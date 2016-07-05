@@ -19,7 +19,7 @@ Repository: w3c/accelerometer
 Markup Shorthands: markdown on
 Inline Github Issues: true
 !Test Suite: <a href="https://github.com/w3c/web-platform-tests/tree/master/accelerometer">web-platform-tests on GitHub</a>
-Boilerplate: omit issues-index
+Boilerplate: omit issues-index, omit conformance
 Default Biblio Status: current
 Note class: note
 </pre>
@@ -107,10 +107,8 @@ provide 0 (m/s^2) acceleration value for each axis.
 The sign of the acceleration values must be according to the right-hand convention in a <a>local coordinate
 system</a> defined by the device.
 
-<pre class=note>
-Note, the <dfn>local coordinate system</dfn> of a mobile device is usually defined relative to
+Note: The <dfn>local coordinate system</dfn> of a mobile device is usually defined relative to
 the device's screen when the device in its default orientation (see figure below).
-</pre>
 
 <img src="accelerometer_coordinate_system.png" srcset="accelerometer_coordinate_system.svg" alt="Accelerometer coordinate system.">
 
