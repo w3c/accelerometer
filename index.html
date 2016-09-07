@@ -1415,7 +1415,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-08-26">26 August 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-09-07">7 September 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1532,6 +1532,9 @@ beyond those described in the Generic Sensor API <a data-link-type="biblio" href
    <h2 class="heading settled" data-level="4" id="model"><span class="secno">4. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
    <p>The Accelerometer Sensor’s associated <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-subclass">Sensor subclass</a> is the <code class="idl"><a data-link-type="idl" href="#accelerometersensor" id="ref-for-accelerometersensor-1">AccelerometerSensor</a></code> class.</p>
    <p>The Accelerometer Sensor’s associated <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensorreading-subclass">SensorReading subclass</a> is the <code class="idl"><a data-link-type="idl" href="#accelerometersensorreading" id="ref-for-accelerometersensorreading-1">AccelerometerSensorReading</a></code> class.</p>
+   <p>The Accelerometer Sensor has a <a data-link-type="dfn" href="https://w3c.github.io/sensors#default-sensor">default sensor</a>,
+which is the device’s main accelerometer sensor.</p>
+   <p>The Accelerometer Sensor has a single <a data-link-type="dfn" href="https://w3c.github.io/sensors#supported-reporting-modes">supported reporting mode</a> which is "<a data-link-type="dfn" href="https://w3c.github.io/sensors#auto">auto</a>".</p>
    <p>The Accelerometer Sensor’s <a data-link-type="dfn" href="https://w3c.github.io/permissions/#idl-def-Permission">permission</a> name is "accelerometer".
 It has no <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-associated-permissiondescriptor">associated PermissionDescriptor</a>.</p>
    <p>The Accelerometer Sensor has an associated abstract operation
@@ -1655,9 +1658,12 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li>
     <a data-link-type="biblio">[GENERIC-SENSOR]</a> defines the following terms:
     <ul>
+     <li><a href="https://w3c.github.io/sensors#auto">auto</a>
      <li><a href="https://w3c.github.io/sensors#construct-sensor-object">construct a sensor object</a>
+     <li><a href="https://w3c.github.io/sensors#default-sensor">default sensor</a>
      <li><a href="https://w3c.github.io/sensors#sensor-subclass">sensor subclass</a>
      <li><a href="https://w3c.github.io/sensors#sensorreading-subclass">sensorreading subclass</a>
+     <li><a href="https://w3c.github.io/sensors#supported-reporting-modes">supported reporting mode</a>
     </ul>
    <li>
     <a data-link-type="biblio">[permissions]</a> defines the following terms:

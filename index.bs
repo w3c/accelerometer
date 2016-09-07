@@ -79,6 +79,12 @@ is the {{AccelerometerSensor}} class.
 The Accelerometer Sensor's associated <a>SensorReading subclass</a>
 is the {{AccelerometerSensorReading}} class.
 
+The Accelerometer Sensor has a <a>default sensor</a>,
+which is the device's main accelerometer sensor.
+
+The Accelerometer Sensor has a single <a>supported reporting mode</a>
+which is "<a>auto</a>".
+
 The Accelerometer Sensor's <a>permission</a> name is "accelerometer".
 It has no <a>associated PermissionDescriptor</a>.
 
