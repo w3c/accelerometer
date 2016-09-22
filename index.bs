@@ -83,7 +83,7 @@ The Accelerometer Sensor has a <a>default sensor</a>,
 which is the device's main accelerometer sensor.
 
 The Accelerometer Sensor has a single <a>supported reporting mode</a>
-which is "<a>auto</a>".
+which is "<a>periodic</a>".
 
 The Accelerometer Sensor's <a>permission</a> name is "accelerometer".
 It has no <a>associated PermissionDescriptor</a>.

@@ -35,7 +35,6 @@
  *   - .note       for informative notes             (div, p, span, aside, details)
  *   - .example    for informative examples          (div, p, pre, span)
  *   - .issue      for issues                        (div, p, span)
- *   - .assertion  for assertions                    (div, p, span)
  *   - .advisement for loud normative statements     (div, p, strong)
  *   - .annoying-warning for spec obsoletion notices (div, aside, details)
  *
@@ -50,9 +49,9 @@
  *   - ::before styled for CSS-generated issue/example/figure numbers:
  *     -> Documents wishing to use this only need to add
  *        figcaption::before,
- *        .caption::before { content: "Figure "  counter(figure) " ";  }
- *        .example::before { content: "Example " counter(example) " "; }
- *        .issue::before   { content: "Issue "   counter(issue) " ";   }
+ *        .caption::before { content: "Figure "  counter(figure);  }
+ *        .example::before { content: "Example " counter(example); }
+ *        .issue::before   { content: "Issue "   counter(issue);   }
  *
  * Header Stuff (ignore, just don't conflict with these classes)
  *   - .head for the header
@@ -458,7 +457,7 @@
 		font-style: normal;
 	}
 	dt dfn code, code.idl {
-		font-size: normal;
+		font-size: inherit;
 	}
 	dfn var {
 		font-style: normal;
@@ -599,7 +598,7 @@
 /*                             Colored Boxes                                  */
 /******************************************************************************/
 
-	.issue, .note, .example, .assertion, .advisement, blockquote {
+	.issue, .note, .example, .advisement, blockquote {
 		padding: .5em;
 		border: .5em;
 		border-left-style: solid;
@@ -614,7 +613,6 @@
 	.note,
 	.example,
 	.advisement,
-	.assertion,
 	blockquote {
 		margin: 1em auto;
 	}
@@ -647,7 +645,7 @@
 		padding-right: 1em;
 		text-transform: uppercase;
 	}
-	/* Add .issue::before { content: "Issue " counter(issue) " "; } for autogen numbers,
+	/* Add .issue::before { content: "Issue " counter(issue); } for autogen numbers,
 	   or use class="marker" to mark up the issue number in source. */
 
 /** Example *******************************************************************/
@@ -665,7 +663,7 @@
 		min-width: 7.5em;
 		display: block;
 	}
-	/* Add .example::before { content: "Example " counter(example) " "; } for autogen numbers,
+	/* Add .example::before { content: "Example " counter(example); } for autogen numbers,
 	   or use class="marker" to mark up the example number in source. */
 
 /** Non-normative Note ********************************************************/
@@ -692,14 +690,6 @@
 	}
 	details.note[open] > summary {
 		border-bottom: 1px silver solid;
-	}
-
-/** Assertion Box *************************************************************/
-	/*  for assertions in algorithms */
-
-	.assertion {
-		border-color: #AAA;
-		background: #EEE;
 	}
 
 /** Advisement Box ************************************************************/
@@ -1252,7 +1242,7 @@ Possible extra rowspan handling
                 counter-increment: figure;
             }
             figcaption:not(.no-marker)::before {
-                content: "Figure " counter(figure) " ";
+                content: "Figure " counter(figure);
             }</style>
 <style>/* style-autolinks */
 
@@ -1415,7 +1405,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-09-07">7 September 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-09-22">22 September 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1514,7 +1504,7 @@ X, Y and Z axis in <a data-link-type="dfn" href="#local-coordinate-system" id="r
    <h2 class="heading settled" data-level="2" id="examples"><span class="secno">2. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <div class="example" id="example-2decdd6c">
     <a class="self-link" href="#example-2decdd6c"></a> 
-<pre class="highlight"><span></span><span class="kd">let</span> <span class="nx">sensor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AccelerometerSensor</span><span class="p">({</span><span class="nx">includeGravity</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">frequency</span><span class="o">:</span> <span class="mi">60</span><span class="p">});</span>
+<pre class="highlight"><span class="kd">let</span> <span class="nx">sensor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AccelerometerSensor</span><span class="p">({</span><span class="nx">includeGravity</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">frequency</span><span class="o">:</span> <span class="mi">60</span><span class="p">});</span>
 <span class="nx">sensor</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 
 <span class="nx">sensor</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="nx">event</span> <span class="o">=></span> <span class="p">{</span>
@@ -1534,7 +1524,7 @@ beyond those described in the Generic Sensor API <a data-link-type="biblio" href
    <p>The Accelerometer Sensor’s associated <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensorreading-subclass">SensorReading subclass</a> is the <code class="idl"><a data-link-type="idl" href="#accelerometersensorreading" id="ref-for-accelerometersensorreading-1">AccelerometerSensorReading</a></code> class.</p>
    <p>The Accelerometer Sensor has a <a data-link-type="dfn" href="https://w3c.github.io/sensors#default-sensor">default sensor</a>,
 which is the device’s main accelerometer sensor.</p>
-   <p>The Accelerometer Sensor has a single <a data-link-type="dfn" href="https://w3c.github.io/sensors#supported-reporting-modes">supported reporting mode</a> which is "<a data-link-type="dfn" href="https://w3c.github.io/sensors#auto">auto</a>".</p>
+   <p>The Accelerometer Sensor has a single <a data-link-type="dfn" href="https://w3c.github.io/sensors#supported-reporting-modes">supported reporting mode</a> which is "<a data-link-type="dfn">periodic</a>".</p>
    <p>The Accelerometer Sensor’s <a data-link-type="dfn" href="https://w3c.github.io/permissions/#idl-def-Permission">permission</a> name is "accelerometer".
 It has no <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-associated-permissiondescriptor">associated PermissionDescriptor</a>.</p>
    <p>The Accelerometer Sensor has an associated abstract operation
@@ -1658,7 +1648,6 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li>
     <a data-link-type="biblio">[GENERIC-SENSOR]</a> defines the following terms:
     <ul>
-     <li><a href="https://w3c.github.io/sensors#auto">auto</a>
      <li><a href="https://w3c.github.io/sensors#construct-sensor-object">construct a sensor object</a>
      <li><a href="https://w3c.github.io/sensors#default-sensor">default sensor</a>
      <li><a href="https://w3c.github.io/sensors#sensor-subclass">sensor subclass</a>
