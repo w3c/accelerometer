@@ -1,5 +1,5 @@
 <pre class="metadata">
-Title: Accelerometer Sensor
+Title: Accelerometer
 Level: 1
 Status: ED
 ED: https://w3c.github.io/accelerometer/
@@ -10,7 +10,7 @@ Editor: Alexander Shalamov 78335, Intel Corporation, https://intel.com/
 Group: dap
 Abstract:
   This specification defines accelerometer sensor interface for
-  obtaining information about <a>acceleration</a> applied to the X, Y and Z axis
+  obtaining information about acceleration applied to the X, Y and Z axis
   of a device that hosts the sensor.
 Version History: https://github.com/w3c/accelerometer/commits/gh-pages/index.bs
 !Bug Reports: <a href="https://www.github.com/w3c/accelerometer/issues/new">via the w3c/accelerometer repository on GitHub</a>
@@ -42,8 +42,8 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
 Introduction {#intro}
 ============
 
-The Accelerometer Sensor extends the Generic Sensor API [[GENERIC-SENSOR]]
-interface to provide information about <a>acceleration</a> applied to device's
+The Accelerometer API extends the Generic Sensor API [[GENERIC-SENSOR]]
+interface to provide information about acceleration applied to device's
 X, Y and Z axis in <a>local coordinate system</a> defined by device.
 
 Examples {#examples}
@@ -51,7 +51,7 @@ Examples {#examples}
 
 <div class="example">
     <pre highlight="js">
-    let sensor = new AccelerometerSensor({includeGravity: false, frequency: 60});
+    let sensor = new Accelerometer({includeGravity: false, frequency: 60});
     sensor.start();
 
     sensor.onchange = event => {
@@ -73,37 +73,37 @@ beyond those described in the Generic Sensor API [[!GENERIC-SENSOR]].
 Model {#model}
 =====
 
-The Accelerometer Sensor's associated <a>Sensor subclass</a>
-is the {{AccelerometerSensor}} class.
+The Accelerometer's associated <a>Sensor subclass</a>
+is the {{Accelerometer}} class.
 
-The Accelerometer Sensor's associated <a>SensorReading subclass</a>
-is the {{AccelerometerSensorReading}} class.
+The Accelerometer's associated <a>SensorReading subclass</a>
+is the {{AccelerometerReading}} class.
 
-The Accelerometer Sensor has a <a>default sensor</a>,
+The Accelerometer has a <a>default sensor</a>,
 which is the device's main accelerometer sensor.
 
-The Accelerometer Sensor has a single <a>supported reporting mode</a>
+The Accelerometer has a single <a>supported reporting mode</a>
 which is "<a>periodic</a>".
 
-The Accelerometer Sensor's <a>permission</a> name is "accelerometer".
+The Accelerometer's <a>permission</a> name is "accelerometer".
 It has no <a>associated PermissionDescriptor</a>.
 
-The Accelerometer Sensor has an associated abstract operation
+The Accelerometer has an associated abstract operation
 to <dfn>retrieve the sensor permission</dfn> which
 must simply return a <a>permission</a> whose name is "accelerometer".
 
-The Accelerometer Sensor has an associated abstract operation
+The Accelerometer has an associated abstract operation
 to <dfn lt="Construct SensorReading Object">construct a SensorReading object</dfn>
-which creates a new {{AccelerometerSensorReading}} object and sets its
-<a attribute for="AccelerometerSensorReading">accelerationX</a>,
-<a attribute for="AccelerometerSensorReading">accelerationY</a> and
-<a attribute for="AccelerometerSensorReading">accelerationZ</a> attributes
+which creates a new {{AccelerometerReading}} object and sets its
+<a attribute for="AccelerometerReading">accelerationX</a>,
+<a attribute for="AccelerometerReading">accelerationY</a> and
+<a attribute for="AccelerometerReading">accelerationZ</a> attributes
 to zero.
 
 The <dfn>linear acceleration</dfn> is an acceleration that is applied to the device that hosts
 the sensor, without the contribution of a gravity force.
 
-The {{AccelerometerSensorReading}}'s attribute values must be in [[SI]] units for acceleration, metre
+The {{AccelerometerReading}}'s attribute values must be in [[SI]] units for acceleration, metre
 per second squared (m/s^2), expressed in a three-dimentional Cartesian <a>local coordinate system</a>
 defined by the device.
 
@@ -121,74 +121,74 @@ the device's screen when the device in its default orientation (see figure below
 API {#api}
 ===
 
-The AccelerometerSensor Interface {#accelerometer-sensor-interface}
+The Accelerometer Interface {#accelerometer-interface}
 --------------------------------
 
 <pre class="idl">
-  [Constructor(optional AccelerometerSensorOptions accelerometerSensorOptions)]
-  interface AccelerometerSensor : Sensor {
-    readonly attribute AccelerometerSensorReading? reading;
+  [Constructor(optional AccelerometerOptions accelerometerOptions)]
+  interface Accelerometer : Sensor {
+    readonly attribute AccelerometerReading? reading;
     readonly attribute boolean includesGravity;
   };
 </pre>
 
-To <dfn>Construct an AccelerometerSensor Object</dfn> the user agent must invoke
+To <dfn>Construct an Accelerometer Object</dfn> the user agent must invoke
 the <a>construct a Sensor object</a> abstract operation.
 
-The AccelerometerSensorOptions Dictionary {#accelerometer-sensor-options-dictionary}
+The AccelerometerOptions Dictionary {#accelerometer-options-dictionary}
 --------------------------------
 
 <pre class="idl">
-  dictionary AccelerometerSensorOptions :  SensorOptions  {
+  dictionary AccelerometerOptions :  SensorOptions  {
     boolean includeGravity = true;
   };
 </pre>
 
-By default, the Accelerometer sensor would provide acceleration information including
+By default, Accelerometer would provide acceleration information including
 the effect of the gravity force. In cases, when <a>linear acceleration</a> information is
-required, {{AccelerometerSensorOptions}} dictionary with and dictionary member
-<a attribute for="AccelerometerSensorOptions">includeGravity</a> that is set to false,
-must be provided to {{AccelerometerSensor}} constructor.
+required, {{AccelerometerOptions}} dictionary with and dictionary member
+<a attribute for="AccelerometerOptions">includeGravity</a> that is set to false,
+must be provided to {{Accelerometer}} constructor.
 
-The AccelerometerSensorReading Interface {#accelerometer-sensor-reading-interface}
+The AccelerometerReading Interface {#accelerometer-reading-interface}
 ---------------------------------------
 
 <pre class="idl">
-  [Constructor(AccelerometerSensorReadingInit AccelerometerSensorReadingInit)]
-  interface AccelerometerSensorReading : SensorReading {
+  [Constructor(AccelerometerReadingInit AccelerometerReadingInit)]
+  interface AccelerometerReading : SensorReading {
       readonly attribute double accelerationX;
       readonly attribute double accelerationY;
       readonly attribute double accelerationZ;
   };
 
-  dictionary AccelerometerSensorReadingInit {
+  dictionary AccelerometerReadingInit {
       double accelerationX = 0;
       double accelerationY = 0;
       double accelerationZ = 0;
   };
 </pre>
 
-### The AccelerometerSensor attributes ### {#accelerometer-sensor-attributes}
+### The Accelerometer attributes ### {#accelerometer-attributes}
 
-The <a attribute for="AccelerometerSensor">includesGravity</a> attribute of the {{AccelerometerSensor}}
+The <a attribute for="Accelerometer">includesGravity</a> attribute of the {{Accelerometer}}
 interface represents whether the acceleration information provided by the sensor includes effect of the gravity
-force. In case when <a attribute for="AccelerometerSensor">includesGravity</a> equals to false, {{AccelerometerSensor}}
+force. In case when <a attribute for="Accelerometer">includesGravity</a> equals to false, {{Accelerometer}}
 will provide <a>linear acceleration</a> information.
 
-### The AccelerometerSensorReading constructor ### {#accelerometer-sensor-reading-constructor}
+### The AccelerometerReading constructor ### {#accelerometer-reading-constructor}
 
-The AccelerometerSensorReading constructor accepts {{AccelerometerSensorReadingInit}} dictionary that is used
-for initialization of {{AccelerometerSensorReading}} attributes.
+The AccelerometerReading constructor accepts {{AccelerometerReadingInit}} dictionary that is used
+for initialization of {{AccelerometerReading}} attributes.
 
-### The AccelerometerSensorReading attributes ### {#accelerometer-sensor-reading-attributes}
+### The AccelerometerReading attributes ### {#accelerometer-reading-attributes}
 
-The <a attribute for="AccelerometerSensorReading">accelerationX</a> attribute of the {{AccelerometerSensorReading}}
+The <a attribute for="AccelerometerReading">accelerationX</a> attribute of the {{AccelerometerReading}}
 interface represents the <a>acceleration</a> along X-axis.
 
-The <a attribute for="AccelerometerSensorReading">accelerationY</a> attribute of the {{AccelerometerSensorReading}}
+The <a attribute for="AccelerometerReading">accelerationY</a> attribute of the {{AccelerometerReading}}
 interface represents the <a>acceleration</a> along Y-axis.
 
-The <a attribute for="AccelerometerSensorReading">accelerationZ</a> attribute of the {{AccelerometerSensorReading}}
+The <a attribute for="AccelerometerReading">accelerationZ</a> attribute of the {{AccelerometerReading}}
 interface represents the <a>acceleration</a> along Z-axis.
 
 Acknowledgements {#acknowledgements}
