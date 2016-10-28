@@ -55,9 +55,9 @@ Examples {#examples}
     sensor.start();
 
     sensor.onchange = event => {
-        console.log("Linear acceleration for an X-axis: " + event.reading.accelerationX);
-        console.log("Linear acceleration for an Y-axis: " + event.reading.accelerationY);
-        console.log("Linear acceleration for an Z-axis: " + event.reading.accelerationZ);
+        console.log("Linear acceleration for an X-axis: " + event.reading.x);
+        console.log("Linear acceleration for an Y-axis: " + event.reading.y);
+        console.log("Linear acceleration for an Z-axis: " + event.reading.z);
     }
 
     sensor.onerror = event => console.log(event.error.name, event.error.message);
@@ -95,9 +95,9 @@ must simply return a <a>permission</a> whose name is "accelerometer".
 The Accelerometer has an associated abstract operation
 to <dfn lt="Construct SensorReading Object">construct a SensorReading object</dfn>
 which creates a new {{AccelerometerReading}} object and sets its
-<a attribute for="AccelerometerReading">accelerationX</a>,
-<a attribute for="AccelerometerReading">accelerationY</a> and
-<a attribute for="AccelerometerReading">accelerationZ</a> attributes
+<a attribute for="AccelerometerReading">x</a>,
+<a attribute for="AccelerometerReading">y</a> and
+<a attribute for="AccelerometerReading">z</a> attributes
 to zero.
 
 The <dfn>linear acceleration</dfn> is an acceleration that is applied to the device that hosts
@@ -156,15 +156,15 @@ The AccelerometerReading Interface {#accelerometer-reading-interface}
 <pre class="idl">
   [Constructor(AccelerometerReadingInit AccelerometerReadingInit)]
   interface AccelerometerReading : SensorReading {
-      readonly attribute double accelerationX;
-      readonly attribute double accelerationY;
-      readonly attribute double accelerationZ;
+      readonly attribute double x;
+      readonly attribute double y;
+      readonly attribute double z;
   };
 
   dictionary AccelerometerReadingInit {
-      double accelerationX = 0;
-      double accelerationY = 0;
-      double accelerationZ = 0;
+      double x = 0;
+      double y = 0;
+      double z = 0;
   };
 </pre>
 
@@ -182,13 +182,13 @@ for initialization of {{AccelerometerReading}} attributes.
 
 ### The AccelerometerReading attributes ### {#accelerometer-reading-attributes}
 
-The <a attribute for="AccelerometerReading">accelerationX</a> attribute of the {{AccelerometerReading}}
+The <a attribute for="AccelerometerReading">x</a> attribute of the {{AccelerometerReading}}
 interface represents the <a>acceleration</a> along X-axis.
 
-The <a attribute for="AccelerometerReading">accelerationY</a> attribute of the {{AccelerometerReading}}
+The <a attribute for="AccelerometerReading">y</a> attribute of the {{AccelerometerReading}}
 interface represents the <a>acceleration</a> along Y-axis.
 
-The <a attribute for="AccelerometerReading">accelerationZ</a> attribute of the {{AccelerometerReading}}
+The <a attribute for="AccelerometerReading">z</a> attribute of the {{AccelerometerReading}}
 interface represents the <a>acceleration</a> along Z-axis.
 
 Acknowledgements {#acknowledgements}
