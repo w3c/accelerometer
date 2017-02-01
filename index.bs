@@ -10,7 +10,7 @@ Editor: Alexander Shalamov 78335, Intel Corporation, https://intel.com/
 Group: dap
 Abstract:
   This specification defines accelerometer sensor interface for
-  obtaining information about acceleration applied to the X, Y and Z axis
+  obtaining information about <a>acceleration</a> applied to the X, Y and Z axis
   of a device that hosts the sensor.
 Version History: https://github.com/w3c/accelerometer/commits/gh-pages/index.bs
 !Bug Reports: <a href="https://www.github.com/w3c/accelerometer/issues/new">via the w3c/accelerometer repository on GitHub</a>
@@ -24,18 +24,12 @@ Default Biblio Status: current
 Note class: note
 </pre>
 <pre class="anchors">
-urlPrefix: https://w3c.github.io/permissions/; spec: PERMISSIONS
-  type: dfn
-    text: permission; url: idl-def-Permission
-    text: associated PermissionDescriptor;  url: dfn-associated-permissiondescriptor
 urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
   type: dfn
     text: high-level
-    text: sensor subclass
-    text: sensorreading subclass
+    text: sensor
+    text: latest reading
     text: default sensor
-    text: supported reporting mode; url: supported-reporting-modes
-    text: auto
     text: construct a sensor object; url: construct-sensor-object
 </pre>
 
@@ -43,7 +37,7 @@ Introduction {#intro}
 ============
 
 The Accelerometer API extends the Generic Sensor API [[GENERIC-SENSOR]]
-interface to provide information about acceleration applied to device's
+interface to provide information about <a>acceleration</a> applied to device's
 X, Y and Z axis in <a>local coordinate system</a> defined by device.
 
 Examples {#examples}
@@ -51,13 +45,13 @@ Examples {#examples}
 
 <div class="example">
     <pre highlight="js">
-    let sensor = new Accelerometer({includeGravity: false, frequency: 60});
+    let sensor = new Accelerometer();
     sensor.start();
 
-    sensor.onchange = event => {
-        console.log("Linear acceleration for an X-axis: " + event.reading.x);
-        console.log("Linear acceleration for an Y-axis: " + event.reading.y);
-        console.log("Linear acceleration for an Z-axis: " + event.reading.z);
+    sensor.onchange = () => {
+        console.log("Acceleration along X-axis: " + sensor.x);
+        console.log("Acceleration along Y-axis: " + sensor.y);
+        console.log("Acceleration along Z-axis: " + sensor.z);
     }
 
     sensor.onerror = event => console.log(event.error.name, event.error.message);
@@ -73,50 +67,30 @@ beyond those described in the Generic Sensor API [[!GENERIC-SENSOR]].
 Model {#model}
 =====
 
-The Accelerometer's associated <a>Sensor subclass</a>
-is the {{Accelerometer}} class.
+The accelerometer's associated {{Sensor}} subclass is the {{Accelerometer}} class.
 
-The Accelerometer's associated <a>SensorReading subclass</a>
-is the {{AccelerometerReading}} class.
+Accelerometer has a <a>default sensor</a>, which is the device's main accelerometer sensor.
 
-The Accelerometer has a <a>default sensor</a>,
-which is the device's main accelerometer sensor.
+A [=latest reading=] per [=sensor=] of accelerometer type includes three [=map/entries=]
+whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain device's <a>acceleration</a>
+about the corresponding axes.
 
-The Accelerometer has a single <a>supported reporting mode</a>
-which is "<a>periodic</a>".
+The <dfn>acceleration</dfn> is the rate of change of velocity of a device with respect to time. Its 
+unit is the metre per second squared (m/s^2) [[SI]].
 
-The Accelerometer's <a>permission</a> name is "accelerometer".
-It has no <a>associated PermissionDescriptor</a>.
+The frame of reference for the <a>acceleration</a> measurement must be inertial, such as, the device in free fall would
+provide 0 (m/s^2) <a>acceleration</a> value for each axis.
 
-The Accelerometer has an associated abstract operation
-to <dfn>retrieve the sensor permission</dfn> which
-must simply return a <a>permission</a> whose name is "accelerometer".
-
-The Accelerometer has an associated abstract operation
-to <dfn lt="Construct SensorReading Object">construct a SensorReading object</dfn>
-which creates a new {{AccelerometerReading}} object and sets its
-<a attribute for="AccelerometerReading">x</a>,
-<a attribute for="AccelerometerReading">y</a> and
-<a attribute for="AccelerometerReading">z</a> attributes
-to zero.
-
-The <dfn>linear acceleration</dfn> is an acceleration that is applied to the device that hosts
-the sensor, without the contribution of a gravity force.
-
-The {{AccelerometerReading}}'s attribute values must be in [[SI]] units for acceleration, metre
-per second squared (m/s^2), expressed in a three-dimentional Cartesian <a>local coordinate system</a>
-defined by the device.
-
-The frame of reference for the acceleration measurement must be inertial, such as device in free fall would
-provide 0 (m/s^2) acceleration value for each axis.
-
-The sign of the acceleration values must be according to the right-hand convention in a <a>local coordinate
+The sign of the <a>acceleration</a> values must be according to the right-hand convention in a <a>local coordinate
 system</a> defined by the device.
 
 Note: The <dfn>local coordinate system</dfn> of a mobile device is usually defined relative to
 the device's screen when the device in its default orientation (see figure below).
 
 <img src="accelerometer_coordinate_system.png" srcset="accelerometer_coordinate_system.svg" alt="Accelerometer coordinate system.">
+
+The <dfn>linear acceleration</dfn> is an <a>acceleration</a> that is applied to the device that hosts
+the sensor, without the contribution of a gravity force.
 
 API {#api}
 ===
@@ -127,13 +101,40 @@ The Accelerometer Interface {#accelerometer-interface}
 <pre class="idl">
   [Constructor(optional AccelerometerOptions accelerometerOptions)]
   interface Accelerometer : Sensor {
-    readonly attribute AccelerometerReading? reading;
+    readonly attribute unrestricted double? x;
+    readonly attribute unrestricted double? y;
+    readonly attribute unrestricted double? z;
     readonly attribute boolean includesGravity;
   };
 </pre>
 
 To <dfn>Construct an Accelerometer Object</dfn> the user agent must invoke
 the <a>construct a Sensor object</a> abstract operation.
+
+### Accelerometer.x ### {#accelerometer-x}
+
+The {{Accelerometer/x!!attribute}} attribute of the {{Accelerometer}}
+interface represents the <a>acceleration</a> along X-axis.
+This attribute returns [=map/value=] for [=latest reading=]["x"] [=map/entry=].
+
+### Accelerometer.y ### {#accelerometer-y}
+
+The {{Accelerometer/y!!attribute}} attribute of the {{Accelerometer}}
+interface represents the <a>acceleration</a> along Y-axis.
+This attribute returns [=map/value=] for [=latest reading=]["y"] [=map/entry=].
+
+### Accelerometer.z ### {#accelerometer-z}
+
+The {{Accelerometer/z!!attribute}} attribute of the {{Accelerometer}}
+interface represents the <a>acceleration</a> along Z-axis.
+This attribute returns [=map/value=] for [=latest reading=]["z"] [=map/entry=].
+
+### Accelerometer.includesGravity ### {#accelerometer-includesGravity}
+
+The {{Accelerometer/includesGravity!!attribute}} attribute of the {{Accelerometer}}
+interface represents whether the <a>acceleration</a> information provided by the sensor includes the effect of the gravity
+force. In case when {{Accelerometer/includesGravity!!attribute}} equals to false, {{Accelerometer}}
+will provide <a>linear acceleration</a> information.
 
 The AccelerometerOptions Dictionary {#accelerometer-options-dictionary}
 --------------------------------
@@ -144,52 +145,9 @@ The AccelerometerOptions Dictionary {#accelerometer-options-dictionary}
   };
 </pre>
 
-By default, Accelerometer would provide acceleration information including
-the effect of the gravity force. In cases, when <a>linear acceleration</a> information is
-required, {{AccelerometerOptions}} dictionary with and dictionary member
-<a attribute for="AccelerometerOptions">includeGravity</a> that is set to false,
-must be provided to {{Accelerometer}} constructor.
-
-The AccelerometerReading Interface {#accelerometer-reading-interface}
----------------------------------------
-
-<pre class="idl">
-  [Constructor(AccelerometerReadingInit AccelerometerReadingInit)]
-  interface AccelerometerReading : SensorReading {
-      readonly attribute double x;
-      readonly attribute double y;
-      readonly attribute double z;
-  };
-
-  dictionary AccelerometerReadingInit {
-      double x = 0;
-      double y = 0;
-      double z = 0;
-  };
-</pre>
-
-### The Accelerometer attributes ### {#accelerometer-attributes}
-
-The <a attribute for="Accelerometer">includesGravity</a> attribute of the {{Accelerometer}}
-interface represents whether the acceleration information provided by the sensor includes effect of the gravity
-force. In case when <a attribute for="Accelerometer">includesGravity</a> equals to false, {{Accelerometer}}
-will provide <a>linear acceleration</a> information.
-
-### The AccelerometerReading constructor ### {#accelerometer-reading-constructor}
-
-The AccelerometerReading constructor accepts {{AccelerometerReadingInit}} dictionary that is used
-for initialization of {{AccelerometerReading}} attributes.
-
-### The AccelerometerReading attributes ### {#accelerometer-reading-attributes}
-
-The <a attribute for="AccelerometerReading">x</a> attribute of the {{AccelerometerReading}}
-interface represents the <a>acceleration</a> along X-axis.
-
-The <a attribute for="AccelerometerReading">y</a> attribute of the {{AccelerometerReading}}
-interface represents the <a>acceleration</a> along Y-axis.
-
-The <a attribute for="AccelerometerReading">z</a> attribute of the {{AccelerometerReading}}
-interface represents the <a>acceleration</a> along Z-axis.
+By default, accelerometer sensor provides <a>acceleration</a> information including the effect of the gravity force.
+In cases when <a>linear acceleration</a> information is required, {{AccelerometerOptions}} dictionary
+must include an [=map/entry=] whose [=map/key=] is "includeGravity" and whose [=map/value=] is false.
 
 Acknowledgements {#acknowledgements}
 ================
