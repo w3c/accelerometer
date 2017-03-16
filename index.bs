@@ -137,7 +137,7 @@ The {{Accelerometer/z!!attribute}} attribute of the {{Accelerometer}}
 interface represents the [=acceleration=] along z-axis.
 This attribute returns [=map/value=] for [=latest reading=]["z"] [=map/entry=].
 
-The LinearAccelerationSensor Interface {#linear-accelerometer-interface}
+The LinearAccelerationSensor Interface {#linearaccelerationsensor-interface}
 --------------------------------
 
 <pre class="idl">
@@ -167,7 +167,7 @@ The {{Accelerometer/z!!attribute}} attribute of the {{LinearAccelerationSensor}}
 interface represents the [=linear acceleration=] along z-axis.
 This attribute returns [=map/value=] for [=latest reading=]["z"] [=map/entry=].
 
-The GravitySensor Interface {#gravity-sensor-interface}
+The GravitySensor Interface {#gravitysensor-interface}
 --------------------------------
 
 <pre class="idl">
