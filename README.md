@@ -1,6 +1,6 @@
-## Accelerometer Sensor API
+## Accelerometer
 
 This repository contains the
-[Accelerometer Sensor API](https://w3c.github.io/accelerometer/)
+[Accelerometer](https://w3c.github.io/accelerometer/)
 specification that is being worked on in the
-[W3C Device APIs Working Group](http://www.w3.org/2009/dap/).
+[W3C Device and Sensors Working Group](http://www.w3.org/2009/dap/).
