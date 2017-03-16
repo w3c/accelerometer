@@ -1183,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version a65093ce3e69a8d01029b4650499d152cd9bd39a" name="generator">
+  <meta content="Bikeshed version fa6d32dea6b39d19cbb9dd6d5e69f189e8bdd53f" name="generator">
 <style>/* style-md-lists */
 
             /* This is a weird hack for me not yet following the commonmark spec
@@ -1430,7 +1430,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-15">15 March 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-16">16 March 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1503,14 +1503,14 @@ of a device that hosts the sensor.</p>
         <li><a href="#accelerometer-z"><span class="secno">5.1.3</span> <span class="content">Accelerometer.z</span></a>
        </ol>
       <li>
-       <a href="#linear-accelerometer-interface"><span class="secno">5.2</span> <span class="content">The LinearAccelerationSensor Interface</span></a>
+       <a href="#linearaccelerationsensor-interface"><span class="secno">5.2</span> <span class="content">The LinearAccelerationSensor Interface</span></a>
        <ol class="toc">
         <li><a href="#linearaccelerationsensor-x"><span class="secno">5.2.1</span> <span class="content">LinearAccelerationSensor.x</span></a>
         <li><a href="#linearaccelerationsensor-y"><span class="secno">5.2.2</span> <span class="content">LinearAccelerationSensor.y</span></a>
         <li><a href="#linearaccelerationsensor-z"><span class="secno">5.2.3</span> <span class="content">LinearAccelerationSensor.z</span></a>
        </ol>
       <li>
-       <a href="#gravity-sensor-interface"><span class="secno">5.3</span> <span class="content">The GravitySensor Interface</span></a>
+       <a href="#gravitysensor-interface"><span class="secno">5.3</span> <span class="content">The GravitySensor Interface</span></a>
        <ol class="toc">
         <li><a href="#gravitysensor-x"><span class="secno">5.3.1</span> <span class="content">GravitySensor.x</span></a>
         <li><a href="#gravitysensor-y"><span class="secno">5.3.2</span> <span class="content">GravitySensor.y</span></a>
@@ -1594,7 +1594,7 @@ This attribute returns <a data-link-type="dfn" href="https://infra.spec.whatwg.o
    <h4 class="heading settled" data-level="5.1.3" id="accelerometer-z"><span class="secno">5.1.3. </span><span class="content">Accelerometer.z</span><a class="self-link" href="#accelerometer-z"></a></h4>
    <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-z" id="ref-for-dom-accelerometer-z-1">z</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer-7">Accelerometer</a></code> interface represents the <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration-10">acceleration</a> along z-axis.
 This attribute returns <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value">value</a> for <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["z"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry">entry</a>.</p>
-   <h3 class="heading settled" data-level="5.2" id="linear-accelerometer-interface"><span class="secno">5.2. </span><span class="content">The LinearAccelerationSensor Interface</span><a class="self-link" href="#linear-accelerometer-interface"></a></h3>
+   <h3 class="heading settled" data-level="5.2" id="linearaccelerationsensor-interface"><span class="secno">5.2. </span><span class="content">The LinearAccelerationSensor Interface</span><a class="self-link" href="#linearaccelerationsensor-interface"></a></h3>
 <pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="LinearAccelerationSensor" data-dfn-type="constructor" data-export="" data-lt="LinearAccelerationSensor(options)|LinearAccelerationSensor()" id="dom-linearaccelerationsensor-linearaccelerationsensor">Constructor<a class="self-link" href="#dom-linearaccelerationsensor-linearaccelerationsensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a> <dfn class="nv idl-code" data-dfn-for="LinearAccelerationSensor/LinearAccelerationSensor(options)" data-dfn-type="argument" data-export="" id="dom-linearaccelerationsensor-linearaccelerationsensor-options-options">options<a class="self-link" href="#dom-linearaccelerationsensor-linearaccelerationsensor-options-options"></a></dfn>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="linearaccelerationsensor">LinearAccelerationSensor</dfn> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer-8">Accelerometer</a> {
 };
@@ -1610,7 +1610,7 @@ This attribute returns <a data-link-type="dfn" href="https://infra.spec.whatwg.o
    <h4 class="heading settled" data-level="5.2.3" id="linearaccelerationsensor-z"><span class="secno">5.2.3. </span><span class="content">LinearAccelerationSensor.z</span><a class="self-link" href="#linearaccelerationsensor-z"></a></h4>
    <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-z" id="ref-for-dom-accelerometer-z-2">z</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor-6">LinearAccelerationSensor</a></code> interface represents the <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration-5">linear acceleration</a> along z-axis.
 This attribute returns <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value">value</a> for <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["z"] <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry">entry</a>.</p>
-   <h3 class="heading settled" data-level="5.3" id="gravity-sensor-interface"><span class="secno">5.3. </span><span class="content">The GravitySensor Interface</span><a class="self-link" href="#gravity-sensor-interface"></a></h3>
+   <h3 class="heading settled" data-level="5.3" id="gravitysensor-interface"><span class="secno">5.3. </span><span class="content">The GravitySensor Interface</span><a class="self-link" href="#gravitysensor-interface"></a></h3>
 <pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="GravitySensor" data-dfn-type="constructor" data-export="" data-lt="GravitySensor(options)|GravitySensor()" id="dom-gravitysensor-gravitysensor">Constructor<a class="self-link" href="#dom-gravitysensor-gravitysensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a> <dfn class="nv idl-code" data-dfn-for="GravitySensor/GravitySensor(options)" data-dfn-type="argument" data-export="" id="dom-gravitysensor-gravitysensor-options-options">options<a class="self-link" href="#dom-gravitysensor-gravitysensor-options-options"></a></dfn>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="gravitysensor">GravitySensor</dfn> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer-9">Accelerometer</a> {
 };
