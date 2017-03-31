@@ -69,7 +69,9 @@ Model {#model}
 
 The accelerometer's associated {{Sensor}} subclass is the {{Accelerometer}} class.
 
-Accelerometer has a [=default sensor=], which is the device's main accelerometer sensor.
+The Accelerometer has a [=default sensor=], which is the device's main accelerometer sensor.
+
+The Accelerometer has an associated {{PermissionName}} which is <a for="PermissionName" enum-value>"accelerometer"</a>.
 
 A [=latest reading=] per [=sensor=] of accelerometer type includes three [=map/entries=]
 whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain device's [=acceleration=]
