@@ -101,7 +101,7 @@ The <dfn>gravity</dfn> is a force that attracts an object to the center of the e
 Note: The <dfn>local coordinate system</dfn> of a mobile device is usually defined relative to
 the device's screen when the device in its default orientation (see figure below).
 
-<img src="accelerometer_coordinate_system.png" srcset="accelerometer_coordinate_system.svg" style="display: block;margin: auto;" alt="Accelerometer coordinate system.">
+<img src="images/accelerometer_coordinate_system.png" srcset="images/accelerometer_coordinate_system.svg" style="display: block;margin: auto;" alt="Accelerometer coordinate system.">
 
 API {#api}
 ===
