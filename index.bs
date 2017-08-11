@@ -1,6 +1,6 @@
 <pre class="metadata">
 Title: Accelerometer
-Level: 1
+Level: none
 Status: ED
 ED: https://w3c.github.io/accelerometer/
 Shortname: accelerometer
