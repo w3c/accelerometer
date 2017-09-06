@@ -111,7 +111,7 @@ The Accelerometer Interface {#accelerometer-interface}
 --------------------------------
 
 <pre class="idl">
-  [Constructor(optional SensorOptions options)]
+  [Constructor(optional SensorOptions options), Exposed=Window]
   interface Accelerometer : Sensor {
     readonly attribute unrestricted double? x;
     readonly attribute unrestricted double? y;
@@ -144,7 +144,7 @@ The LinearAccelerationSensor Interface {#linearaccelerationsensor-interface}
 --------------------------------
 
 <pre class="idl">
-  [Constructor(optional SensorOptions options)]
+  [Constructor(optional SensorOptions options), Exposed=Window]
   interface LinearAccelerationSensor : Accelerometer {
   };
 </pre>
@@ -174,7 +174,7 @@ The GravitySensor Interface {#gravitysensor-interface}
 --------------------------------
 
 <pre class="idl">
-  [Constructor(optional SensorOptions options)]
+  [Constructor(optional SensorOptions options), Exposed=Window]
   interface GravitySensor : Accelerometer {
   };
 </pre>
