@@ -134,19 +134,19 @@ the [=construct a Sensor object=] abstract operation.
 
 The {{Accelerometer/x!!attribute}} attribute of the {{Accelerometer}}
 interface returns the result of invoking [=get value from latest reading=] with
-<emu-val>this</emu-val> and "x" as arguments.
+`this` and "x" as arguments. It represents the [=acceleration=] along x-axis.
 
 ### Accelerometer.y ### {#accelerometer-y}
 
 The {{Accelerometer/y!!attribute}} attribute of the {{Accelerometer}}
 interface returns the result of invoking [=get value from latest reading=] with
-<emu-val>this</emu-val> and "y" as arguments.
+`this` and "y" as arguments. It represents the [=acceleration=] along y-axis.
 
 ### Accelerometer.z ### {#accelerometer-z}
 
 The {{Accelerometer/z!!attribute}} attribute of the {{Accelerometer}}
 interface returns the result of invoking [=get value from latest reading=] with
-<emu-val>this</emu-val> and "z" as arguments.
+`this` and "z" as arguments. It represents the [=acceleration=] along z-axis.
 
 The LinearAccelerationSensor Interface {#linearaccelerationsensor-interface}
 --------------------------------
@@ -164,19 +164,19 @@ the [=construct a Sensor object=] abstract operation.
 
 The {{Accelerometer/x!!attribute}} attribute of the {{LinearAccelerationSensor}}
 interface returns the result of invoking [=get value from latest reading=] with
-<emu-val>this</emu-val> and "x" as arguments.
+`this` and "x" as arguments. It represents the [=linear acceleration=] along x-axis.
 
 ### LinearAccelerationSensor.y ### {#linearaccelerationsensor-y}
 
 The {{Accelerometer/y!!attribute}} attribute of the {{LinearAccelerationSensor}}
 interface returns the result of invoking [=get value from latest reading=] with
-<emu-val>this</emu-val> and "y" as arguments.
+`this` and "y" as arguments. It represents the [=linear acceleration=] along y-axis.
 
 ### LinearAccelerationSensor.z ### {#linearaccelerationsensor-z}
 
 The {{Accelerometer/z!!attribute}} attribute of the {{LinearAccelerationSensor}}
 interface returns the result of invoking [=get value from latest reading=] with
-<emu-val>this</emu-val> and "z" as arguments.
+`this` and "z" as arguments. It represents the [=linear acceleration=] along z-axis.
 
 The GravitySensor Interface {#gravitysensor-interface}
 --------------------------------
@@ -194,19 +194,22 @@ the [=construct a Sensor object=] abstract operation.
 
 The {{Accelerometer/x!!attribute}} attribute of the {{GravitySensor}}
 interface returns the result of invoking [=get value from latest reading=] with
-<emu-val>this</emu-val> and "x" as arguments.
+`this` and "x" as arguments. It represents the effect of [=acceleration=] along x-axis due to
+[=gravity=].
 
 ### GravitySensor.y ### {#gravitysensor-y}
 
 The {{Accelerometer/y!!attribute}} attribute of the {{GravitySensor}}
 interface returns the result of invoking [=get value from latest reading=] with
-<emu-val>this</emu-val> and "y" as arguments.
+`this` and "y" as arguments. It represents the effect of [=acceleration=] along y-axis due to
+[=gravity=].
 
 ### GravitySensor.z ### {#gravitysensor-z}
 
 The {{Accelerometer/z!!attribute}} attribute of the {{GravitySensor}}
 interface returns the result of invoking [=get value from latest reading=] with
-<emu-val>this</emu-val> and "z" as arguments.
+`this` and "z" as arguments. It represents the effect of [=acceleration=] along z-axis due to
+[=gravity=].
 
 Acknowledgements {#acknowledgements}
 ================
