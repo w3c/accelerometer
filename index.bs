@@ -60,6 +60,13 @@ Examples {#examples}
     </pre>
 </div>
 
+Use Cases and Requirements {#usecases-requirements}
+==============================
+
+The use cases and requirements are listed in the <cite><a href="https://w3c.github.io/motion-sensors/#usecases-and-requirements">
+Motion Sensors Explainer</a></cite> and <cite><a href="https://w3c.github.io/sensors/usecases.html">
+Sensor use cases</a></cite> documents.
+
 Security and Privacy Considerations {#security-and-privacy}
 ===================================
 
@@ -114,9 +121,9 @@ The Accelerometer Interface {#accelerometer-interface}
 <pre class="idl">
   [Constructor(optional SensorOptions options), Exposed=Window]
   interface Accelerometer : Sensor {
-    readonly attribute unrestricted double? x;
-    readonly attribute unrestricted double? y;
-    readonly attribute unrestricted double? z;
+    readonly attribute double? x;
+    readonly attribute double? y;
+    readonly attribute double? z;
   };
 </pre>
 
@@ -126,20 +133,20 @@ the [=construct a Sensor object=] abstract operation.
 ### Accelerometer.x ### {#accelerometer-x}
 
 The {{Accelerometer/x!!attribute}} attribute of the {{Accelerometer}}
-interface represents the [=acceleration=] along x-axis.
-This attribute returns [=map/value=] for [=latest reading=]["x"] [=map/entry=].
+interface returns the result of invoking [=get value from latest reading=] with
+`this` and "x" as arguments. It represents the [=acceleration=] along x-axis.
 
 ### Accelerometer.y ### {#accelerometer-y}
 
 The {{Accelerometer/y!!attribute}} attribute of the {{Accelerometer}}
-interface represents the [=acceleration=] along y-axis.
-This attribute returns [=map/value=] for [=latest reading=]["y"] [=map/entry=].
+interface returns the result of invoking [=get value from latest reading=] with
+`this` and "y" as arguments. It represents the [=acceleration=] along y-axis.
 
 ### Accelerometer.z ### {#accelerometer-z}
 
 The {{Accelerometer/z!!attribute}} attribute of the {{Accelerometer}}
-interface represents the [=acceleration=] along z-axis.
-This attribute returns [=map/value=] for [=latest reading=]["z"] [=map/entry=].
+interface returns the result of invoking [=get value from latest reading=] with
+`this` and "z" as arguments. It represents the [=acceleration=] along z-axis.
 
 The LinearAccelerationSensor Interface {#linearaccelerationsensor-interface}
 --------------------------------
@@ -156,20 +163,20 @@ the [=construct a Sensor object=] abstract operation.
 ### LinearAccelerationSensor.x ### {#linearaccelerationsensor-x}
 
 The {{Accelerometer/x!!attribute}} attribute of the {{LinearAccelerationSensor}}
-interface represents the [=linear acceleration=] along x-axis.
-This attribute returns [=map/value=] for [=latest reading=]["x"] [=map/entry=].
+interface returns the result of invoking [=get value from latest reading=] with
+`this` and "x" as arguments. It represents the [=linear acceleration=] along x-axis.
 
 ### LinearAccelerationSensor.y ### {#linearaccelerationsensor-y}
 
 The {{Accelerometer/y!!attribute}} attribute of the {{LinearAccelerationSensor}}
-interface represents the [=linear acceleration=] along y-axis.
-This attribute returns [=map/value=] for [=latest reading=]["y"] [=map/entry=].
+interface returns the result of invoking [=get value from latest reading=] with
+`this` and "y" as arguments. It represents the [=linear acceleration=] along y-axis.
 
 ### LinearAccelerationSensor.z ### {#linearaccelerationsensor-z}
 
 The {{Accelerometer/z!!attribute}} attribute of the {{LinearAccelerationSensor}}
-interface represents the [=linear acceleration=] along z-axis.
-This attribute returns [=map/value=] for [=latest reading=]["z"] [=map/entry=].
+interface returns the result of invoking [=get value from latest reading=] with
+`this` and "z" as arguments. It represents the [=linear acceleration=] along z-axis.
 
 The GravitySensor Interface {#gravitysensor-interface}
 --------------------------------
@@ -186,20 +193,23 @@ the [=construct a Sensor object=] abstract operation.
 ### GravitySensor.x ### {#gravitysensor-x}
 
 The {{Accelerometer/x!!attribute}} attribute of the {{GravitySensor}}
-interface represents the effect of [=acceleration=] along x-axis due to [=gravity=].
-This attribute returns [=map/value=] for [=latest reading=]["x"] [=map/entry=].
+interface returns the result of invoking [=get value from latest reading=] with
+`this` and "x" as arguments. It represents the effect of [=acceleration=] along x-axis due to
+[=gravity=].
 
 ### GravitySensor.y ### {#gravitysensor-y}
 
 The {{Accelerometer/y!!attribute}} attribute of the {{GravitySensor}}
-interface represents the effect of [=acceleration=] along y-axis due to [=gravity=].
-This attribute returns [=map/value=] for [=latest reading=]["y"] [=map/entry=].
+interface returns the result of invoking [=get value from latest reading=] with
+`this` and "y" as arguments. It represents the effect of [=acceleration=] along y-axis due to
+[=gravity=].
 
 ### GravitySensor.z ### {#gravitysensor-z}
 
 The {{Accelerometer/z!!attribute}} attribute of the {{GravitySensor}}
-interface represents the effect of [=acceleration=] along z-axis due to [=gravity=].
-This attribute returns [=map/value=] for [=latest reading=]["z"] [=map/entry=].
+interface returns the result of invoking [=get value from latest reading=] with
+`this` and "z" as arguments. It represents the effect of [=acceleration=] along z-axis due to
+[=gravity=].
 
 Acknowledgements {#acknowledgements}
 ================
