@@ -33,6 +33,10 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: default sensor
     text: construct a sensor object; url: construct-sensor-object
     text: sensor type
+urlPrefix: https://w3c.github.io/screen-orientation; spec: SCREEN-ORIENTATION
+  type: dfn
+    text: current orientation type;  url: dfn-current-orientation-type
+    text: dom screen; url: dom-screen
 </pre>
 
 Introduction {#intro}
@@ -94,7 +98,9 @@ The frame of reference for the [=acceleration=] measurement must be inertial, su
 provide 0 (m/s<sup>2</sup>) [=acceleration=] value for each axis.
 
 The sign of the [=acceleration=] values must be according to the right-hand convention in a [=local coordinate
-system=] defined by the device.
+system=] (see figure below).
+
+<img src="images/accelerometer_coordinate_system.png" srcset="images/accelerometer_coordinate_system.svg" style="display: block;margin: auto;" alt="Accelerometer coordinate system.">
 
 The {{LinearAccelerationSensor}} class is an {{Accelerometer}}'s subclass. The {{LinearAccelerationSensor}}'s
 [=latest reading=] contains device's [=linear acceleration=] about the corresponding axes.
@@ -107,19 +113,70 @@ The {{GravitySensor}} class is an {{Accelerometer}}'s subclass. The {{GravitySen
 
 The <dfn>gravity</dfn> is a force that attracts an object to the center of the earth, or towards any other physical object having mass.
 
-Note: The <dfn>local coordinate system</dfn> of a mobile device is usually defined relative to
-the device's screen when the device in its default orientation (see figure below).
+Reference Frame {#reference-frame}
+----------------
 
-<img src="images/accelerometer_coordinate_system.png" srcset="images/accelerometer_coordinate_system.svg" style="display: block;margin: auto;" alt="Accelerometer coordinate system.">
+The reference frame for the sensor classes defined in this specification,
+is expressed in a [=local coordinate system=], which can be defined as
+either the [=device coordinate system=], or the [=screen coordinate system=].
+
+The <dfn export>device coordinate system</dfn> is defined as a three dimensional
+Cartesian coordinate system (x, y, z), which is bound to the physical device.
+For devices with a display, the origin of the [=device coordinate system=] is
+the center of the device display. If the device is held in its default position,
+the Y-axis points towards the top of the display, the X-axis points towards the right of
+the display and Z-axis is the vector product of X and Y axes and it points outwards from
+the display, and towards the viewer.
+
+The <dfn export>screen coordinate system</dfn> is defined as a three dimensional
+Cartesian coordinate system (x, y, z), which is bound to the [=dom screen=].
+The origin of the [=screen coordinate system=] in the center
+of the [=dom screen=]. The Y-axis always points towards the top of the [=dom screen=],
+the X-axis points towards the right of the [=dom screen=] and Z-axis is the
+vector product of X and Y axes and it and it points outwards from the [=dom screen=],
+and towards the viewer.
+
+The main difference between the [=device coordinate system=] and the [=screen coordinate system=],
+is that the [=screen coordinate system=] always follows the [=dom screen=] orientation,
+i.e. it will swap X and Y axes in relation to the device if the [=current orientation type=]
+changes. In contrast, the [=device coordinate system=] will always remain the same.
 
 API {#api}
 ===
+
+The SpatialSensorOptions Dictionary {#the-spatialsensoroptions-dictionary}
+------------------------------------
+
+<pre class="idl">
+  enum LocalCoordinateSystem { "device", "screen" };
+
+  dictionary SpatialSensorOptions :  SensorOptions  {
+    LocalCoordinateSystem referenceFrame = "device";
+  };
+ </pre>
+
+<h4 dfn export>Construct spatial sensor object</h4>
+
+<div algorithm="construct spatial sensor object">
+
+    : input
+    :: |options|, a {{SpatialSensorOptions}} object.
+    : output
+    :: A {{Sensor}} object.
+
+    1. Let |sensor_instance| be the result of invoking [=construct a Sensor object=] with |options|.
+    1. If |options|.{{referenceFrame!!dict-member}} is "screen", then:
+       1.  Define [=local coordinate system=] for |sensor_instance|
+           as the [=screen coordinate system=].
+    1. Otherwise, define [=local coordinate system=] for |sensor_instance|
+       as the [=device coordinate system=].
+</div>
 
 The Accelerometer Interface {#accelerometer-interface}
 --------------------------------
 
 <pre class="idl">
-  [Constructor(optional SensorOptions options), SecureContext, Exposed=Window]
+  [Constructor(optional SpatialSensorOptions options), SecureContext, Exposed=Window]
   interface Accelerometer : Sensor {
     readonly attribute double? x;
     readonly attribute double? y;
@@ -128,7 +185,7 @@ The Accelerometer Interface {#accelerometer-interface}
 </pre>
 
 To <dfn>Construct an Accelerometer Object</dfn> the user agent must invoke
-the [=construct a Sensor object=] abstract operation.
+the [=Construct spatial sensor object=] abstract operation.
 
 ### Accelerometer.x ### {#accelerometer-x}
 
@@ -152,13 +209,13 @@ The LinearAccelerationSensor Interface {#linearaccelerationsensor-interface}
 --------------------------------
 
 <pre class="idl">
-  [Constructor(optional SensorOptions options), SecureContext, Exposed=Window]
+  [Constructor(optional SpatialSensorOptions options), SecureContext, Exposed=Window]
   interface LinearAccelerationSensor : Accelerometer {
   };
 </pre>
 
 To <dfn>Construct a LinearAccelerationSensor Object</dfn> the user agent must invoke
-the [=construct a Sensor object=] abstract operation.
+the [=Construct spatial sensor object=] abstract operation.
 
 ### LinearAccelerationSensor.x ### {#linearaccelerationsensor-x}
 
