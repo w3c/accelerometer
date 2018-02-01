@@ -65,6 +65,42 @@ Examples {#examples}
     </pre>
 </div>
 
+<div class="example">
+    The following example shows how to use gravity sensor that provides
+    readings in the [=screen coordinate system=]. The snippet will print message to the
+    console when the [=dom screen=] is perpendicular to the ground and bottom of the
+    rendered web page is pointing downwards.
+    <pre highlight="js">
+    let sensor = new GravitySensor({frequency: 5, referenceFrame: "screen"});
+
+    sensor.onreading = () => {
+      if (sensor.y >= 9.8) {
+        console.log("Web page is perpendicular to the ground.");
+      }
+    }
+
+    sensor.start();
+    </pre>
+</div>
+
+<div class="example">
+    The following example detects shake gesture along x axis of the device, regardless
+    of the orientation of the [=dom screen=].
+    <pre highlight="js">
+    const shakeThreshold = 25;
+
+    let sensor = new LinearAccelerationSensor({frequency: 60});
+
+    sensor.addEventListener('reading', () => {
+      if (sensor.x > shakeThreshold) {
+        console.log("Shake detected.");
+      }
+    });
+
+    sensor.start();
+    </pre>
+</div>
+
 Use Cases and Requirements {#usecases-requirements}
 ==============================
 
@@ -127,7 +163,10 @@ For devices with a display, the origin of the [=device coordinate system=] is
 the center of the device display. If the device is held in its default position,
 the Y-axis points towards the top of the display, the X-axis points towards the right of
 the display and Z-axis is the vector product of X and Y axes and it points outwards from
-the display, and towards the viewer.
+the display, and towards the viewer. The [=device coordinate system=] remains stationary
+regardless of the [=dom screen=] orientation (see figure below).
+
+<img src="images/device_coordinate_system.svg" onerror="this.src='images/device_coordinate_system.png'" style="display: block;margin: auto;" alt="Device coordinate system.">
 
 The <dfn export>screen coordinate system</dfn> is defined as a three dimensional
 Cartesian coordinate system (x, y, z), which is bound to the [=dom screen=].
@@ -135,7 +174,9 @@ The origin of the [=screen coordinate system=] in the center
 of the [=dom screen=]. The Y-axis always points towards the top of the [=dom screen=],
 the X-axis points towards the right of the [=dom screen=] and Z-axis is the
 vector product of X and Y axes and it and it points outwards from the [=dom screen=],
-and towards the viewer.
+and towards the viewer (see figure below).
+
+<img src="images/screen_coordinate_system.svg" onerror="this.src='images/screen_coordinate_system.png'" style="display: block;margin: auto;" alt="Screen coordinate system.">
 
 The main difference between the [=device coordinate system=] and the [=screen coordinate system=],
 is that the [=screen coordinate system=] always follows the [=dom screen=] orientation,
@@ -240,13 +281,13 @@ The GravitySensor Interface {#gravitysensor-interface}
 --------------------------------
 
 <pre class="idl">
-  [Constructor(optional SensorOptions options), SecureContext, Exposed=Window]
+  [Constructor(optional SpatialSensorOptions options), SecureContext, Exposed=Window]
   interface GravitySensor : Accelerometer {
   };
 </pre>
 
 To <dfn>Construct an GravitySensor Object</dfn> the user agent must invoke
-the [=construct a Sensor object=] abstract operation.
+the [=Construct spatial sensor object=] abstract operation.
 
 ### GravitySensor.x ### {#gravitysensor-x}
 

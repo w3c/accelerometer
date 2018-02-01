@@ -1183,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 1760a0346ebf3096d8d47b818b15ffcad41e99a0" name="generator">
+  <meta content="Bikeshed version 166744eb86a34dbc5493268ea410dc65275aa964" name="generator">
   <link href="https://www.w3.org/TR/accelerometer/" rel="canonical">
 <style>/* style-md-lists */
 
@@ -1431,7 +1431,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-02-01">1 February 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-02-04">4 February 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1484,7 +1484,7 @@ of a device that hosts the sensor.</p>
 	W3C maintains a <a href="https://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
 	that page also includes instructions for disclosing a patent.
 	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
-   <p> This document is governed by the <a href="https://www.w3.org/2017/Process-20170301/" id="w3c_process_revision">1 March 2017 W3C Process Document</a>. </p>
+   <p> This document is governed by the <a href="https://www.w3.org/2018/Process-20180201/" id="w3c_process_revision">1 February 2018 W3C Process Document</a>. </p>
    <p></p>
   </div>
   <div data-fill-with="at-risk"></div>
@@ -1566,6 +1566,38 @@ sensor<span class="p">.</span>onreading <span class="o">=</span> <span class="p"
 sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="p">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">);</span>
 </pre>
    </div>
+   <div class="example" id="example-67e56c83">
+    <a class="self-link" href="#example-67e56c83"></a> The following example shows how to use gravity sensor that provides
+    readings in the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system">screen coordinate system</a>. The snippet will print message to the
+    console when the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen">dom screen</a> is perpendicular to the ground and bottom of the
+    rendered web page is pointing downwards. 
+<pre class="highlight"><span class="kd">let</span> sensor <span class="o">=</span> <span class="k">new</span> GravitySensor<span class="p">({</span>frequency<span class="o">:</span> <span class="mi">5</span><span class="p">,</span> referenceFrame<span class="o">:</span> <span class="s2">"screen"</span><span class="p">});</span>
+
+sensor<span class="p">.</span>onreading <span class="o">=</span> <span class="p">()</span> <span class="p">=></span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span>sensor<span class="p">.</span>y <span class="o">>=</span> <span class="mf">9.8</span><span class="p">)</span> <span class="p">{</span>
+    console<span class="p">.</span>log<span class="p">(</span><span class="s2">"Web page is perpendicular to the ground."</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+sensor<span class="p">.</span>start<span class="p">();</span>
+</pre>
+   </div>
+   <div class="example" id="example-9c43849a">
+    <a class="self-link" href="#example-9c43849a"></a> The following example detects shake gesture along x axis of the device, regardless
+    of the orientation of the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen①">dom screen</a>. 
+<pre class="highlight"><span class="kr">const</span> shakeThreshold <span class="o">=</span> <span class="mi">25</span><span class="p">;</span>
+
+<span class="kd">let</span> sensor <span class="o">=</span> <span class="k">new</span> LinearAccelerationSensor<span class="p">({</span>frequency<span class="o">:</span> <span class="mi">60</span><span class="p">});</span>
+
+sensor<span class="p">.</span>addEventListener<span class="p">(</span><span class="s1">'reading'</span><span class="p">,</span> <span class="p">()</span> <span class="p">=></span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span>sensor<span class="p">.</span>x <span class="o">></span> shakeThreshold<span class="p">)</span> <span class="p">{</span>
+    console<span class="p">.</span>log<span class="p">(</span><span class="s2">"Shake detected."</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+sensor<span class="p">.</span>start<span class="p">();</span>
+</pre>
+   </div>
    <h2 class="heading settled" data-level="3" id="usecases-requirements"><span class="secno">3. </span><span class="content">Use Cases and Requirements</span><a class="self-link" href="#usecases-requirements"></a></h2>
    <p>The use cases and requirements are listed in the <cite><a href="https://w3c.github.io/motion-sensors/#usecases-and-requirements"> Motion Sensors Explainer</a></cite> and <cite><a href="https://w3c.github.io/sensors/usecases.html"> Sensor use cases</a></cite> documents.</p>
    <h2 class="heading settled" data-level="4" id="security-and-privacy"><span class="secno">4. </span><span class="content">Security and Privacy Considerations</span><a class="self-link" href="#security-and-privacy"></a></h2>
@@ -1591,24 +1623,27 @@ the sensor, without the contribution of a <a data-link-type="dfn" href="#gravity
    <h3 class="heading settled" data-level="5.1" id="reference-frame"><span class="secno">5.1. </span><span class="content">Reference Frame</span><a class="self-link" href="#reference-frame"></a></h3>
    <p>The reference frame for the sensor classes defined in this specification,
 is expressed in a <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system②">local coordinate system</a>, which can be defined as
-either the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system">device coordinate system</a>, or the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system">screen coordinate system</a>.</p>
+either the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system">device coordinate system</a>, or the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system①">screen coordinate system</a>.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export="" id="device-coordinate-system">device coordinate system</dfn> is defined as a three dimensional
 Cartesian coordinate system (x, y, z), which is bound to the physical device.
 For devices with a display, the origin of the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system①">device coordinate system</a> is
 the center of the device display. If the device is held in its default position,
 the Y-axis points towards the top of the display, the X-axis points towards the right of
 the display and Z-axis is the vector product of X and Y axes and it points outwards from
-the display, and towards the viewer.</p>
+the display, and towards the viewer. The <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system②">device coordinate system</a> remains stationary
+regardless of the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen②">dom screen</a> orientation (see figure below).</p>
+   <p><img alt="Device coordinate system." onerror="this.src=&apos;images/device_coordinate_system.png&apos;" src="images/device_coordinate_system.svg" style="display: block;margin: auto;"></p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export="" id="screen-coordinate-system">screen coordinate system</dfn> is defined as a three dimensional
-Cartesian coordinate system (x, y, z), which is bound to the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen">dom screen</a>.
-The origin of the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system①">screen coordinate system</a> in the center
-of the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen①">dom screen</a>. The Y-axis always points towards the top of the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen②">dom screen</a>,
-the X-axis points towards the right of the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen③">dom screen</a> and Z-axis is the
-vector product of X and Y axes and it and it points outwards from the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen④">dom screen</a>,
-and towards the viewer.</p>
-   <p>The main difference between the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system②">device coordinate system</a> and the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system②">screen coordinate system</a>,
-is that the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system③">screen coordinate system</a> always follows the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen⑤">dom screen</a> orientation,
-i.e. it will swap X and Y axes in relation to the device if the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dfn-current-orientation-type" id="ref-for-dfn-current-orientation-type">current orientation type</a> changes. In contrast, the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system③">device coordinate system</a> will always remain the same.</p>
+Cartesian coordinate system (x, y, z), which is bound to the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen③">dom screen</a>.
+The origin of the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system②">screen coordinate system</a> in the center
+of the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen④">dom screen</a>. The Y-axis always points towards the top of the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen⑤">dom screen</a>,
+the X-axis points towards the right of the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen⑥">dom screen</a> and Z-axis is the
+vector product of X and Y axes and it and it points outwards from the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen⑦">dom screen</a>,
+and towards the viewer (see figure below).</p>
+   <p><img alt="Screen coordinate system." onerror="this.src=&apos;images/screen_coordinate_system.png&apos;" src="images/screen_coordinate_system.svg" style="display: block;margin: auto;"></p>
+   <p>The main difference between the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system③">device coordinate system</a> and the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system③">screen coordinate system</a>,
+is that the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system④">screen coordinate system</a> always follows the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dom-screen" id="ref-for-dom-screen⑧">dom screen</a> orientation,
+i.e. it will swap X and Y axes in relation to the device if the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dfn-current-orientation-type" id="ref-for-dfn-current-orientation-type">current orientation type</a> changes. In contrast, the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system④">device coordinate system</a> will always remain the same.</p>
    <h2 class="heading settled" data-level="6" id="api"><span class="secno">6. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
    <h3 class="heading settled" data-level="6.1" id="the-spatialsensoroptions-dictionary"><span class="secno">6.1. </span><span class="content">The SpatialSensorOptions Dictionary</span><a class="self-link" href="#the-spatialsensoroptions-dictionary"></a></h3>
 <pre class="idl highlight def"><span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-localcoordinatesystem"><code>LocalCoordinateSystem</code></dfn> { <dfn class="s idl-code" data-dfn-for="LocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;device&quot;|device" id="dom-localcoordinatesystem-device"><code>"device"</code><a class="self-link" href="#dom-localcoordinatesystem-device"></a></dfn>, <dfn class="s idl-code" data-dfn-for="LocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;screen&quot;|screen" id="dom-localcoordinatesystem-screen"><code>"screen"</code><a class="self-link" href="#dom-localcoordinatesystem-screen"></a></dfn> };
@@ -1634,10 +1669,10 @@ i.e. it will swap X and Y axes in relation to the device if the <a data-link-typ
       <p>If <var>options</var>.<code class="idl"><a class="idl-code" data-link-type="dict-member" href="#dom-spatialsensoroptions-referenceframe" id="ref-for-dom-spatialsensoroptions-referenceframe">referenceFrame</a></code> is "screen", then:</p>
       <ol>
        <li data-md="">
-        <p>Define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system③">local coordinate system</a> for <var>sensor_instance</var> as the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system④">screen coordinate system</a>.</p>
+        <p>Define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system③">local coordinate system</a> for <var>sensor_instance</var> as the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system⑤">screen coordinate system</a>.</p>
       </ol>
      <li data-md="">
-      <p>Otherwise, define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system④">local coordinate system</a> for <var>sensor_instance</var> as the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system④">device coordinate system</a>.</p>
+      <p>Otherwise, define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system④">local coordinate system</a> for <var>sensor_instance</var> as the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system⑤">device coordinate system</a>.</p>
     </ol>
    </div>
    <h3 class="heading settled" data-level="6.2" id="accelerometer-interface"><span class="secno">6.2. </span><span class="content">The Accelerometer Interface</span><a class="self-link" href="#accelerometer-interface"></a></h3>
@@ -1670,12 +1705,12 @@ the <a data-link-type="dfn" href="#construct-spatial-sensor-object" id="ref-for-
    <h4 class="heading settled" data-level="6.3.3" id="linearaccelerationsensor-z"><span class="secno">6.3.3. </span><span class="content">LinearAccelerationSensor.z</span><a class="self-link" href="#linearaccelerationsensor-z"></a></h4>
    <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-z" id="ref-for-dom-accelerometer-z①">z</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor⑥">LinearAccelerationSensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading⑤">get value from latest reading</a> with <code>this</code> and "z" as arguments. It represents the <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration④">linear acceleration</a> along z-axis.</p>
    <h3 class="heading settled" data-level="6.4" id="gravitysensor-interface"><span class="secno">6.4. </span><span class="content">The GravitySensor Interface</span><a class="self-link" href="#gravitysensor-interface"></a></h3>
-<pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="GravitySensor" data-dfn-type="constructor" data-export="" data-lt="GravitySensor(options)|GravitySensor()" id="dom-gravitysensor-gravitysensor"><code>Constructor</code><a class="self-link" href="#dom-gravitysensor-gravitysensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions①">SensorOptions</a> <dfn class="nv idl-code" data-dfn-for="GravitySensor/GravitySensor(options)" data-dfn-type="argument" data-export="" id="dom-gravitysensor-gravitysensor-options-options"><code>options</code><a class="self-link" href="#dom-gravitysensor-gravitysensor-options-options"></a></dfn>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②">SecureContext</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②">Exposed</a>=<span class="n">Window</span>]
+<pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="GravitySensor" data-dfn-type="constructor" data-export="" data-lt="GravitySensor(options)|GravitySensor()" id="dom-gravitysensor-gravitysensor"><code>Constructor</code><a class="self-link" href="#dom-gravitysensor-gravitysensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-spatialsensoroptions" id="ref-for-dictdef-spatialsensoroptions③">SpatialSensorOptions</a> <dfn class="nv idl-code" data-dfn-for="GravitySensor/GravitySensor(options)" data-dfn-type="argument" data-export="" id="dom-gravitysensor-gravitysensor-options-options"><code>options</code><a class="self-link" href="#dom-gravitysensor-gravitysensor-options-options"></a></dfn>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②">SecureContext</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②">Exposed</a>=<span class="n">Window</span>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="gravitysensor"><code>GravitySensor</code></dfn> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer⑨">Accelerometer</a> {
 };
 </pre>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-an-gravitysensor-object">Construct an GravitySensor Object<a class="self-link" href="#construct-an-gravitysensor-object"></a></dfn> the user agent must invoke
-the <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object" id="ref-for-construct-sensor-object①">construct a Sensor object</a> abstract operation.</p>
+the <a data-link-type="dfn" href="#construct-spatial-sensor-object" id="ref-for-construct-spatial-sensor-object②">Construct spatial sensor object</a> abstract operation.</p>
    <h4 class="heading settled" data-level="6.4.1" id="gravitysensor-x"><span class="secno">6.4.1. </span><span class="content">GravitySensor.x</span><a class="self-link" href="#gravitysensor-x"></a></h4>
    <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-x" id="ref-for-dom-accelerometer-x②">x</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor④">GravitySensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading⑥">get value from latest reading</a> with <code>this</code> and "x" as arguments. It represents the effect of <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration①①">acceleration</a> along x-axis due to <a data-link-type="dfn" href="#gravity" id="ref-for-gravity③">gravity</a>.</p>
    <h4 class="heading settled" data-level="6.4.2" id="gravitysensor-y"><span class="secno">6.4.2. </span><span class="content">GravitySensor.y</span><a class="self-link" href="#gravitysensor-y"></a></h4>
@@ -1803,7 +1838,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
 <pre class="idl highlight def"><span class="kt">enum</span> <a class="nv" href="#enumdef-localcoordinatesystem"><code>LocalCoordinateSystem</code></a> { <a class="s" href="#dom-localcoordinatesystem-device"><code>"device"</code></a>, <a class="s" href="#dom-localcoordinatesystem-screen"><code>"screen"</code></a> };
 
-<span class="kt">dictionary</span> <a class="nv" href="#dictdef-spatialsensoroptions"><code>SpatialSensorOptions</code></a> :  <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions②">SensorOptions</a>  {
+<span class="kt">dictionary</span> <a class="nv" href="#dictdef-spatialsensoroptions"><code>SpatialSensorOptions</code></a> :  <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions①">SensorOptions</a>  {
   <a class="n" data-link-type="idl-name" href="#enumdef-localcoordinatesystem" id="ref-for-enumdef-localcoordinatesystem①">LocalCoordinateSystem</a> <a class="nv" data-default="&quot;device&quot;" data-type="LocalCoordinateSystem " href="#dom-spatialsensoroptions-referenceframe"><code>referenceFrame</code></a> = "device";
 };
 
@@ -1818,7 +1853,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
 <span class="kt">interface</span> <a class="nv" href="#linearaccelerationsensor"><code>LinearAccelerationSensor</code></a> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer⑧①">Accelerometer</a> {
 };
 
-[<a class="nv" href="#dom-gravitysensor-gravitysensor"><code>Constructor</code></a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions①①">SensorOptions</a> <a class="nv" href="#dom-gravitysensor-gravitysensor-options-options"><code>options</code></a>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②①">SecureContext</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②①">Exposed</a>=<span class="n">Window</span>]
+[<a class="nv" href="#dom-gravitysensor-gravitysensor"><code>Constructor</code></a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-spatialsensoroptions" id="ref-for-dictdef-spatialsensoroptions③①">SpatialSensorOptions</a> <a class="nv" href="#dom-gravitysensor-gravitysensor-options-options"><code>options</code></a>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②①">SecureContext</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②①">Exposed</a>=<span class="n">Window</span>]
 <span class="kt">interface</span> <a class="nv" href="#gravitysensor"><code>GravitySensor</code></a> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer⑨①">Accelerometer</a> {
 };
 
@@ -1863,15 +1898,16 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <aside class="dfn-panel" data-for="device-coordinate-system">
    <b><a href="#device-coordinate-system">#device-coordinate-system</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-device-coordinate-system">5.1. Reference Frame</a> <a href="#ref-for-device-coordinate-system①">(2)</a> <a href="#ref-for-device-coordinate-system②">(3)</a> <a href="#ref-for-device-coordinate-system③">(4)</a>
-    <li><a href="#ref-for-device-coordinate-system④">6.1.1. Construct spatial sensor object</a>
+    <li><a href="#ref-for-device-coordinate-system">5.1. Reference Frame</a> <a href="#ref-for-device-coordinate-system①">(2)</a> <a href="#ref-for-device-coordinate-system②">(3)</a> <a href="#ref-for-device-coordinate-system③">(4)</a> <a href="#ref-for-device-coordinate-system④">(5)</a>
+    <li><a href="#ref-for-device-coordinate-system⑤">6.1.1. Construct spatial sensor object</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="screen-coordinate-system">
    <b><a href="#screen-coordinate-system">#screen-coordinate-system</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-screen-coordinate-system">5.1. Reference Frame</a> <a href="#ref-for-screen-coordinate-system①">(2)</a> <a href="#ref-for-screen-coordinate-system②">(3)</a> <a href="#ref-for-screen-coordinate-system③">(4)</a>
-    <li><a href="#ref-for-screen-coordinate-system④">6.1.1. Construct spatial sensor object</a>
+    <li><a href="#ref-for-screen-coordinate-system">2. Examples</a>
+    <li><a href="#ref-for-screen-coordinate-system①">5.1. Reference Frame</a> <a href="#ref-for-screen-coordinate-system②">(2)</a> <a href="#ref-for-screen-coordinate-system③">(3)</a> <a href="#ref-for-screen-coordinate-system④">(4)</a>
+    <li><a href="#ref-for-screen-coordinate-system⑤">6.1.1. Construct spatial sensor object</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="enumdef-localcoordinatesystem">
@@ -1886,6 +1922,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <li><a href="#ref-for-dictdef-spatialsensoroptions">6.1.1. Construct spatial sensor object</a>
     <li><a href="#ref-for-dictdef-spatialsensoroptions①">6.2. The Accelerometer Interface</a>
     <li><a href="#ref-for-dictdef-spatialsensoroptions②">6.3. The LinearAccelerationSensor Interface</a>
+    <li><a href="#ref-for-dictdef-spatialsensoroptions③">6.4. The GravitySensor Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-spatialsensoroptions-referenceframe">
@@ -1899,6 +1936,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <ul>
     <li><a href="#ref-for-construct-spatial-sensor-object">6.2. The Accelerometer Interface</a>
     <li><a href="#ref-for-construct-spatial-sensor-object①">6.3. The LinearAccelerationSensor Interface</a>
+    <li><a href="#ref-for-construct-spatial-sensor-object②">6.4. The GravitySensor Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="accelerometer">
