@@ -137,7 +137,7 @@ provide 0 (m/s<sup>2</sup>) [=acceleration=] value for each axis.
 The sign of the [=acceleration=] values must be according to the right-hand convention in a [=local coordinate
 system=] (see figure below).
 
-<img src="images/accelerometer_coordinate_system.png" srcset="images/accelerometer_coordinate_system.svg" style="display: block;margin: auto;" alt="Accelerometer coordinate system.">
+<img src="images/accelerometer_coordinate_system.svg" onerror="this.src='images/accelerometer_coordinate_system.png'" style="display: block;margin: auto;" alt="Accelerometer coordinate system.">
 
 The {{LinearAccelerationSensor}} class is an {{Accelerometer}}'s subclass. The {{LinearAccelerationSensor}}'s
 [=latest reading=] contains device's [=linear acceleration=] about the corresponding axes.
@@ -154,7 +154,7 @@ Reference Frame {#reference-frame}
 ----------------
 
 The reference frame for the sensor classes defined in this specification,
-is expressed in a [=local coordinate system=], which can be defined as
+is defined with a [=local coordinate system=], which can be defined as
 either the [=device coordinate system=], or the [=screen coordinate system=].
 
 The <dfn export>device coordinate system</dfn> is defined as a three dimensional
@@ -181,7 +181,8 @@ and towards the viewer (see figure below).
 The main difference between the [=device coordinate system=] and the [=screen coordinate system=],
 is that the [=screen coordinate system=] always follows the [=dom screen=] orientation,
 i.e. it will swap X and Y axes in relation to the device if the [=current orientation type=]
-changes. In contrast, the [=device coordinate system=] will always remain the same.
+changes. In contrast, the [=device coordinate system=] will always remain stationary relative to
+the device.
 
 API {#api}
 ===
