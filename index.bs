@@ -34,6 +34,7 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: construct a sensor object; url: construct-sensor-object
     text: sensor type
     text: local coordinate system
+    text: sensor readings; url: sensor-readings
 urlPrefix: https://w3c.github.io/screen-orientation; spec: SCREEN-ORIENTATION
   type: dfn
     text: current orientation type;  url: dfn-current-orientation-type
@@ -153,9 +154,10 @@ The <dfn>gravity</dfn> is a force that attracts an object to the center of the e
 Reference Frame {#reference-frame}
 ----------------
 
-The reference frame for the sensor classes defined in this specification,
-is defined with a [=local coordinate system=], which can be defined as
-either the [=device coordinate system=], or the [=screen coordinate system=].
+The [=local coordinate system=] represents the reference frame for the
+{{Accelerometer}}, {{LinearAccelerationSensor}}, and the {{GravitySensor}}
+[=sensor readings|readings=]. It can be either the [=device coordinate system=]
+or the [=screen coordinate system=].
 
 The <dfn export>device coordinate system</dfn> is defined as a three dimensional
 Cartesian coordinate system (x, y, z), which is bound to the physical device.
@@ -187,48 +189,28 @@ the device.
 API {#api}
 ===
 
-The SpatialSensorOptions Dictionary {#the-spatialsensoroptions-dictionary}
-------------------------------------
-
-<pre class="idl">
-  enum LocalCoordinateSystem { "device", "screen" };
-
-  dictionary SpatialSensorOptions :  SensorOptions  {
-    LocalCoordinateSystem referenceFrame = "device";
-  };
- </pre>
-
-<h4 dfn export>Construct spatial sensor object</h4>
-
-<div algorithm="construct spatial sensor object">
-
-    : input
-    :: |options|, a {{SpatialSensorOptions}} object.
-    : output
-    :: A {{Sensor}} object.
-
-    1. Let |sensor_instance| be the result of invoking [=construct a Sensor object=] with |options|.
-    1. If |options|.{{referenceFrame!!dict-member}} is "screen", then:
-       1.  Define [=local coordinate system=] for |sensor_instance|
-           as the [=screen coordinate system=].
-    1. Otherwise, define [=local coordinate system=] for |sensor_instance|
-       as the [=device coordinate system=].
-</div>
-
 The Accelerometer Interface {#accelerometer-interface}
 --------------------------------
 
 <pre class="idl">
-  [Constructor(optional SpatialSensorOptions options), SecureContext, Exposed=Window]
+  [Constructor(optional AccelerometerSensorOptions options), SecureContext,
+    Exposed=Window]
   interface Accelerometer : Sensor {
     readonly attribute double? x;
     readonly attribute double? y;
     readonly attribute double? z;
   };
+
+  enum LocalCoordinateSystem { "device", "screen" };
+
+  dictionary AccelerometerSensorOptions :  SensorOptions  {
+    LocalCoordinateSystem referenceFrame = "device";
+  };
 </pre>
 
-To <dfn>Construct an Accelerometer Object</dfn> the user agent must invoke
-the [=Construct spatial sensor object=] abstract operation.
+To construct an {{Accelerometer}} object the user agent must invoke
+the [=construct an accelerometer object=] abstract operation for the
+{{Accelerometer}} interface.
 
 ### Accelerometer.x ### {#accelerometer-x}
 
@@ -252,13 +234,15 @@ The LinearAccelerationSensor Interface {#linearaccelerationsensor-interface}
 --------------------------------
 
 <pre class="idl">
-  [Constructor(optional SpatialSensorOptions options), SecureContext, Exposed=Window]
+  [Constructor(optional AccelerometerSensorOptions options), SecureContext,
+    Exposed=Window]
   interface LinearAccelerationSensor : Accelerometer {
   };
 </pre>
 
-To <dfn>Construct a LinearAccelerationSensor Object</dfn> the user agent must invoke
-the [=Construct spatial sensor object=] abstract operation.
+To construct a {{LinearAccelerationSensor}} object the user agent must invoke
+the [=construct an accelerometer object=] abstract operation for the
+{{LinearAccelerationSensor}} interface.
 
 ### LinearAccelerationSensor.x ### {#linearaccelerationsensor-x}
 
@@ -282,13 +266,15 @@ The GravitySensor Interface {#gravitysensor-interface}
 --------------------------------
 
 <pre class="idl">
-  [Constructor(optional SpatialSensorOptions options), SecureContext, Exposed=Window]
+  [Constructor(optional AccelerometerSensorOptions options), SecureContext,
+    Exposed=Window]
   interface GravitySensor : Accelerometer {
   };
 </pre>
 
-To <dfn>Construct an GravitySensor Object</dfn> the user agent must invoke
-the [=Construct spatial sensor object=] abstract operation.
+To construct a {{GravitySensor}} object the user agent must invoke
+the [=construct an accelerometer object=] abstract operation for the
+{{GravitySensor}} interface.
 
 ### GravitySensor.x ### {#gravitysensor-x}
 
@@ -310,6 +296,26 @@ The {{Accelerometer/z!!attribute}} attribute of the {{GravitySensor}}
 interface returns the result of invoking [=get value from latest reading=] with
 `this` and "z" as arguments. It represents the effect of [=acceleration=] along z-axis due to
 [=gravity=].
+
+Abstract Operations {#abstract-opertaions}
+==============
+
+<h3 dfn>Construct an accelerometer object</h3>
+
+<div algorithm="construct an accelerometer object">
+
+    : input
+    :: |options|, a {{AccelerometerSensorOptions}} object.
+    : output
+    :: A {{Sensor}} object.
+
+    1. Let |sensor_instance| be the result of invoking [=construct a Sensor object=] with |options|.
+    1. If |options|.{{referenceFrame!!dict-member}} is "screen", then:
+       1.  Define [=local coordinate system=] for |sensor_instance|
+           as the [=screen coordinate system=].
+    1. Otherwise, define [=local coordinate system=] for |sensor_instance|
+       as the [=device coordinate system=].
+</div>
 
 Acknowledgements {#acknowledgements}
 ================
