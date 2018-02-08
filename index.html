@@ -1431,7 +1431,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-02-07">7 February 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-02-08">8 February 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1504,34 +1504,34 @@ of a device that hosts the sensor.</p>
      <a href="#api"><span class="secno">6</span> <span class="content">API</span></a>
      <ol class="toc">
       <li>
-       <a href="#the-spatialsensoroptions-dictionary"><span class="secno">6.1</span> <span class="content">The SpatialSensorOptions Dictionary</span></a>
+       <a href="#accelerometer-interface"><span class="secno">6.1</span> <span class="content">The Accelerometer Interface</span></a>
        <ol class="toc">
-        <li><a href="#construct-spatial-sensor-object"><span class="secno">6.1.1</span> <span class="content">Construct spatial sensor object</span></a>
+        <li><a href="#accelerometer-x"><span class="secno">6.1.1</span> <span class="content">Accelerometer.x</span></a>
+        <li><a href="#accelerometer-y"><span class="secno">6.1.2</span> <span class="content">Accelerometer.y</span></a>
+        <li><a href="#accelerometer-z"><span class="secno">6.1.3</span> <span class="content">Accelerometer.z</span></a>
        </ol>
       <li>
-       <a href="#accelerometer-interface"><span class="secno">6.2</span> <span class="content">The Accelerometer Interface</span></a>
+       <a href="#linearaccelerationsensor-interface"><span class="secno">6.2</span> <span class="content">The LinearAccelerationSensor Interface</span></a>
        <ol class="toc">
-        <li><a href="#accelerometer-x"><span class="secno">6.2.1</span> <span class="content">Accelerometer.x</span></a>
-        <li><a href="#accelerometer-y"><span class="secno">6.2.2</span> <span class="content">Accelerometer.y</span></a>
-        <li><a href="#accelerometer-z"><span class="secno">6.2.3</span> <span class="content">Accelerometer.z</span></a>
+        <li><a href="#linearaccelerationsensor-x"><span class="secno">6.2.1</span> <span class="content">LinearAccelerationSensor.x</span></a>
+        <li><a href="#linearaccelerationsensor-y"><span class="secno">6.2.2</span> <span class="content">LinearAccelerationSensor.y</span></a>
+        <li><a href="#linearaccelerationsensor-z"><span class="secno">6.2.3</span> <span class="content">LinearAccelerationSensor.z</span></a>
        </ol>
       <li>
-       <a href="#linearaccelerationsensor-interface"><span class="secno">6.3</span> <span class="content">The LinearAccelerationSensor Interface</span></a>
+       <a href="#gravitysensor-interface"><span class="secno">6.3</span> <span class="content">The GravitySensor Interface</span></a>
        <ol class="toc">
-        <li><a href="#linearaccelerationsensor-x"><span class="secno">6.3.1</span> <span class="content">LinearAccelerationSensor.x</span></a>
-        <li><a href="#linearaccelerationsensor-y"><span class="secno">6.3.2</span> <span class="content">LinearAccelerationSensor.y</span></a>
-        <li><a href="#linearaccelerationsensor-z"><span class="secno">6.3.3</span> <span class="content">LinearAccelerationSensor.z</span></a>
-       </ol>
-      <li>
-       <a href="#gravitysensor-interface"><span class="secno">6.4</span> <span class="content">The GravitySensor Interface</span></a>
-       <ol class="toc">
-        <li><a href="#gravitysensor-x"><span class="secno">6.4.1</span> <span class="content">GravitySensor.x</span></a>
-        <li><a href="#gravitysensor-y"><span class="secno">6.4.2</span> <span class="content">GravitySensor.y</span></a>
-        <li><a href="#gravitysensor-z"><span class="secno">6.4.3</span> <span class="content">GravitySensor.z</span></a>
+        <li><a href="#gravitysensor-x"><span class="secno">6.3.1</span> <span class="content">GravitySensor.x</span></a>
+        <li><a href="#gravitysensor-y"><span class="secno">6.3.2</span> <span class="content">GravitySensor.y</span></a>
+        <li><a href="#gravitysensor-z"><span class="secno">6.3.3</span> <span class="content">GravitySensor.z</span></a>
        </ol>
      </ol>
-    <li><a href="#acknowledgements"><span class="secno">7</span> <span class="content">Acknowledgements</span></a>
-    <li><a href="#conformance"><span class="secno">8</span> <span class="content">Conformance</span></a>
+    <li>
+     <a href="#abstract-opertaions"><span class="secno">7</span> <span class="content">Abstract Operations</span></a>
+     <ol class="toc">
+      <li><a href="#construct-an-accelerometer-object"><span class="secno">7.1</span> <span class="content">Construct an accelerometer object</span></a>
+     </ol>
+    <li><a href="#acknowledgements"><span class="secno">8</span> <span class="content">Acknowledgements</span></a>
+    <li><a href="#conformance"><span class="secno">9</span> <span class="content">Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ol class="toc">
@@ -1621,9 +1621,7 @@ the sensor, without the contribution of a <a data-link-type="dfn" href="#gravity
    <p>The <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor②">GravitySensor</a></code> class is an <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer④">Accelerometer</a></code>'s subclass. The <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor③">GravitySensor</a></code>'s <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading" id="ref-for-latest-reading②">latest reading</a> contains device’s <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration⑦">acceleration</a> due to the effect of <a data-link-type="dfn" href="#gravity" id="ref-for-gravity②">gravity</a> force about the corresponding axes.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="gravity">gravity</dfn> is a force that attracts an object to the center of the earth, or towards any other physical object having mass.</p>
    <h3 class="heading settled" data-level="5.1" id="reference-frame"><span class="secno">5.1. </span><span class="content">Reference Frame</span><a class="self-link" href="#reference-frame"></a></h3>
-   <p>The reference frame for the sensor classes defined in this specification,
-is defined with a <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system②">local coordinate system</a>, which can be defined as
-either the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system">device coordinate system</a>, or the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system①">screen coordinate system</a>.</p>
+   <p>The <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system②">local coordinate system</a> represents the reference frame for the <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer⑤">Accelerometer</a></code>, <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor④">LinearAccelerationSensor</a></code>, and the <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor④">GravitySensor</a></code> <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-readings" id="ref-for-sensor-readings">readings</a>. It can be either the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system">device coordinate system</a> or the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system①">screen coordinate system</a>.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export="" id="device-coordinate-system">device coordinate system</dfn> is defined as a three dimensional
 Cartesian coordinate system (x, y, z), which is bound to the physical device.
 For devices with a display, the origin of the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system①">device coordinate system</a> is
@@ -1646,28 +1644,73 @@ is that the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for
 i.e. it will swap X and Y axes in relation to the device if the <a data-link-type="dfn" href="https://w3c.github.io/screen-orientation#dfn-current-orientation-type" id="ref-for-dfn-current-orientation-type">current orientation type</a> changes. In contrast, the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system④">device coordinate system</a> will always remain stationary relative to
 the device.</p>
    <h2 class="heading settled" data-level="6" id="api"><span class="secno">6. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
-   <h3 class="heading settled" data-level="6.1" id="the-spatialsensoroptions-dictionary"><span class="secno">6.1. </span><span class="content">The SpatialSensorOptions Dictionary</span><a class="self-link" href="#the-spatialsensoroptions-dictionary"></a></h3>
-<pre class="idl highlight def"><span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-localcoordinatesystem"><code>LocalCoordinateSystem</code></dfn> { <dfn class="s idl-code" data-dfn-for="LocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;device&quot;|device" id="dom-localcoordinatesystem-device"><code>"device"</code><a class="self-link" href="#dom-localcoordinatesystem-device"></a></dfn>, <dfn class="s idl-code" data-dfn-for="LocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;screen&quot;|screen" id="dom-localcoordinatesystem-screen"><code>"screen"</code><a class="self-link" href="#dom-localcoordinatesystem-screen"></a></dfn> };
+   <h3 class="heading settled" data-level="6.1" id="accelerometer-interface"><span class="secno">6.1. </span><span class="content">The Accelerometer Interface</span><a class="self-link" href="#accelerometer-interface"></a></h3>
+<pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="Accelerometer" data-dfn-type="constructor" data-export="" data-lt="Accelerometer(options)|Accelerometer()" id="dom-accelerometer-accelerometer"><code>Constructor</code><a class="self-link" href="#dom-accelerometer-accelerometer"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions">AccelerometerSensorOptions</a> <dfn class="nv idl-code" data-dfn-for="Accelerometer/Accelerometer(options)" data-dfn-type="argument" data-export="" id="dom-accelerometer-accelerometer-options-options"><code>options</code><a class="self-link" href="#dom-accelerometer-accelerometer-options-options"></a></dfn>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext">SecureContext</a>,
+  <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed">Exposed</a>=<span class="n">Window</span>]
+<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="accelerometer"><code>Accelerometer</code></dfn> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor②">Sensor</a> {
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double"><span class="kt">double</span></a>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="Accelerometer" data-dfn-type="attribute" data-export="" data-readonly="" data-type="double?" id="dom-accelerometer-x"><code>x</code></dfn>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double①"><span class="kt">double</span></a>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="Accelerometer" data-dfn-type="attribute" data-export="" data-readonly="" data-type="double?" id="dom-accelerometer-y"><code>y</code></dfn>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double②"><span class="kt">double</span></a>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="Accelerometer" data-dfn-type="attribute" data-export="" data-readonly="" data-type="double?" id="dom-accelerometer-z"><code>z</code></dfn>;
+};
 
-<span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-spatialsensoroptions"><code>SpatialSensorOptions</code></dfn> :  <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions">SensorOptions</a>  {
-  <a class="n" data-link-type="idl-name" href="#enumdef-localcoordinatesystem" id="ref-for-enumdef-localcoordinatesystem">LocalCoordinateSystem</a> <dfn class="nv dfn-paneled idl-code" data-default="&quot;device&quot;" data-dfn-for="SpatialSensorOptions" data-dfn-type="dict-member" data-export="" data-type="LocalCoordinateSystem " id="dom-spatialsensoroptions-referenceframe"><code>referenceFrame</code></dfn> = "device";
+<span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-localcoordinatesystem"><code>LocalCoordinateSystem</code></dfn> { <dfn class="s idl-code" data-dfn-for="LocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;device&quot;|device" id="dom-localcoordinatesystem-device"><code>"device"</code><a class="self-link" href="#dom-localcoordinatesystem-device"></a></dfn>, <dfn class="s idl-code" data-dfn-for="LocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;screen&quot;|screen" id="dom-localcoordinatesystem-screen"><code>"screen"</code><a class="self-link" href="#dom-localcoordinatesystem-screen"></a></dfn> };
+
+<span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-accelerometersensoroptions"><code>AccelerometerSensorOptions</code></dfn> :  <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions">SensorOptions</a>  {
+  <a class="n" data-link-type="idl-name" href="#enumdef-localcoordinatesystem" id="ref-for-enumdef-localcoordinatesystem">LocalCoordinateSystem</a> <dfn class="nv dfn-paneled idl-code" data-default="&quot;device&quot;" data-dfn-for="AccelerometerSensorOptions" data-dfn-type="dict-member" data-export="" data-type="LocalCoordinateSystem " id="dom-accelerometersensoroptions-referenceframe"><code>referenceFrame</code></dfn> = "device";
 };
 </pre>
-   <h4 class="heading settled dfn-paneled" data-dfn-type="dfn" data-export="" data-level="6.1.1" data-lt="Construct spatial sensor object" id="construct-spatial-sensor-object"><span class="secno">6.1.1. </span><span class="content">Construct spatial sensor object</span></h4>
-   <div class="algorithm" data-algorithm="construct spatial sensor object">
+   <p>To construct an <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer⑥">Accelerometer</a></code> object the user agent must invoke
+the <a data-link-type="dfn" href="#construct-an-accelerometer-object" id="ref-for-construct-an-accelerometer-object">construct an accelerometer object</a> abstract operation for the <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer⑦">Accelerometer</a></code> interface.</p>
+   <h4 class="heading settled" data-level="6.1.1" id="accelerometer-x"><span class="secno">6.1.1. </span><span class="content">Accelerometer.x</span><a class="self-link" href="#accelerometer-x"></a></h4>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-x" id="ref-for-dom-accelerometer-x">x</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer⑧">Accelerometer</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading">get value from latest reading</a> with <code>this</code> and "x" as arguments. It represents the <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration⑧">acceleration</a> along x-axis.</p>
+   <h4 class="heading settled" data-level="6.1.2" id="accelerometer-y"><span class="secno">6.1.2. </span><span class="content">Accelerometer.y</span><a class="self-link" href="#accelerometer-y"></a></h4>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-y" id="ref-for-dom-accelerometer-y">y</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer⑨">Accelerometer</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading①">get value from latest reading</a> with <code>this</code> and "y" as arguments. It represents the <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration⑨">acceleration</a> along y-axis.</p>
+   <h4 class="heading settled" data-level="6.1.3" id="accelerometer-z"><span class="secno">6.1.3. </span><span class="content">Accelerometer.z</span><a class="self-link" href="#accelerometer-z"></a></h4>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-z" id="ref-for-dom-accelerometer-z">z</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer①⓪">Accelerometer</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading②">get value from latest reading</a> with <code>this</code> and "z" as arguments. It represents the <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration①⓪">acceleration</a> along z-axis.</p>
+   <h3 class="heading settled" data-level="6.2" id="linearaccelerationsensor-interface"><span class="secno">6.2. </span><span class="content">The LinearAccelerationSensor Interface</span><a class="self-link" href="#linearaccelerationsensor-interface"></a></h3>
+<pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="LinearAccelerationSensor" data-dfn-type="constructor" data-export="" data-lt="LinearAccelerationSensor(options)|LinearAccelerationSensor()" id="dom-linearaccelerationsensor-linearaccelerationsensor"><code>Constructor</code><a class="self-link" href="#dom-linearaccelerationsensor-linearaccelerationsensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions①">AccelerometerSensorOptions</a> <dfn class="nv idl-code" data-dfn-for="LinearAccelerationSensor/LinearAccelerationSensor(options)" data-dfn-type="argument" data-export="" id="dom-linearaccelerationsensor-linearaccelerationsensor-options-options"><code>options</code><a class="self-link" href="#dom-linearaccelerationsensor-linearaccelerationsensor-options-options"></a></dfn>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext①">SecureContext</a>,
+  <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①">Exposed</a>=<span class="n">Window</span>]
+<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="linearaccelerationsensor"><code>LinearAccelerationSensor</code></dfn> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer①①">Accelerometer</a> {
+};
+</pre>
+   <p>To construct a <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor⑤">LinearAccelerationSensor</a></code> object the user agent must invoke
+the <a data-link-type="dfn" href="#construct-an-accelerometer-object" id="ref-for-construct-an-accelerometer-object①">construct an accelerometer object</a> abstract operation for the <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor⑥">LinearAccelerationSensor</a></code> interface.</p>
+   <h4 class="heading settled" data-level="6.2.1" id="linearaccelerationsensor-x"><span class="secno">6.2.1. </span><span class="content">LinearAccelerationSensor.x</span><a class="self-link" href="#linearaccelerationsensor-x"></a></h4>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-x" id="ref-for-dom-accelerometer-x①">x</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor⑦">LinearAccelerationSensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading③">get value from latest reading</a> with <code>this</code> and "x" as arguments. It represents the <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration②">linear acceleration</a> along x-axis.</p>
+   <h4 class="heading settled" data-level="6.2.2" id="linearaccelerationsensor-y"><span class="secno">6.2.2. </span><span class="content">LinearAccelerationSensor.y</span><a class="self-link" href="#linearaccelerationsensor-y"></a></h4>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-y" id="ref-for-dom-accelerometer-y①">y</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor⑧">LinearAccelerationSensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading④">get value from latest reading</a> with <code>this</code> and "y" as arguments. It represents the <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration③">linear acceleration</a> along y-axis.</p>
+   <h4 class="heading settled" data-level="6.2.3" id="linearaccelerationsensor-z"><span class="secno">6.2.3. </span><span class="content">LinearAccelerationSensor.z</span><a class="self-link" href="#linearaccelerationsensor-z"></a></h4>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-z" id="ref-for-dom-accelerometer-z①">z</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor⑨">LinearAccelerationSensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading⑤">get value from latest reading</a> with <code>this</code> and "z" as arguments. It represents the <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration④">linear acceleration</a> along z-axis.</p>
+   <h3 class="heading settled" data-level="6.3" id="gravitysensor-interface"><span class="secno">6.3. </span><span class="content">The GravitySensor Interface</span><a class="self-link" href="#gravitysensor-interface"></a></h3>
+<pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="GravitySensor" data-dfn-type="constructor" data-export="" data-lt="GravitySensor(options)|GravitySensor()" id="dom-gravitysensor-gravitysensor"><code>Constructor</code><a class="self-link" href="#dom-gravitysensor-gravitysensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions②">AccelerometerSensorOptions</a> <dfn class="nv idl-code" data-dfn-for="GravitySensor/GravitySensor(options)" data-dfn-type="argument" data-export="" id="dom-gravitysensor-gravitysensor-options-options"><code>options</code><a class="self-link" href="#dom-gravitysensor-gravitysensor-options-options"></a></dfn>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②">SecureContext</a>,
+  <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②">Exposed</a>=<span class="n">Window</span>]
+<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="gravitysensor"><code>GravitySensor</code></dfn> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer①②">Accelerometer</a> {
+};
+</pre>
+   <p>To construct a <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor⑤">GravitySensor</a></code> object the user agent must invoke
+the <a data-link-type="dfn" href="#construct-an-accelerometer-object" id="ref-for-construct-an-accelerometer-object②">construct an accelerometer object</a> abstract operation for the <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor⑥">GravitySensor</a></code> interface.</p>
+   <h4 class="heading settled" data-level="6.3.1" id="gravitysensor-x"><span class="secno">6.3.1. </span><span class="content">GravitySensor.x</span><a class="self-link" href="#gravitysensor-x"></a></h4>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-x" id="ref-for-dom-accelerometer-x②">x</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor⑦">GravitySensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading⑥">get value from latest reading</a> with <code>this</code> and "x" as arguments. It represents the effect of <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration①①">acceleration</a> along x-axis due to <a data-link-type="dfn" href="#gravity" id="ref-for-gravity③">gravity</a>.</p>
+   <h4 class="heading settled" data-level="6.3.2" id="gravitysensor-y"><span class="secno">6.3.2. </span><span class="content">GravitySensor.y</span><a class="self-link" href="#gravitysensor-y"></a></h4>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-y" id="ref-for-dom-accelerometer-y②">y</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor⑧">GravitySensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading⑦">get value from latest reading</a> with <code>this</code> and "y" as arguments. It represents the effect of <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration①②">acceleration</a> along y-axis due to <a data-link-type="dfn" href="#gravity" id="ref-for-gravity④">gravity</a>.</p>
+   <h4 class="heading settled" data-level="6.3.3" id="gravitysensor-z"><span class="secno">6.3.3. </span><span class="content">GravitySensor.z</span><a class="self-link" href="#gravitysensor-z"></a></h4>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-z" id="ref-for-dom-accelerometer-z②">z</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor⑨">GravitySensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading⑧">get value from latest reading</a> with <code>this</code> and "z" as arguments. It represents the effect of <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration①③">acceleration</a> along z-axis due to <a data-link-type="dfn" href="#gravity" id="ref-for-gravity⑤">gravity</a>.</p>
+   <h2 class="heading settled" data-level="7" id="abstract-opertaions"><span class="secno">7. </span><span class="content">Abstract Operations</span><a class="self-link" href="#abstract-opertaions"></a></h2>
+   <h3 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="7.1" data-lt="Construct an accelerometer object" data-noexport="" id="construct-an-accelerometer-object"><span class="secno">7.1. </span><span class="content">Construct an accelerometer object</span></h3>
+   <div class="algorithm" data-algorithm="construct an accelerometer object">
     <dl>
      <dt data-md="">input
      <dd data-md="">
-      <p><var>options</var>, a <code class="idl"><a data-link-type="idl" href="#dictdef-spatialsensoroptions" id="ref-for-dictdef-spatialsensoroptions">SpatialSensorOptions</a></code> object.</p>
+      <p><var>options</var>, a <code class="idl"><a data-link-type="idl" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions③">AccelerometerSensorOptions</a></code> object.</p>
      <dt data-md="">output
      <dd data-md="">
-      <p>A <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor②">Sensor</a></code> object.</p>
+      <p>A <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor③">Sensor</a></code> object.</p>
     </dl>
     <ol>
      <li data-md="">
       <p>Let <var>sensor_instance</var> be the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object" id="ref-for-construct-sensor-object">construct a Sensor object</a> with <var>options</var>.</p>
      <li data-md="">
-      <p>If <var>options</var>.<code class="idl"><a class="idl-code" data-link-type="dict-member" href="#dom-spatialsensoroptions-referenceframe" id="ref-for-dom-spatialsensoroptions-referenceframe">referenceFrame</a></code> is "screen", then:</p>
+      <p>If <var>options</var>.<code class="idl"><a class="idl-code" data-link-type="dict-member" href="#dom-accelerometersensoroptions-referenceframe" id="ref-for-dom-accelerometersensoroptions-referenceframe">referenceFrame</a></code> is "screen", then:</p>
       <ol>
        <li data-md="">
         <p>Define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system③">local coordinate system</a> for <var>sensor_instance</var> as the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system⑤">screen coordinate system</a>.</p>
@@ -1676,51 +1719,9 @@ the device.</p>
       <p>Otherwise, define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system④">local coordinate system</a> for <var>sensor_instance</var> as the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system⑤">device coordinate system</a>.</p>
     </ol>
    </div>
-   <h3 class="heading settled" data-level="6.2" id="accelerometer-interface"><span class="secno">6.2. </span><span class="content">The Accelerometer Interface</span><a class="self-link" href="#accelerometer-interface"></a></h3>
-<pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="Accelerometer" data-dfn-type="constructor" data-export="" data-lt="Accelerometer(options)|Accelerometer()" id="dom-accelerometer-accelerometer"><code>Constructor</code><a class="self-link" href="#dom-accelerometer-accelerometer"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-spatialsensoroptions" id="ref-for-dictdef-spatialsensoroptions①">SpatialSensorOptions</a> <dfn class="nv idl-code" data-dfn-for="Accelerometer/Accelerometer(options)" data-dfn-type="argument" data-export="" id="dom-accelerometer-accelerometer-options-options"><code>options</code><a class="self-link" href="#dom-accelerometer-accelerometer-options-options"></a></dfn>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext">SecureContext</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed">Exposed</a>=<span class="n">Window</span>]
-<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="accelerometer"><code>Accelerometer</code></dfn> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor③">Sensor</a> {
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double"><span class="kt">double</span></a>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="Accelerometer" data-dfn-type="attribute" data-export="" data-readonly="" data-type="double?" id="dom-accelerometer-x"><code>x</code></dfn>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double①"><span class="kt">double</span></a>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="Accelerometer" data-dfn-type="attribute" data-export="" data-readonly="" data-type="double?" id="dom-accelerometer-y"><code>y</code></dfn>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double②"><span class="kt">double</span></a>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="Accelerometer" data-dfn-type="attribute" data-export="" data-readonly="" data-type="double?" id="dom-accelerometer-z"><code>z</code></dfn>;
-};
-</pre>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-an-accelerometer-object">Construct an Accelerometer Object<a class="self-link" href="#construct-an-accelerometer-object"></a></dfn> the user agent must invoke
-the <a data-link-type="dfn" href="#construct-spatial-sensor-object" id="ref-for-construct-spatial-sensor-object">Construct spatial sensor object</a> abstract operation.</p>
-   <h4 class="heading settled" data-level="6.2.1" id="accelerometer-x"><span class="secno">6.2.1. </span><span class="content">Accelerometer.x</span><a class="self-link" href="#accelerometer-x"></a></h4>
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-x" id="ref-for-dom-accelerometer-x">x</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer⑤">Accelerometer</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading">get value from latest reading</a> with <code>this</code> and "x" as arguments. It represents the <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration⑧">acceleration</a> along x-axis.</p>
-   <h4 class="heading settled" data-level="6.2.2" id="accelerometer-y"><span class="secno">6.2.2. </span><span class="content">Accelerometer.y</span><a class="self-link" href="#accelerometer-y"></a></h4>
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-y" id="ref-for-dom-accelerometer-y">y</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer⑥">Accelerometer</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading①">get value from latest reading</a> with <code>this</code> and "y" as arguments. It represents the <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration⑨">acceleration</a> along y-axis.</p>
-   <h4 class="heading settled" data-level="6.2.3" id="accelerometer-z"><span class="secno">6.2.3. </span><span class="content">Accelerometer.z</span><a class="self-link" href="#accelerometer-z"></a></h4>
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-z" id="ref-for-dom-accelerometer-z">z</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer⑦">Accelerometer</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading②">get value from latest reading</a> with <code>this</code> and "z" as arguments. It represents the <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration①⓪">acceleration</a> along z-axis.</p>
-   <h3 class="heading settled" data-level="6.3" id="linearaccelerationsensor-interface"><span class="secno">6.3. </span><span class="content">The LinearAccelerationSensor Interface</span><a class="self-link" href="#linearaccelerationsensor-interface"></a></h3>
-<pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="LinearAccelerationSensor" data-dfn-type="constructor" data-export="" data-lt="LinearAccelerationSensor(options)|LinearAccelerationSensor()" id="dom-linearaccelerationsensor-linearaccelerationsensor"><code>Constructor</code><a class="self-link" href="#dom-linearaccelerationsensor-linearaccelerationsensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-spatialsensoroptions" id="ref-for-dictdef-spatialsensoroptions②">SpatialSensorOptions</a> <dfn class="nv idl-code" data-dfn-for="LinearAccelerationSensor/LinearAccelerationSensor(options)" data-dfn-type="argument" data-export="" id="dom-linearaccelerationsensor-linearaccelerationsensor-options-options"><code>options</code><a class="self-link" href="#dom-linearaccelerationsensor-linearaccelerationsensor-options-options"></a></dfn>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext①">SecureContext</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①">Exposed</a>=<span class="n">Window</span>]
-<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="linearaccelerationsensor"><code>LinearAccelerationSensor</code></dfn> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer⑧">Accelerometer</a> {
-};
-</pre>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-a-linearaccelerationsensor-object">Construct a LinearAccelerationSensor Object<a class="self-link" href="#construct-a-linearaccelerationsensor-object"></a></dfn> the user agent must invoke
-the <a data-link-type="dfn" href="#construct-spatial-sensor-object" id="ref-for-construct-spatial-sensor-object①">Construct spatial sensor object</a> abstract operation.</p>
-   <h4 class="heading settled" data-level="6.3.1" id="linearaccelerationsensor-x"><span class="secno">6.3.1. </span><span class="content">LinearAccelerationSensor.x</span><a class="self-link" href="#linearaccelerationsensor-x"></a></h4>
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-x" id="ref-for-dom-accelerometer-x①">x</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor④">LinearAccelerationSensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading③">get value from latest reading</a> with <code>this</code> and "x" as arguments. It represents the <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration②">linear acceleration</a> along x-axis.</p>
-   <h4 class="heading settled" data-level="6.3.2" id="linearaccelerationsensor-y"><span class="secno">6.3.2. </span><span class="content">LinearAccelerationSensor.y</span><a class="self-link" href="#linearaccelerationsensor-y"></a></h4>
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-y" id="ref-for-dom-accelerometer-y①">y</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor⑤">LinearAccelerationSensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading④">get value from latest reading</a> with <code>this</code> and "y" as arguments. It represents the <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration③">linear acceleration</a> along y-axis.</p>
-   <h4 class="heading settled" data-level="6.3.3" id="linearaccelerationsensor-z"><span class="secno">6.3.3. </span><span class="content">LinearAccelerationSensor.z</span><a class="self-link" href="#linearaccelerationsensor-z"></a></h4>
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-z" id="ref-for-dom-accelerometer-z①">z</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor⑥">LinearAccelerationSensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading⑤">get value from latest reading</a> with <code>this</code> and "z" as arguments. It represents the <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration④">linear acceleration</a> along z-axis.</p>
-   <h3 class="heading settled" data-level="6.4" id="gravitysensor-interface"><span class="secno">6.4. </span><span class="content">The GravitySensor Interface</span><a class="self-link" href="#gravitysensor-interface"></a></h3>
-<pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="GravitySensor" data-dfn-type="constructor" data-export="" data-lt="GravitySensor(options)|GravitySensor()" id="dom-gravitysensor-gravitysensor"><code>Constructor</code><a class="self-link" href="#dom-gravitysensor-gravitysensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-spatialsensoroptions" id="ref-for-dictdef-spatialsensoroptions③">SpatialSensorOptions</a> <dfn class="nv idl-code" data-dfn-for="GravitySensor/GravitySensor(options)" data-dfn-type="argument" data-export="" id="dom-gravitysensor-gravitysensor-options-options"><code>options</code><a class="self-link" href="#dom-gravitysensor-gravitysensor-options-options"></a></dfn>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②">SecureContext</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②">Exposed</a>=<span class="n">Window</span>]
-<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="gravitysensor"><code>GravitySensor</code></dfn> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer⑨">Accelerometer</a> {
-};
-</pre>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-an-gravitysensor-object">Construct an GravitySensor Object<a class="self-link" href="#construct-an-gravitysensor-object"></a></dfn> the user agent must invoke
-the <a data-link-type="dfn" href="#construct-spatial-sensor-object" id="ref-for-construct-spatial-sensor-object②">Construct spatial sensor object</a> abstract operation.</p>
-   <h4 class="heading settled" data-level="6.4.1" id="gravitysensor-x"><span class="secno">6.4.1. </span><span class="content">GravitySensor.x</span><a class="self-link" href="#gravitysensor-x"></a></h4>
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-x" id="ref-for-dom-accelerometer-x②">x</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor④">GravitySensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading⑥">get value from latest reading</a> with <code>this</code> and "x" as arguments. It represents the effect of <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration①①">acceleration</a> along x-axis due to <a data-link-type="dfn" href="#gravity" id="ref-for-gravity③">gravity</a>.</p>
-   <h4 class="heading settled" data-level="6.4.2" id="gravitysensor-y"><span class="secno">6.4.2. </span><span class="content">GravitySensor.y</span><a class="self-link" href="#gravitysensor-y"></a></h4>
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-y" id="ref-for-dom-accelerometer-y②">y</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor⑤">GravitySensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading⑦">get value from latest reading</a> with <code>this</code> and "y" as arguments. It represents the effect of <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration①②">acceleration</a> along y-axis due to <a data-link-type="dfn" href="#gravity" id="ref-for-gravity④">gravity</a>.</p>
-   <h4 class="heading settled" data-level="6.4.3" id="gravitysensor-z"><span class="secno">6.4.3. </span><span class="content">GravitySensor.z</span><a class="self-link" href="#gravitysensor-z"></a></h4>
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-accelerometer-z" id="ref-for-dom-accelerometer-z②">z</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor⑥">GravitySensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading⑧">get value from latest reading</a> with <code>this</code> and "z" as arguments. It represents the effect of <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration①③">acceleration</a> along z-axis due to <a data-link-type="dfn" href="#gravity" id="ref-for-gravity⑤">gravity</a>.</p>
-   <h2 class="heading settled" data-level="7" id="acknowledgements"><span class="secno">7. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
+   <h2 class="heading settled" data-level="8" id="acknowledgements"><span class="secno">8. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
    <p>Tobie Langel for the work on Generic Sensor API.</p>
-   <h2 class="heading settled" data-level="8" id="conformance"><span class="secno">8. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
+   <h2 class="heading settled" data-level="9" id="conformance"><span class="secno">9. </span><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
    <p>Conformance requirements are expressed with a combination of
 descriptive assertions and RFC 2119 terminology. The key words "MUST",
 "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
@@ -1744,35 +1745,32 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     Accelerometer
     <ul>
      <li><a href="#accelerometer-sensor-type">definition of</a><span>, in §5</span>
-     <li><a href="#accelerometer">(interface)</a><span>, in §6.2</span>
+     <li><a href="#accelerometer">(interface)</a><span>, in §6.1</span>
     </ul>
-   <li><a href="#dom-accelerometer-accelerometer">Accelerometer()</a><span>, in §6.2</span>
-   <li><a href="#dom-accelerometer-accelerometer">Accelerometer(options)</a><span>, in §6.2</span>
-   <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §8</span>
-   <li><a href="#construct-a-linearaccelerationsensor-object">Construct a LinearAccelerationSensor Object</a><span>, in §6.3</span>
-   <li><a href="#construct-an-accelerometer-object">Construct an Accelerometer Object</a><span>, in §6.2</span>
-   <li><a href="#construct-an-gravitysensor-object">Construct an GravitySensor Object</a><span>, in §6.4</span>
-   <li><a href="#construct-spatial-sensor-object">Construct spatial sensor object</a><span>, in §6.1</span>
+   <li><a href="#dom-accelerometer-accelerometer">Accelerometer()</a><span>, in §6.1</span>
+   <li><a href="#dom-accelerometer-accelerometer">Accelerometer(options)</a><span>, in §6.1</span>
+   <li><a href="#dictdef-accelerometersensoroptions">AccelerometerSensorOptions</a><span>, in §6.1</span>
+   <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §9</span>
+   <li><a href="#construct-an-accelerometer-object">Construct an accelerometer object</a><span>, in §7</span>
    <li><a href="#dom-localcoordinatesystem-device">device</a><span>, in §6.1</span>
    <li><a href="#dom-localcoordinatesystem-device">"device"</a><span>, in §6.1</span>
    <li><a href="#device-coordinate-system">device coordinate system</a><span>, in §5.1</span>
    <li><a href="#gravity">gravity</a><span>, in §5</span>
-   <li><a href="#dom-gravitysensor-gravitysensor">GravitySensor()</a><span>, in §6.4</span>
-   <li><a href="#gravitysensor">GravitySensor</a><span>, in §6.4</span>
-   <li><a href="#dom-gravitysensor-gravitysensor">GravitySensor(options)</a><span>, in §6.4</span>
+   <li><a href="#dom-gravitysensor-gravitysensor">GravitySensor()</a><span>, in §6.3</span>
+   <li><a href="#gravitysensor">GravitySensor</a><span>, in §6.3</span>
+   <li><a href="#dom-gravitysensor-gravitysensor">GravitySensor(options)</a><span>, in §6.3</span>
    <li><a href="#linear-acceleration">linear acceleration</a><span>, in §5</span>
-   <li><a href="#linearaccelerationsensor">LinearAccelerationSensor</a><span>, in §6.3</span>
-   <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">LinearAccelerationSensor()</a><span>, in §6.3</span>
-   <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">LinearAccelerationSensor(options)</a><span>, in §6.3</span>
+   <li><a href="#linearaccelerationsensor">LinearAccelerationSensor</a><span>, in §6.2</span>
+   <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">LinearAccelerationSensor()</a><span>, in §6.2</span>
+   <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">LinearAccelerationSensor(options)</a><span>, in §6.2</span>
    <li><a href="#enumdef-localcoordinatesystem">LocalCoordinateSystem</a><span>, in §6.1</span>
-   <li><a href="#dom-spatialsensoroptions-referenceframe">referenceFrame</a><span>, in §6.1</span>
+   <li><a href="#dom-accelerometersensoroptions-referenceframe">referenceFrame</a><span>, in §6.1</span>
    <li><a href="#dom-localcoordinatesystem-screen">"screen"</a><span>, in §6.1</span>
    <li><a href="#dom-localcoordinatesystem-screen">screen</a><span>, in §6.1</span>
    <li><a href="#screen-coordinate-system">screen coordinate system</a><span>, in §5.1</span>
-   <li><a href="#dictdef-spatialsensoroptions">SpatialSensorOptions</a><span>, in §6.1</span>
-   <li><a href="#dom-accelerometer-x">x</a><span>, in §6.2</span>
-   <li><a href="#dom-accelerometer-y">y</a><span>, in §6.2</span>
-   <li><a href="#dom-accelerometer-z">z</a><span>, in §6.2</span>
+   <li><a href="#dom-accelerometer-x">x</a><span>, in §6.1</span>
+   <li><a href="#dom-accelerometer-y">y</a><span>, in §6.1</span>
+   <li><a href="#dom-accelerometer-z">z</a><span>, in §6.1</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
@@ -1786,6 +1784,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="https://w3c.github.io/sensors/#get-value-from-latest-reading">get value from latest reading</a>
      <li><a href="https://w3c.github.io/sensors#latest-reading">latest reading</a>
      <li><a href="https://w3c.github.io/sensors#local-coordinate-system">local coordinate system</a>
+     <li><a href="https://w3c.github.io/sensors#sensor-readings">sensor readings</a>
      <li><a href="https://w3c.github.io/sensors#sensor-type">sensor type</a>
     </ul>
    <li>
@@ -1837,25 +1836,28 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <dd><a href="http://www.bipm.org/en/publications/si-brochure/">SI Brochure: The International System of Units (SI), 8th edition</a>. 2014. URL: <a href="http://www.bipm.org/en/publications/si-brochure/">http://www.bipm.org/en/publications/si-brochure/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-<pre class="idl highlight def"><span class="kt">enum</span> <a class="nv" href="#enumdef-localcoordinatesystem"><code>LocalCoordinateSystem</code></a> { <a class="s" href="#dom-localcoordinatesystem-device"><code>"device"</code></a>, <a class="s" href="#dom-localcoordinatesystem-screen"><code>"screen"</code></a> };
-
-<span class="kt">dictionary</span> <a class="nv" href="#dictdef-spatialsensoroptions"><code>SpatialSensorOptions</code></a> :  <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions①">SensorOptions</a>  {
-  <a class="n" data-link-type="idl-name" href="#enumdef-localcoordinatesystem" id="ref-for-enumdef-localcoordinatesystem①">LocalCoordinateSystem</a> <a class="nv" data-default="&quot;device&quot;" data-type="LocalCoordinateSystem " href="#dom-spatialsensoroptions-referenceframe"><code>referenceFrame</code></a> = "device";
-};
-
-[<a class="nv" href="#dom-accelerometer-accelerometer"><code>Constructor</code></a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-spatialsensoroptions" id="ref-for-dictdef-spatialsensoroptions①①">SpatialSensorOptions</a> <a class="nv" href="#dom-accelerometer-accelerometer-options-options"><code>options</code></a>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext③">SecureContext</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed③">Exposed</a>=<span class="n">Window</span>]
-<span class="kt">interface</span> <a class="nv" href="#accelerometer"><code>Accelerometer</code></a> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor③①">Sensor</a> {
+<pre class="idl highlight def">[<a class="nv" href="#dom-accelerometer-accelerometer"><code>Constructor</code></a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions④">AccelerometerSensorOptions</a> <a class="nv" href="#dom-accelerometer-accelerometer-options-options"><code>options</code></a>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext③">SecureContext</a>,
+  <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed③">Exposed</a>=<span class="n">Window</span>]
+<span class="kt">interface</span> <a class="nv" href="#accelerometer"><code>Accelerometer</code></a> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor②①">Sensor</a> {
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double③"><span class="kt">double</span></a>? <a class="nv" data-readonly="" data-type="double?" href="#dom-accelerometer-x"><code>x</code></a>;
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double①①"><span class="kt">double</span></a>? <a class="nv" data-readonly="" data-type="double?" href="#dom-accelerometer-y"><code>y</code></a>;
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double②①"><span class="kt">double</span></a>? <a class="nv" data-readonly="" data-type="double?" href="#dom-accelerometer-z"><code>z</code></a>;
 };
 
-[<a class="nv" href="#dom-linearaccelerationsensor-linearaccelerationsensor"><code>Constructor</code></a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-spatialsensoroptions" id="ref-for-dictdef-spatialsensoroptions②①">SpatialSensorOptions</a> <a class="nv" href="#dom-linearaccelerationsensor-linearaccelerationsensor-options-options"><code>options</code></a>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext①①">SecureContext</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①①">Exposed</a>=<span class="n">Window</span>]
-<span class="kt">interface</span> <a class="nv" href="#linearaccelerationsensor"><code>LinearAccelerationSensor</code></a> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer⑧①">Accelerometer</a> {
+<span class="kt">enum</span> <a class="nv" href="#enumdef-localcoordinatesystem"><code>LocalCoordinateSystem</code></a> { <a class="s" href="#dom-localcoordinatesystem-device"><code>"device"</code></a>, <a class="s" href="#dom-localcoordinatesystem-screen"><code>"screen"</code></a> };
+
+<span class="kt">dictionary</span> <a class="nv" href="#dictdef-accelerometersensoroptions"><code>AccelerometerSensorOptions</code></a> :  <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions①">SensorOptions</a>  {
+  <a class="n" data-link-type="idl-name" href="#enumdef-localcoordinatesystem" id="ref-for-enumdef-localcoordinatesystem①">LocalCoordinateSystem</a> <a class="nv" data-default="&quot;device&quot;" data-type="LocalCoordinateSystem " href="#dom-accelerometersensoroptions-referenceframe"><code>referenceFrame</code></a> = "device";
 };
 
-[<a class="nv" href="#dom-gravitysensor-gravitysensor"><code>Constructor</code></a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-spatialsensoroptions" id="ref-for-dictdef-spatialsensoroptions③①">SpatialSensorOptions</a> <a class="nv" href="#dom-gravitysensor-gravitysensor-options-options"><code>options</code></a>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②①">SecureContext</a>, <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②①">Exposed</a>=<span class="n">Window</span>]
-<span class="kt">interface</span> <a class="nv" href="#gravitysensor"><code>GravitySensor</code></a> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer⑨①">Accelerometer</a> {
+[<a class="nv" href="#dom-linearaccelerationsensor-linearaccelerationsensor"><code>Constructor</code></a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions①①">AccelerometerSensorOptions</a> <a class="nv" href="#dom-linearaccelerationsensor-linearaccelerationsensor-options-options"><code>options</code></a>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext①①">SecureContext</a>,
+  <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①①">Exposed</a>=<span class="n">Window</span>]
+<span class="kt">interface</span> <a class="nv" href="#linearaccelerationsensor"><code>LinearAccelerationSensor</code></a> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer①①①">Accelerometer</a> {
+};
+
+[<a class="nv" href="#dom-gravitysensor-gravitysensor"><code>Constructor</code></a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions②①">AccelerometerSensorOptions</a> <a class="nv" href="#dom-gravitysensor-gravitysensor-options-options"><code>options</code></a>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext②①">SecureContext</a>,
+  <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed②①">Exposed</a>=<span class="n">Window</span>]
+<span class="kt">interface</span> <a class="nv" href="#gravitysensor"><code>GravitySensor</code></a> : <a class="n" data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer①②①">Accelerometer</a> {
 };
 
 </pre>
@@ -1870,37 +1872,37 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <ul>
     <li><a href="#ref-for-acceleration①">1. Introduction</a>
     <li><a href="#ref-for-acceleration②">5. Model</a> <a href="#ref-for-acceleration③">(2)</a> <a href="#ref-for-acceleration④">(3)</a> <a href="#ref-for-acceleration⑤">(4)</a> <a href="#ref-for-acceleration⑥">(5)</a> <a href="#ref-for-acceleration⑦">(6)</a>
-    <li><a href="#ref-for-acceleration⑧">6.2.1. Accelerometer.x</a>
-    <li><a href="#ref-for-acceleration⑨">6.2.2. Accelerometer.y</a>
-    <li><a href="#ref-for-acceleration①⓪">6.2.3. Accelerometer.z</a>
-    <li><a href="#ref-for-acceleration①①">6.4.1. GravitySensor.x</a>
-    <li><a href="#ref-for-acceleration①②">6.4.2. GravitySensor.y</a>
-    <li><a href="#ref-for-acceleration①③">6.4.3. GravitySensor.z</a>
+    <li><a href="#ref-for-acceleration⑧">6.1.1. Accelerometer.x</a>
+    <li><a href="#ref-for-acceleration⑨">6.1.2. Accelerometer.y</a>
+    <li><a href="#ref-for-acceleration①⓪">6.1.3. Accelerometer.z</a>
+    <li><a href="#ref-for-acceleration①①">6.3.1. GravitySensor.x</a>
+    <li><a href="#ref-for-acceleration①②">6.3.2. GravitySensor.y</a>
+    <li><a href="#ref-for-acceleration①③">6.3.3. GravitySensor.z</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="linear-acceleration">
    <b><a href="#linear-acceleration">#linear-acceleration</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-linear-acceleration">5. Model</a> <a href="#ref-for-linear-acceleration①">(2)</a>
-    <li><a href="#ref-for-linear-acceleration②">6.3.1. LinearAccelerationSensor.x</a>
-    <li><a href="#ref-for-linear-acceleration③">6.3.2. LinearAccelerationSensor.y</a>
-    <li><a href="#ref-for-linear-acceleration④">6.3.3. LinearAccelerationSensor.z</a>
+    <li><a href="#ref-for-linear-acceleration②">6.2.1. LinearAccelerationSensor.x</a>
+    <li><a href="#ref-for-linear-acceleration③">6.2.2. LinearAccelerationSensor.y</a>
+    <li><a href="#ref-for-linear-acceleration④">6.2.3. LinearAccelerationSensor.z</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="gravity">
    <b><a href="#gravity">#gravity</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-gravity">5. Model</a> <a href="#ref-for-gravity①">(2)</a> <a href="#ref-for-gravity②">(3)</a>
-    <li><a href="#ref-for-gravity③">6.4.1. GravitySensor.x</a>
-    <li><a href="#ref-for-gravity④">6.4.2. GravitySensor.y</a>
-    <li><a href="#ref-for-gravity⑤">6.4.3. GravitySensor.z</a>
+    <li><a href="#ref-for-gravity③">6.3.1. GravitySensor.x</a>
+    <li><a href="#ref-for-gravity④">6.3.2. GravitySensor.y</a>
+    <li><a href="#ref-for-gravity⑤">6.3.3. GravitySensor.z</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="device-coordinate-system">
    <b><a href="#device-coordinate-system">#device-coordinate-system</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-device-coordinate-system">5.1. Reference Frame</a> <a href="#ref-for-device-coordinate-system①">(2)</a> <a href="#ref-for-device-coordinate-system②">(3)</a> <a href="#ref-for-device-coordinate-system③">(4)</a> <a href="#ref-for-device-coordinate-system④">(5)</a>
-    <li><a href="#ref-for-device-coordinate-system⑤">6.1.1. Construct spatial sensor object</a>
+    <li><a href="#ref-for-device-coordinate-system⑤">7.1. Construct an accelerometer object</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="screen-coordinate-system">
@@ -1908,36 +1910,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <ul>
     <li><a href="#ref-for-screen-coordinate-system">2. Examples</a>
     <li><a href="#ref-for-screen-coordinate-system①">5.1. Reference Frame</a> <a href="#ref-for-screen-coordinate-system②">(2)</a> <a href="#ref-for-screen-coordinate-system③">(3)</a> <a href="#ref-for-screen-coordinate-system④">(4)</a>
-    <li><a href="#ref-for-screen-coordinate-system⑤">6.1.1. Construct spatial sensor object</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="enumdef-localcoordinatesystem">
-   <b><a href="#enumdef-localcoordinatesystem">#enumdef-localcoordinatesystem</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-enumdef-localcoordinatesystem">6.1. The SpatialSensorOptions Dictionary</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dictdef-spatialsensoroptions">
-   <b><a href="#dictdef-spatialsensoroptions">#dictdef-spatialsensoroptions</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dictdef-spatialsensoroptions">6.1.1. Construct spatial sensor object</a>
-    <li><a href="#ref-for-dictdef-spatialsensoroptions①">6.2. The Accelerometer Interface</a>
-    <li><a href="#ref-for-dictdef-spatialsensoroptions②">6.3. The LinearAccelerationSensor Interface</a>
-    <li><a href="#ref-for-dictdef-spatialsensoroptions③">6.4. The GravitySensor Interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-spatialsensoroptions-referenceframe">
-   <b><a href="#dom-spatialsensoroptions-referenceframe">#dom-spatialsensoroptions-referenceframe</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-spatialsensoroptions-referenceframe">6.1.1. Construct spatial sensor object</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="construct-spatial-sensor-object">
-   <b><a href="#construct-spatial-sensor-object">#construct-spatial-sensor-object</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-construct-spatial-sensor-object">6.2. The Accelerometer Interface</a>
-    <li><a href="#ref-for-construct-spatial-sensor-object①">6.3. The LinearAccelerationSensor Interface</a>
-    <li><a href="#ref-for-construct-spatial-sensor-object②">6.4. The GravitySensor Interface</a>
+    <li><a href="#ref-for-screen-coordinate-system⑤">7.1. Construct an accelerometer object</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="accelerometer">
@@ -1945,35 +1918,58 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <ul>
     <li><a href="#ref-for-accelerometer①">1. Introduction</a>
     <li><a href="#ref-for-accelerometer②">5. Model</a> <a href="#ref-for-accelerometer③">(2)</a> <a href="#ref-for-accelerometer④">(3)</a>
-    <li><a href="#ref-for-accelerometer⑤">6.2.1. Accelerometer.x</a>
-    <li><a href="#ref-for-accelerometer⑥">6.2.2. Accelerometer.y</a>
-    <li><a href="#ref-for-accelerometer⑦">6.2.3. Accelerometer.z</a>
-    <li><a href="#ref-for-accelerometer⑧">6.3. The LinearAccelerationSensor Interface</a>
-    <li><a href="#ref-for-accelerometer⑨">6.4. The GravitySensor Interface</a>
+    <li><a href="#ref-for-accelerometer⑤">5.1. Reference Frame</a>
+    <li><a href="#ref-for-accelerometer⑥">6.1. The Accelerometer Interface</a> <a href="#ref-for-accelerometer⑦">(2)</a>
+    <li><a href="#ref-for-accelerometer⑧">6.1.1. Accelerometer.x</a>
+    <li><a href="#ref-for-accelerometer⑨">6.1.2. Accelerometer.y</a>
+    <li><a href="#ref-for-accelerometer①⓪">6.1.3. Accelerometer.z</a>
+    <li><a href="#ref-for-accelerometer①①">6.2. The LinearAccelerationSensor Interface</a>
+    <li><a href="#ref-for-accelerometer①②">6.3. The GravitySensor Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-accelerometer-x">
    <b><a href="#dom-accelerometer-x">#dom-accelerometer-x</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-accelerometer-x">6.2.1. Accelerometer.x</a>
-    <li><a href="#ref-for-dom-accelerometer-x①">6.3.1. LinearAccelerationSensor.x</a>
-    <li><a href="#ref-for-dom-accelerometer-x②">6.4.1. GravitySensor.x</a>
+    <li><a href="#ref-for-dom-accelerometer-x">6.1.1. Accelerometer.x</a>
+    <li><a href="#ref-for-dom-accelerometer-x①">6.2.1. LinearAccelerationSensor.x</a>
+    <li><a href="#ref-for-dom-accelerometer-x②">6.3.1. GravitySensor.x</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-accelerometer-y">
    <b><a href="#dom-accelerometer-y">#dom-accelerometer-y</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-accelerometer-y">6.2.2. Accelerometer.y</a>
-    <li><a href="#ref-for-dom-accelerometer-y①">6.3.2. LinearAccelerationSensor.y</a>
-    <li><a href="#ref-for-dom-accelerometer-y②">6.4.2. GravitySensor.y</a>
+    <li><a href="#ref-for-dom-accelerometer-y">6.1.2. Accelerometer.y</a>
+    <li><a href="#ref-for-dom-accelerometer-y①">6.2.2. LinearAccelerationSensor.y</a>
+    <li><a href="#ref-for-dom-accelerometer-y②">6.3.2. GravitySensor.y</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-accelerometer-z">
    <b><a href="#dom-accelerometer-z">#dom-accelerometer-z</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-accelerometer-z">6.2.3. Accelerometer.z</a>
-    <li><a href="#ref-for-dom-accelerometer-z①">6.3.3. LinearAccelerationSensor.z</a>
-    <li><a href="#ref-for-dom-accelerometer-z②">6.4.3. GravitySensor.z</a>
+    <li><a href="#ref-for-dom-accelerometer-z">6.1.3. Accelerometer.z</a>
+    <li><a href="#ref-for-dom-accelerometer-z①">6.2.3. LinearAccelerationSensor.z</a>
+    <li><a href="#ref-for-dom-accelerometer-z②">6.3.3. GravitySensor.z</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="enumdef-localcoordinatesystem">
+   <b><a href="#enumdef-localcoordinatesystem">#enumdef-localcoordinatesystem</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-enumdef-localcoordinatesystem">6.1. The Accelerometer Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dictdef-accelerometersensoroptions">
+   <b><a href="#dictdef-accelerometersensoroptions">#dictdef-accelerometersensoroptions</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dictdef-accelerometersensoroptions">6.1. The Accelerometer Interface</a>
+    <li><a href="#ref-for-dictdef-accelerometersensoroptions①">6.2. The LinearAccelerationSensor Interface</a>
+    <li><a href="#ref-for-dictdef-accelerometersensoroptions②">6.3. The GravitySensor Interface</a>
+    <li><a href="#ref-for-dictdef-accelerometersensoroptions③">7.1. Construct an accelerometer object</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-accelerometersensoroptions-referenceframe">
+   <b><a href="#dom-accelerometersensoroptions-referenceframe">#dom-accelerometersensoroptions-referenceframe</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-accelerometersensoroptions-referenceframe">7.1. Construct an accelerometer object</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="linearaccelerationsensor">
@@ -1981,9 +1977,11 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <ul>
     <li><a href="#ref-for-linearaccelerationsensor①">1. Introduction</a>
     <li><a href="#ref-for-linearaccelerationsensor②">5. Model</a> <a href="#ref-for-linearaccelerationsensor③">(2)</a>
-    <li><a href="#ref-for-linearaccelerationsensor④">6.3.1. LinearAccelerationSensor.x</a>
-    <li><a href="#ref-for-linearaccelerationsensor⑤">6.3.2. LinearAccelerationSensor.y</a>
-    <li><a href="#ref-for-linearaccelerationsensor⑥">6.3.3. LinearAccelerationSensor.z</a>
+    <li><a href="#ref-for-linearaccelerationsensor④">5.1. Reference Frame</a>
+    <li><a href="#ref-for-linearaccelerationsensor⑤">6.2. The LinearAccelerationSensor Interface</a> <a href="#ref-for-linearaccelerationsensor⑥">(2)</a>
+    <li><a href="#ref-for-linearaccelerationsensor⑦">6.2.1. LinearAccelerationSensor.x</a>
+    <li><a href="#ref-for-linearaccelerationsensor⑧">6.2.2. LinearAccelerationSensor.y</a>
+    <li><a href="#ref-for-linearaccelerationsensor⑨">6.2.3. LinearAccelerationSensor.z</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="gravitysensor">
@@ -1991,9 +1989,19 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <ul>
     <li><a href="#ref-for-gravitysensor①">1. Introduction</a>
     <li><a href="#ref-for-gravitysensor②">5. Model</a> <a href="#ref-for-gravitysensor③">(2)</a>
-    <li><a href="#ref-for-gravitysensor④">6.4.1. GravitySensor.x</a>
-    <li><a href="#ref-for-gravitysensor⑤">6.4.2. GravitySensor.y</a>
-    <li><a href="#ref-for-gravitysensor⑥">6.4.3. GravitySensor.z</a>
+    <li><a href="#ref-for-gravitysensor④">5.1. Reference Frame</a>
+    <li><a href="#ref-for-gravitysensor⑤">6.3. The GravitySensor Interface</a> <a href="#ref-for-gravitysensor⑥">(2)</a>
+    <li><a href="#ref-for-gravitysensor⑦">6.3.1. GravitySensor.x</a>
+    <li><a href="#ref-for-gravitysensor⑧">6.3.2. GravitySensor.y</a>
+    <li><a href="#ref-for-gravitysensor⑨">6.3.3. GravitySensor.z</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="construct-an-accelerometer-object">
+   <b><a href="#construct-an-accelerometer-object">#construct-an-accelerometer-object</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-construct-an-accelerometer-object">6.1. The Accelerometer Interface</a>
+    <li><a href="#ref-for-construct-an-accelerometer-object①">6.2. The LinearAccelerationSensor Interface</a>
+    <li><a href="#ref-for-construct-an-accelerometer-object②">6.3. The GravitySensor Interface</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
