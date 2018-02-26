@@ -1183,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 166744eb86a34dbc5493268ea410dc65275aa964" name="generator">
+  <meta content="Bikeshed version 66a76cd06d4fa9e491630583356008a71a166760" name="generator">
   <link href="https://www.w3.org/TR/accelerometer/" rel="canonical">
 <style>/* style-md-lists */
 
@@ -1431,7 +1431,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-02-08">8 February 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-02-26">26 February 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1701,22 +1701,37 @@ the <a data-link-type="dfn" href="#construct-an-accelerometer-object" id="ref-fo
     <dl>
      <dt data-md="">input
      <dd data-md="">
+      <p><var>accelerometer_interface</var>, an <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer①③">Accelerometer</a></code> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-interface" id="ref-for-dfn-interface">interface</a> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-identifier" id="ref-for-dfn-identifier">identifier</a> or
+ an <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-interface" id="ref-for-dfn-interface①">interface</a> <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-identifier" id="ref-for-dfn-identifier①">identifier</a> whose <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-inherited-interfaces" id="ref-for-dfn-inherited-interfaces">inherited interfaces</a> contains <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer①④">Accelerometer</a></code>.</p>
+     <dd data-md="">
       <p><var>options</var>, a <code class="idl"><a data-link-type="idl" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions③">AccelerometerSensorOptions</a></code> object.</p>
      <dt data-md="">output
      <dd data-md="">
-      <p>A <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor③">Sensor</a></code> object.</p>
+      <p>An <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer①⑤">Accelerometer</a></code> object.</p>
     </dl>
     <ol>
      <li data-md="">
-      <p>Let <var>sensor_instance</var> be the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object" id="ref-for-construct-sensor-object">construct a Sensor object</a> with <var>options</var>.</p>
+      <p>Let <var>allowed</var> be the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors#check-sensor-policy-controlled-features" id="ref-for-check-sensor-policy-controlled-features">check sensor policy-controlled features</a> with <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type③">Accelerometer</a>.</p>
+     <li data-md="">
+      <p>If <var>allowed</var> is false, then:</p>
+      <ol>
+       <li data-md="">
+        <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-throw" id="ref-for-dfn-throw">Throw</a> a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror" id="ref-for-securityerror">SecurityError</a></code> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException">DOMException</a></code>.</p>
+      </ol>
+     <li data-md="">
+      <p>Let <var>accelerometer</var> be a new instance of the <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-interface" id="ref-for-dfn-interface②">interface</a> identified by <var>accelerometer_interface</var>.</p>
+     <li data-md="">
+      <p>Invoke <a data-link-type="dfn" href="https://w3c.github.io/sensors#initialize-a-sensor-object" id="ref-for-initialize-a-sensor-object">initialize a sensor object</a> with <var>accelerometer</var> and <var>options</var>.</p>
      <li data-md="">
       <p>If <var>options</var>.<code class="idl"><a class="idl-code" data-link-type="dict-member" href="#dom-accelerometersensoroptions-referenceframe" id="ref-for-dom-accelerometersensoroptions-referenceframe">referenceFrame</a></code> is "screen", then:</p>
       <ol>
        <li data-md="">
-        <p>Define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system③">local coordinate system</a> for <var>sensor_instance</var> as the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system⑤">screen coordinate system</a>.</p>
+        <p>Define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system③">local coordinate system</a> for <var>accelerometer</var> as the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system⑤">screen coordinate system</a>.</p>
       </ol>
      <li data-md="">
-      <p>Otherwise, define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system④">local coordinate system</a> for <var>sensor_instance</var> as the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system⑤">device coordinate system</a>.</p>
+      <p>Otherwise, define <a data-link-type="dfn" href="https://w3c.github.io/sensors#local-coordinate-system" id="ref-for-local-coordinate-system④">local coordinate system</a> for <var>accelerometer</var> as the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system⑤">device coordinate system</a>.</p>
+     <li data-md="">
+      <p>Return <var>accelerometer</var>.</p>
     </ol>
    </div>
    <h2 class="heading settled" data-level="8" id="acknowledgements"><span class="secno">8. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
@@ -1779,9 +1794,10 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <ul>
      <li><a href="https://w3c.github.io/sensors/#sensor">Sensor</a>
      <li><a href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a>
-     <li><a href="https://w3c.github.io/sensors#construct-sensor-object">construct a sensor object</a>
+     <li><a href="https://w3c.github.io/sensors#check-sensor-policy-controlled-features">check sensor policy-controlled features</a>
      <li><a href="https://w3c.github.io/sensors#default-sensor">default sensor</a>
      <li><a href="https://w3c.github.io/sensors/#get-value-from-latest-reading">get value from latest reading</a>
+     <li><a href="https://w3c.github.io/sensors#initialize-a-sensor-object">initialize a sensor object</a>
      <li><a href="https://w3c.github.io/sensors#latest-reading">latest reading</a>
      <li><a href="https://w3c.github.io/sensors#local-coordinate-system">local coordinate system</a>
      <li><a href="https://w3c.github.io/sensors#sensor-readings">sensor readings</a>
@@ -1809,9 +1825,15 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li>
     <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
     <ul>
+     <li><a href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a>
      <li><a href="https://heycam.github.io/webidl/#Exposed">Exposed</a>
      <li><a href="https://heycam.github.io/webidl/#SecureContext">SecureContext</a>
+     <li><a href="https://heycam.github.io/webidl/#securityerror">SecurityError</a>
      <li><a href="https://heycam.github.io/webidl/#idl-double">double</a>
+     <li><a href="https://heycam.github.io/webidl/#dfn-identifier">identifier</a>
+     <li><a href="https://heycam.github.io/webidl/#dfn-inherited-interfaces">inherited interfaces</a>
+     <li><a href="https://heycam.github.io/webidl/#dfn-interface">interface</a>
+     <li><a href="https://heycam.github.io/webidl/#dfn-throw">throw</a>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -1865,6 +1887,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <b><a href="#accelerometer-sensor-type">#accelerometer-sensor-type</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-accelerometer-sensor-type">5. Model</a> <a href="#ref-for-accelerometer-sensor-type①">(2)</a> <a href="#ref-for-accelerometer-sensor-type②">(3)</a>
+    <li><a href="#ref-for-accelerometer-sensor-type③">7.1. Construct an accelerometer object</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="acceleration">
@@ -1925,6 +1948,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <li><a href="#ref-for-accelerometer①⓪">6.1.3. Accelerometer.z</a>
     <li><a href="#ref-for-accelerometer①①">6.2. The LinearAccelerationSensor Interface</a>
     <li><a href="#ref-for-accelerometer①②">6.3. The GravitySensor Interface</a>
+    <li><a href="#ref-for-accelerometer①③">7.1. Construct an accelerometer object</a> <a href="#ref-for-accelerometer①④">(2)</a> <a href="#ref-for-accelerometer①⑤">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-accelerometer-x">

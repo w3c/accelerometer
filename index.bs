@@ -31,14 +31,21 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: sensor
     text: latest reading
     text: default sensor
-    text: construct a sensor object; url: construct-sensor-object
+    text: initialize a sensor object; url: initialize-a-sensor-object
     text: sensor type
     text: local coordinate system
     text: sensor readings; url: sensor-readings
+    text: check sensor policy-controlled features; url: check-sensor-policy-controlled-features
 urlPrefix: https://w3c.github.io/screen-orientation; spec: SCREEN-ORIENTATION
   type: dfn
     text: current orientation type;  url: dfn-current-orientation-type
     text: dom screen; url: dom-screen
+</pre>
+
+<pre class=link-defaults>
+  spec: webidl;
+    type:dfn;
+      text:identifier
 </pre>
 
 Introduction {#intro}
@@ -305,16 +312,24 @@ Abstract Operations {#abstract-opertaions}
 <div algorithm="construct an accelerometer object">
 
     : input
+    :: |accelerometer_interface|, an {{Accelerometer}} [=interface=] [=identifier=] or
+       an [=interface=] [=identifier=] whose [=inherited interfaces=] contains {{Accelerometer}}.
     :: |options|, a {{AccelerometerSensorOptions}} object.
     : output
-    :: A {{Sensor}} object.
+    :: An {{Accelerometer}} object.
 
-    1. Let |sensor_instance| be the result of invoking [=construct a Sensor object=] with |options|.
-    1. If |options|.{{referenceFrame!!dict-member}} is "screen", then:
-       1.  Define [=local coordinate system=] for |sensor_instance|
-           as the [=screen coordinate system=].
-    1. Otherwise, define [=local coordinate system=] for |sensor_instance|
-       as the [=device coordinate system=].
+    1.  Let |allowed| be the result of invoking [=check sensor policy-controlled features=]
+        with <a>Accelerometer</a>.
+    1.  If |allowed| is false, then:
+        1.  [=Throw=] a {{SecurityError}} {{DOMException}}.
+    1.  Let |accelerometer| be a new instance of the [=interface=] identified by |accelerometer_interface|.
+    1.  Invoke [=initialize a sensor object=] with |accelerometer| and |options|.
+    1.  If |options|.{{referenceFrame!!dict-member}} is "screen", then:
+        1.  Define [=local coordinate system=] for |accelerometer|
+            as the [=screen coordinate system=].
+    1.  Otherwise, define [=local coordinate system=] for |accelerometer|
+        as the [=device coordinate system=].
+    1.  Return |accelerometer|.
 </div>
 
 Acknowledgements {#acknowledgements}
