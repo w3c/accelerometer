@@ -36,6 +36,11 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: local coordinate system
     text: sensor readings; url: sensor-readings
     text: check sensor policy-controlled features; url: check-sensor-policy-controlled-features
+    text: location tracking; url: location-tracking
+    text: keylogging; url: keystroke-monitoring
+    text: fingerprinting; url: device-fingerprinting
+    text: user identifying; url: user-identifying
+    text: generic mitigations; url: mitigation-strategies
 urlPrefix: https://w3c.github.io/screen-orientation; spec: SCREEN-ORIENTATION
   type: dfn
     text: current orientation type;  url: dfn-current-orientation-type
@@ -46,6 +51,44 @@ urlPrefix: https://w3c.github.io/screen-orientation; spec: SCREEN-ORIENTATION
   spec: webidl;
     type:dfn;
       text:identifier
+</pre>
+
+<pre class=biblio>
+{
+    "KEYSTROKEDEFENSE": {
+        "authors": [
+            "Song, Yihang, et al"
+        ],
+        "id": "KEYSTROKEDEFENSE",
+        "href": "https://arxiv.org/abs/1410.7746",
+        "title": "Two novel defenses against motion-based keystroke inference attacks",
+        "date": "2014",
+        "status": "Informational",
+        "publisher": "arXiv"
+     },
+    "TOUCHSIGNATURES": {
+        "authors": [
+            "Mehrnezhad, Maryam, et al"
+        ],
+        "id": "TOUCHSIGNATURES",
+        "href": "https://arxiv.org/abs/1602.04115",
+        "title": "Touchsignatures: identification of user touch actions and pins based on mobile sensor data via javascript",
+        "date": "2016",
+        "status": "Informational",
+        "publisher": "Journal of Information Security and Applications"
+     },
+    "ACCESSORY": {
+        "authors": [
+            "Owusu, Emmanuel, et al"
+        ],
+        "id": "ACCESSORY",
+        "href": "https://dl.acm.org/citation.cfm?id=2162095",
+        "title": "ACCessory: password inference using accelerometers on smartphones",
+        "date": "2012",
+        "status": "Informational",
+        "publisher": "Proceedings of the Twelfth Workshop on Mobile Computing Systems & Applications"
+     }
+}
 </pre>
 
 Introduction {#intro}
@@ -119,8 +162,18 @@ Sensor use cases</a></cite> documents.
 Security and Privacy Considerations {#security-and-privacy}
 ===================================
 
-There are no specific security and privacy considerations
-beyond those described in the Generic Sensor API [[!GENERIC-SENSOR]].
+[=Sensor readings=] provided by inertial sensors, such as accelerometer, could be used by adversaries
+to exploit various security threats, for example, [=keylogging=], [=location tracking=],
+[=fingerprinting=] and [=user identifying=].
+
+Research papers published by security community, for instance, [[KEYSTROKEDEFENSE]], indicate that
+by throttling the frequency, risks of successful attacks are not fully eliminated, while throttling
+may greatly affect usefulness of a web application with ligitimate reasons to use the sensors.
+
+The [[TOUCHSIGNATURES]] and [[ACCESSORY]] research papers propose that implementations can
+provide visual indication when inertial sensors are in use and/or require explicit user consent to
+access [=sensor readings=]. These mitigation strategies complement the [=generic mitigations=] defined
+in the Generic Sensor API [[!GENERIC-SENSOR]].
 
 Model {#model}
 =====
