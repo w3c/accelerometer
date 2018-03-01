@@ -1185,6 +1185,7 @@ Possible extra rowspan handling
   </style>
   <meta content="Bikeshed version 66a76cd06d4fa9e491630583356008a71a166760" name="generator">
   <link href="https://www.w3.org/TR/accelerometer/" rel="canonical">
+  <meta content="b60eca817438e8aa2e916c75f0b5796eed04fff9" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1431,7 +1432,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-02-28">28 February 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-03-01">1 March 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1613,7 +1614,7 @@ in the Generic Sensor API <a data-link-type="biblio" href="#biblio-generic-senso
    <h2 class="heading settled" data-level="5" id="model"><span class="secno">5. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="accelerometer-sensor-type">Accelerometer</dfn> <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-type" id="ref-for-sensor-type">sensor type</a>’s associated <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor">Sensor</a></code> subclass is the <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer②">Accelerometer</a></code> class.</p>
    <p>The <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type">Accelerometer</a> has a <a data-link-type="dfn" href="https://w3c.github.io/sensors#default-sensor" id="ref-for-default-sensor">default sensor</a>, which is the device’s main accelerometer sensor.</p>
-   <p>The <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type①">Accelerometer</a> has an associated <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/permissions/#enumdef-permissionname" id="ref-for-enumdef-permissionname">PermissionName</a></code> which is <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/permissions/#dom-permissionname-accelerometer" id="ref-for-dom-permissionname-accelerometer">"accelerometer"</a>.</p>
+   <p>The <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type①">Accelerometer</a> has an associated <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-permission-names" id="ref-for-sensor-permission-names">sensor permission name</a> which is <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/permissions/#dom-permissionname-accelerometer" id="ref-for-dom-permissionname-accelerometer">"accelerometer"</a>.</p>
    <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading" id="ref-for-latest-reading">latest reading</a> for a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor①">Sensor</a></code> of <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type②">Accelerometer</a> <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-type" id="ref-for-sensor-type①">sensor type</a> includes three <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry" id="ref-for-map-entry">entries</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key" id="ref-for-map-key">keys</a> are "x", "y", "z" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value" id="ref-for-map-value">values</a> contain device’s <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration②">acceleration</a> about the corresponding axes. Values can contain also device’s <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration">linear acceleration</a> or <a data-link-type="dfn" href="#gravity" id="ref-for-gravity">gravity</a> depending on which object was instantiated.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="acceleration">acceleration</dfn> is the rate of change of velocity of a device with respect to time. Its
 unit is the metre per second squared (m/s<sup>2</sup>) <a data-link-type="biblio" href="#biblio-si">[SI]</a>.</p>
@@ -1811,6 +1812,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="https://w3c.github.io/sensors#latest-reading">latest reading</a>
      <li><a href="https://w3c.github.io/sensors#local-coordinate-system">local coordinate system</a>
      <li><a href="https://w3c.github.io/sensors#location-tracking">location tracking</a>
+     <li><a href="https://w3c.github.io/sensors#sensor-permission-names">sensor permission name</a>
      <li><a href="https://w3c.github.io/sensors#sensor-readings">sensor readings</a>
      <li><a href="https://w3c.github.io/sensors#sensor-type">sensor type</a>
      <li><a href="https://w3c.github.io/sensors#user-identifying">user identifying</a>
@@ -1826,7 +1828,6 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <a data-link-type="biblio">[permissions]</a> defines the following terms:
     <ul>
      <li><a href="https://w3c.github.io/permissions/#dom-permissionname-accelerometer">"accelerometer"</a>
-     <li><a href="https://w3c.github.io/permissions/#enumdef-permissionname">PermissionName</a>
     </ul>
    <li>
     <a data-link-type="biblio">[screen-orientation]</a> defines the following terms:
