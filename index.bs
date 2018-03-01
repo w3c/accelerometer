@@ -41,6 +41,7 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: fingerprinting; url: device-fingerprinting
     text: user identifying; url: user-identifying
     text: generic mitigations; url: mitigation-strategies
+    text: sensor permission name; url: sensor-permission-names
 urlPrefix: https://w3c.github.io/screen-orientation; spec: SCREEN-ORIENTATION
   type: dfn
     text: current orientation type;  url: dfn-current-orientation-type
@@ -182,7 +183,7 @@ The <dfn id="accelerometer-sensor-type">Accelerometer</dfn> <a>sensor type</a>'s
 
 The <a>Accelerometer</a> has a [=default sensor=], which is the device's main accelerometer sensor.
 
-The <a>Accelerometer</a> has an associated {{PermissionName}} which is <a for="PermissionName" enum-value>"accelerometer"</a>.
+The <a>Accelerometer</a> has an associated [=sensor permission name=] which is <a for="PermissionName" enum-value>"accelerometer"</a>.
 
 A [=latest reading=] for a {{Sensor}} of <a>Accelerometer</a> <a>sensor type</a> includes three [=map/entries=]
 whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain device's [=acceleration=]
