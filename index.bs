@@ -168,7 +168,7 @@ to exploit various security threats, for example, [=keylogging=], [=location tra
 
 Research papers published by security community, for instance, [[KEYSTROKEDEFENSE]], indicate that
 by throttling the frequency, risks of successful attacks are not fully eliminated, while throttling
-may greatly affect usefulness of a web application with ligitimate reasons to use the sensors.
+may greatly affect usefulness of a web application with legitimate reasons to use the sensors.
 
 The [[TOUCHSIGNATURES]] and [[ACCESSORY]] research papers propose that implementations can
 provide visual indication when inertial sensors are in use and/or require explicit user consent to
