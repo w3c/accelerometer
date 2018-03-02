@@ -262,10 +262,10 @@ The Accelerometer Interface {#accelerometer-interface}
     readonly attribute double? z;
   };
 
-  enum LocalCoordinateSystem { "device", "screen" };
+  enum AccelerometerLocalCoordinateSystem { "device", "screen" };
 
   dictionary AccelerometerSensorOptions :  SensorOptions  {
-    LocalCoordinateSystem referenceFrame = "device";
+    AccelerometerLocalCoordinateSystem referenceFrame = "device";
   };
 </pre>
 
