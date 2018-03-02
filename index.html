@@ -1185,7 +1185,6 @@ Possible extra rowspan handling
   </style>
   <meta content="Bikeshed version 66a76cd06d4fa9e491630583356008a71a166760" name="generator">
   <link href="https://www.w3.org/TR/accelerometer/" rel="canonical">
-  <meta content="b60eca817438e8aa2e916c75f0b5796eed04fff9" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1432,7 +1431,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-03-01">1 March 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-03-02">2 March 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1661,10 +1660,10 @@ the device.</p>
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double②"><span class="kt">double</span></a>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="Accelerometer" data-dfn-type="attribute" data-export="" data-readonly="" data-type="double?" id="dom-accelerometer-z"><code>z</code></dfn>;
 };
 
-<span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-localcoordinatesystem"><code>LocalCoordinateSystem</code></dfn> { <dfn class="s idl-code" data-dfn-for="LocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;device&quot;|device" id="dom-localcoordinatesystem-device"><code>"device"</code><a class="self-link" href="#dom-localcoordinatesystem-device"></a></dfn>, <dfn class="s idl-code" data-dfn-for="LocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;screen&quot;|screen" id="dom-localcoordinatesystem-screen"><code>"screen"</code><a class="self-link" href="#dom-localcoordinatesystem-screen"></a></dfn> };
+<span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-accelerometerlocalcoordinatesystem"><code>AccelerometerLocalCoordinateSystem</code></dfn> { <dfn class="s idl-code" data-dfn-for="AccelerometerLocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;device&quot;|device" id="dom-accelerometerlocalcoordinatesystem-device"><code>"device"</code><a class="self-link" href="#dom-accelerometerlocalcoordinatesystem-device"></a></dfn>, <dfn class="s idl-code" data-dfn-for="AccelerometerLocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;screen&quot;|screen" id="dom-accelerometerlocalcoordinatesystem-screen"><code>"screen"</code><a class="self-link" href="#dom-accelerometerlocalcoordinatesystem-screen"></a></dfn> };
 
 <span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-accelerometersensoroptions"><code>AccelerometerSensorOptions</code></dfn> :  <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions">SensorOptions</a>  {
-  <a class="n" data-link-type="idl-name" href="#enumdef-localcoordinatesystem" id="ref-for-enumdef-localcoordinatesystem">LocalCoordinateSystem</a> <dfn class="nv dfn-paneled idl-code" data-default="&quot;device&quot;" data-dfn-for="AccelerometerSensorOptions" data-dfn-type="dict-member" data-export="" data-type="LocalCoordinateSystem " id="dom-accelerometersensoroptions-referenceframe"><code>referenceFrame</code></dfn> = "device";
+  <a class="n" data-link-type="idl-name" href="#enumdef-accelerometerlocalcoordinatesystem" id="ref-for-enumdef-accelerometerlocalcoordinatesystem">AccelerometerLocalCoordinateSystem</a> <dfn class="nv dfn-paneled idl-code" data-default="&quot;device&quot;" data-dfn-for="AccelerometerSensorOptions" data-dfn-type="dict-member" data-export="" data-type="AccelerometerLocalCoordinateSystem " id="dom-accelerometersensoroptions-referenceframe"><code>referenceFrame</code></dfn> = "device";
 };
 </pre>
    <p>To construct an <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer⑥">Accelerometer</a></code> object the user agent must invoke
@@ -1771,12 +1770,13 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="#accelerometer">(interface)</a><span>, in §6.1</span>
     </ul>
    <li><a href="#dom-accelerometer-accelerometer">Accelerometer()</a><span>, in §6.1</span>
+   <li><a href="#enumdef-accelerometerlocalcoordinatesystem">AccelerometerLocalCoordinateSystem</a><span>, in §6.1</span>
    <li><a href="#dom-accelerometer-accelerometer">Accelerometer(options)</a><span>, in §6.1</span>
    <li><a href="#dictdef-accelerometersensoroptions">AccelerometerSensorOptions</a><span>, in §6.1</span>
    <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §9</span>
    <li><a href="#construct-an-accelerometer-object">Construct an accelerometer object</a><span>, in §7</span>
-   <li><a href="#dom-localcoordinatesystem-device">device</a><span>, in §6.1</span>
-   <li><a href="#dom-localcoordinatesystem-device">"device"</a><span>, in §6.1</span>
+   <li><a href="#dom-accelerometerlocalcoordinatesystem-device">device</a><span>, in §6.1</span>
+   <li><a href="#dom-accelerometerlocalcoordinatesystem-device">"device"</a><span>, in §6.1</span>
    <li><a href="#device-coordinate-system">device coordinate system</a><span>, in §5.1</span>
    <li><a href="#gravity">gravity</a><span>, in §5</span>
    <li><a href="#dom-gravitysensor-gravitysensor">GravitySensor()</a><span>, in §6.3</span>
@@ -1786,10 +1786,9 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li><a href="#linearaccelerationsensor">LinearAccelerationSensor</a><span>, in §6.2</span>
    <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">LinearAccelerationSensor()</a><span>, in §6.2</span>
    <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">LinearAccelerationSensor(options)</a><span>, in §6.2</span>
-   <li><a href="#enumdef-localcoordinatesystem">LocalCoordinateSystem</a><span>, in §6.1</span>
    <li><a href="#dom-accelerometersensoroptions-referenceframe">referenceFrame</a><span>, in §6.1</span>
-   <li><a href="#dom-localcoordinatesystem-screen">"screen"</a><span>, in §6.1</span>
-   <li><a href="#dom-localcoordinatesystem-screen">screen</a><span>, in §6.1</span>
+   <li><a href="#dom-accelerometerlocalcoordinatesystem-screen">"screen"</a><span>, in §6.1</span>
+   <li><a href="#dom-accelerometerlocalcoordinatesystem-screen">screen</a><span>, in §6.1</span>
    <li><a href="#screen-coordinate-system">screen coordinate system</a><span>, in §5.1</span>
    <li><a href="#dom-accelerometer-x">x</a><span>, in §6.1</span>
    <li><a href="#dom-accelerometer-y">y</a><span>, in §6.1</span>
@@ -1885,10 +1884,10 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double②①"><span class="kt">double</span></a>? <a class="nv" data-readonly="" data-type="double?" href="#dom-accelerometer-z"><code>z</code></a>;
 };
 
-<span class="kt">enum</span> <a class="nv" href="#enumdef-localcoordinatesystem"><code>LocalCoordinateSystem</code></a> { <a class="s" href="#dom-localcoordinatesystem-device"><code>"device"</code></a>, <a class="s" href="#dom-localcoordinatesystem-screen"><code>"screen"</code></a> };
+<span class="kt">enum</span> <a class="nv" href="#enumdef-accelerometerlocalcoordinatesystem"><code>AccelerometerLocalCoordinateSystem</code></a> { <a class="s" href="#dom-accelerometerlocalcoordinatesystem-device"><code>"device"</code></a>, <a class="s" href="#dom-accelerometerlocalcoordinatesystem-screen"><code>"screen"</code></a> };
 
 <span class="kt">dictionary</span> <a class="nv" href="#dictdef-accelerometersensoroptions"><code>AccelerometerSensorOptions</code></a> :  <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions①">SensorOptions</a>  {
-  <a class="n" data-link-type="idl-name" href="#enumdef-localcoordinatesystem" id="ref-for-enumdef-localcoordinatesystem①">LocalCoordinateSystem</a> <a class="nv" data-default="&quot;device&quot;" data-type="LocalCoordinateSystem " href="#dom-accelerometersensoroptions-referenceframe"><code>referenceFrame</code></a> = "device";
+  <a class="n" data-link-type="idl-name" href="#enumdef-accelerometerlocalcoordinatesystem" id="ref-for-enumdef-accelerometerlocalcoordinatesystem①">AccelerometerLocalCoordinateSystem</a> <a class="nv" data-default="&quot;device&quot;" data-type="AccelerometerLocalCoordinateSystem " href="#dom-accelerometersensoroptions-referenceframe"><code>referenceFrame</code></a> = "device";
 };
 
 [<a class="nv" href="#dom-linearaccelerationsensor-linearaccelerationsensor"><code>Constructor</code></a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions①①">AccelerometerSensorOptions</a> <a class="nv" href="#dom-linearaccelerationsensor-linearaccelerationsensor-options-options"><code>options</code></a>), <a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext" id="ref-for-SecureContext①①">SecureContext</a>,
@@ -1994,10 +1993,10 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <li><a href="#ref-for-dom-accelerometer-z②">6.3.3. GravitySensor.z</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="enumdef-localcoordinatesystem">
-   <b><a href="#enumdef-localcoordinatesystem">#enumdef-localcoordinatesystem</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="enumdef-accelerometerlocalcoordinatesystem">
+   <b><a href="#enumdef-accelerometerlocalcoordinatesystem">#enumdef-accelerometerlocalcoordinatesystem</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-enumdef-localcoordinatesystem">6.1. The Accelerometer Interface</a>
+    <li><a href="#ref-for-enumdef-accelerometerlocalcoordinatesystem">6.1. The Accelerometer Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-accelerometersensoroptions">
