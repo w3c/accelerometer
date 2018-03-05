@@ -1185,6 +1185,7 @@ Possible extra rowspan handling
   </style>
   <meta content="Bikeshed version 66a76cd06d4fa9e491630583356008a71a166760" name="generator">
   <link href="https://www.w3.org/TR/accelerometer/" rel="canonical">
+  <meta content="823f6f7a9650d32d817918f7169c49c9e3ef976a" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1431,7 +1432,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-03-02">2 March 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-03-05">5 March 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1662,7 +1663,7 @@ the device.</p>
 
 <span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-accelerometerlocalcoordinatesystem"><code>AccelerometerLocalCoordinateSystem</code></dfn> { <dfn class="s idl-code" data-dfn-for="AccelerometerLocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;device&quot;|device" id="dom-accelerometerlocalcoordinatesystem-device"><code>"device"</code><a class="self-link" href="#dom-accelerometerlocalcoordinatesystem-device"></a></dfn>, <dfn class="s idl-code" data-dfn-for="AccelerometerLocalCoordinateSystem" data-dfn-type="enum-value" data-export="" data-lt="&quot;screen&quot;|screen" id="dom-accelerometerlocalcoordinatesystem-screen"><code>"screen"</code><a class="self-link" href="#dom-accelerometerlocalcoordinatesystem-screen"></a></dfn> };
 
-<span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-accelerometersensoroptions"><code>AccelerometerSensorOptions</code></dfn> :  <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions">SensorOptions</a>  {
+<span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-accelerometersensoroptions"><code>AccelerometerSensorOptions</code></dfn> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions">SensorOptions</a> {
   <a class="n" data-link-type="idl-name" href="#enumdef-accelerometerlocalcoordinatesystem" id="ref-for-enumdef-accelerometerlocalcoordinatesystem">AccelerometerLocalCoordinateSystem</a> <dfn class="nv dfn-paneled idl-code" data-default="&quot;device&quot;" data-dfn-for="AccelerometerSensorOptions" data-dfn-type="dict-member" data-export="" data-type="AccelerometerLocalCoordinateSystem " id="dom-accelerometersensoroptions-referenceframe"><code>referenceFrame</code></dfn> = "device";
 };
 </pre>
@@ -1886,7 +1887,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
 
 <span class="kt">enum</span> <a class="nv" href="#enumdef-accelerometerlocalcoordinatesystem"><code>AccelerometerLocalCoordinateSystem</code></a> { <a class="s" href="#dom-accelerometerlocalcoordinatesystem-device"><code>"device"</code></a>, <a class="s" href="#dom-accelerometerlocalcoordinatesystem-screen"><code>"screen"</code></a> };
 
-<span class="kt">dictionary</span> <a class="nv" href="#dictdef-accelerometersensoroptions"><code>AccelerometerSensorOptions</code></a> :  <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions①">SensorOptions</a>  {
+<span class="kt">dictionary</span> <a class="nv" href="#dictdef-accelerometersensoroptions"><code>AccelerometerSensorOptions</code></a> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions①">SensorOptions</a> {
   <a class="n" data-link-type="idl-name" href="#enumdef-accelerometerlocalcoordinatesystem" id="ref-for-enumdef-accelerometerlocalcoordinatesystem①">AccelerometerLocalCoordinateSystem</a> <a class="nv" data-default="&quot;device&quot;" data-type="AccelerometerLocalCoordinateSystem " href="#dom-accelerometersensoroptions-referenceframe"><code>referenceFrame</code></a> = "device";
 };
 

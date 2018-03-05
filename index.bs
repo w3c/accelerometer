@@ -264,7 +264,7 @@ The Accelerometer Interface {#accelerometer-interface}
 
   enum AccelerometerLocalCoordinateSystem { "device", "screen" };
 
-  dictionary AccelerometerSensorOptions :  SensorOptions  {
+  dictionary AccelerometerSensorOptions : SensorOptions {
     AccelerometerLocalCoordinateSystem referenceFrame = "device";
   };
 </pre>
