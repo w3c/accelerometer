@@ -1,11 +1,17 @@
 <pre class="metadata">
 Title: Accelerometer
 Level: none
-Status: ED
+Status: CR
+Date: 2018-03-20
+Deadline: 2018-05-01
+Status Text:
+  <p>The CR exit criterion is two interoperable deployed implementations of each feature.</p>
+  <p>For changes since the previous version, see the <a href="https://services.w3.org/htmldiff?doc1=https%3A%2F%2Fwww.w3.org%2FTR%2F2017%2FWD-accelerometer-20171018%2F&doc2=https%3A%2F%2Fwww.w3.org%2FTR%2F2018%2FCR-accelerometer-20180320%2F">online HTML diff tool</a>.</p>
+At Risk: none
 ED: https://w3c.github.io/accelerometer/
 Shortname: accelerometer
 TR: https://www.w3.org/TR/accelerometer/
-Previous Version: https://www.w3.org/TR/2017/WD-accelerometer-20170814/
+Previous Version: https://www.w3.org/TR/2017/WD-accelerometer-20171018/
 Editor: Anssi Kostiainen 41974, Intel Corporation, http://intel.com/
 Editor: Alexander Shalamov 78335, Intel Corporation, http://intel.com/
 Group: dap
