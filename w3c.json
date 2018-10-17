@@ -1,5 +1,9 @@
- {
-    "group":      ["43696"]
-,   "contacts":   ["dontcallmedom"]
-,   "shortName":  "accelerometer"
+{
+  "group": 43696,
+  "contacts": [
+    "xfq"
+  ],
+  "shortName": "accelerometer",
+  "repo-type": "rec-track",
+  "policy": "open"
 }
