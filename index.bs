@@ -407,7 +407,7 @@ that hosts the sensor for the purposes of testing a user agent's implementation 
 
 The {{Accelerometer}} class has an associated [=mock sensor type=] which is
 <a for="MockSensorType" enum-value>"accelerometer"</a>, its [=mock sensor reading values=]
-dictionary is defined as follow:
+dictionary is defined as follows:
 
 <pre class="idl">
   dictionary AccelerometerReadingValues {
@@ -419,7 +419,7 @@ dictionary is defined as follow:
 
 The {{LinearAccelerationSensor}} class has an associated [=mock sensor type=] which is
 <a for="MockSensorType" enum-value>"linear-acceleration"</a>, its [=mock sensor reading values=]
-dictionary is defined as follow:
+dictionary is defined as follows:
 
 <pre class="idl">
   dictionary LinearAccelerationReadingValues : AccelerometerReadingValues {
@@ -428,7 +428,7 @@ dictionary is defined as follow:
 
 The {{GravitySensor}} class has an associated [=mock sensor type=] which is
 <a for="MockSensorType" enum-value>"gravity"</a>, its [=mock sensor reading values=]
-dictionary is defined as follow:
+dictionary is defined as follows:
 
 <pre class="idl">
   dictionary GravityReadingValues : AccelerometerReadingValues {
