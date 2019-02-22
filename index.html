@@ -1219,9 +1219,9 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version eee3e9e7543e2188fb60d183a6cf3fe3a7d971c1" name="generator">
+  <meta content="Bikeshed version 0da7328bb90ef81993146377e4e0fed236969c4c" name="generator">
   <link href="https://www.w3.org/TR/accelerometer/" rel="canonical">
-  <meta content="40ddc7bd018a76d54b54cc799d31f33519e26255" name="document-revision">
+  <meta content="d2065c9f2e38459539a2ef8773d6c05c9615f1d2" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1479,7 +1479,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-01-29">29 January 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-02-22">22 February 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1487,15 +1487,16 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      <dt>Latest published version:
      <dd><a href="https://www.w3.org/TR/accelerometer/">https://www.w3.org/TR/accelerometer/</a>
      <dt>Previous Versions:
-     <dd><a href="https://www.w3.org/TR/2017/WD-accelerometer-20170814/" rel="prev">https://www.w3.org/TR/2017/WD-accelerometer-20170814/</a>
+     <dd><a href="https://www.w3.org/TR/2018/CR-accelerometer-20180320/" rel="prev">https://www.w3.org/TR/2018/CR-accelerometer-20180320/</a>
      <dt>Version History:
      <dd><a href="https://github.com/w3c/accelerometer/commits/gh-pages/index.bs">https://github.com/w3c/accelerometer/commits/gh-pages/index.bs</a>
      <dt>Feedback:
      <dd><span><a href="mailto:public-device-apis@w3.org?subject=%5Baccelerometer%5D%20YOUR%20TOPIC%20HERE">public-device-apis@w3.org</a> with subject line “<kbd>[accelerometer] <i data-lt>… message topic …</i></kbd>” (<a href="https://lists.w3.org/Archives/Public/public-device-apis/" rel="discussion">archives</a>)</span>
      <dt>Issue Tracking:
      <dd><a href="https://github.com/w3c/accelerometer/issues/">GitHub</a>
-     <dt class="editor">Editors:
+     <dt class="editor">Editor:
      <dd class="editor p-author h-card vcard" data-editor-id="41974"><a class="p-name fn u-url url" href="http://intel.com/">Anssi Kostiainen</a> (<span class="p-org org">Intel Corporation</span>)
+     <dt class="editor">Former Editor:
      <dd class="editor p-author h-card vcard" data-editor-id="78335"><a class="p-name fn u-url url" href="http://intel.com/">Alexander Shalamov</a> (<span class="p-org org">Intel Corporation</span>)
      <dt>Bug Reports:
      <dd><a href="https://www.github.com/w3c/accelerometer/issues/new">via the w3c/accelerometer repository on GitHub</a>
@@ -1610,13 +1611,13 @@ X, Y and Z axis in <a data-link-type="dfn" href="https://w3c.github.io/sensors/#
 <pre class="highlight"><c- a>let</c-> sensor <c- o>=</c-> <c- k>new</c-> Accelerometer<c- p>();</c->
 sensor<c- p>.</c->start<c- p>();</c->
 
-sensor<c- p>.</c->onreading <c- o>=</c-> <c- p>()</c-> <c- o>=></c-> <c- p>{</c->
+sensor<c- p>.</c->onreading <c- o>=</c-> <c- p>()</c-> <c- p>=></c-> <c- p>{</c->
     console<c- p>.</c->log<c- p>(</c-><c- u>"Acceleration along X-axis: "</c-> <c- o>+</c-> sensor<c- p>.</c->x<c- p>);</c->
     console<c- p>.</c->log<c- p>(</c-><c- u>"Acceleration along Y-axis: "</c-> <c- o>+</c-> sensor<c- p>.</c->y<c- p>);</c->
     console<c- p>.</c->log<c- p>(</c-><c- u>"Acceleration along Z-axis: "</c-> <c- o>+</c-> sensor<c- p>.</c->z<c- p>);</c->
 <c- p>}</c->
 
-sensor<c- p>.</c->onerror <c- o>=</c-> event <c- o>=></c-> console<c- p>.</c->log<c- p>(</c->event<c- p>.</c->error<c- p>.</c->name<c- p>,</c-> event<c- p>.</c->error<c- p>.</c->message<c- p>);</c->
+sensor<c- p>.</c->onerror <c- o>=</c-> event <c- p>=></c-> console<c- p>.</c->log<c- p>(</c->event<c- p>.</c->error<c- p>.</c->name<c- p>,</c-> event<c- p>.</c->error<c- p>.</c->message<c- p>);</c->
 </pre>
    </div>
    <div class="example" id="example-1cf0e3e6">
@@ -1626,7 +1627,7 @@ sensor<c- p>.</c->onerror <c- o>=</c-> event <c- o>=></c-> console<c- p>.</c->lo
     rendered web page is pointing downwards. 
 <pre class="highlight"><c- a>let</c-> sensor <c- o>=</c-> <c- k>new</c-> GravitySensor<c- p>({</c->frequency<c- o>:</c-> <c- mi>5</c-><c- p>,</c-> referenceFrame<c- o>:</c-> <c- u>"screen"</c-><c- p>});</c->
 
-sensor<c- p>.</c->onreading <c- o>=</c-> <c- p>()</c-> <c- o>=></c-> <c- p>{</c->
+sensor<c- p>.</c->onreading <c- o>=</c-> <c- p>()</c-> <c- p>=></c-> <c- p>{</c->
   <c- k>if</c-> <c- p>(</c->sensor<c- p>.</c->y <c- o>>=</c-> <c- mf>9.8</c-><c- p>)</c-> <c- p>{</c->
     console<c- p>.</c->log<c- p>(</c-><c- u>"Web page is perpendicular to the ground."</c-><c- p>);</c->
   <c- p>}</c->
@@ -1642,7 +1643,7 @@ sensor<c- p>.</c->start<c- p>();</c->
 
 <c- a>let</c-> sensor <c- o>=</c-> <c- k>new</c-> LinearAccelerationSensor<c- p>({</c->frequency<c- o>:</c-> <c- mi>60</c-><c- p>});</c->
 
-sensor<c- p>.</c->addEventListener<c- p>(</c-><c- t>'reading'</c-><c- p>,</c-> <c- p>()</c-> <c- o>=></c-> <c- p>{</c->
+sensor<c- p>.</c->addEventListener<c- p>(</c-><c- t>'reading'</c-><c- p>,</c-> <c- p>()</c-> <c- p>=></c-> <c- p>{</c->
   <c- k>if</c-> <c- p>(</c->sensor<c- p>.</c->x <c- o>></c-> shakeThreshold<c- p>)</c-> <c- p>{</c->
     console<c- p>.</c->log<c- p>(</c-><c- u>"Shake detected."</c-><c- p>);</c->
   <c- p>}</c->
