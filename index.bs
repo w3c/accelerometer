@@ -7,7 +7,7 @@ Shortname: accelerometer
 TR: https://www.w3.org/TR/accelerometer/
 Previous Version: https://www.w3.org/TR/2018/CR-accelerometer-20180320/
 Editor: Anssi Kostiainen 41974, Intel Corporation, http://intel.com/
-Editor: Alexander Shalamov 78335, Intel Corporation, http://intel.com/
+Former Editor: Alexander Shalamov 78335, Intel Corporation, http://intel.com/
 Group: dap
 Abstract:
   This specification defines {{Accelerometer}}, {{LinearAccelerationSensor}} and {{GravitySensor}} interfaces for
