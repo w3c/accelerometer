@@ -5,7 +5,7 @@ Status: ED
 ED: https://w3c.github.io/accelerometer/
 Shortname: accelerometer
 TR: https://www.w3.org/TR/accelerometer/
-Previous Version: https://www.w3.org/TR/2018/CR-accelerometer-20180320/
+Previous Version: https://www.w3.org/TR/2019/WD-accelerometer-20190307/
 Editor: Anssi Kostiainen 41974, Intel Corporation, http://intel.com/
 Former Editor: Alexander Shalamov 78335, Intel Corporation, http://intel.com/
 Group: dap
