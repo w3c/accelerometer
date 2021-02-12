@@ -214,7 +214,9 @@ the sensor, without the contribution of a [=gravity=] force.
 The {{GravitySensor}} class is an {{Accelerometer}}'s subclass. The {{GravitySensor}}'s
 [=latest reading=] contains device's [=acceleration=] due to the effect of [=gravity=] force about the corresponding axes.
 
-The <dfn>gravity</dfn> is a force that attracts an object to the center of the earth, or towards any other physical object having mass.
+The <dfn>gravity</dfn> is the component of the device's acceleration that prevents its velocity from increasing toward nearby masses. Devices in free fall for more than a short period of time may compute incorrect values for the gravity.
+
+Note: The relationship between [=gravity=] and [=linear acceleration=] is discussed in [[MOTION-SENSORS#gravity-and-linear-acceleration]].
 
 Reference Frame {#reference-frame}
 ----------------
