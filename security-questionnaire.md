@@ -1,7 +1,7 @@
 # [Security and Privacy Self-Review Questionnaire] for [Accelerometer]
 
 Answers to the [questionnaire][Security and Privacy Self-Review Questionnaire] for
-[Generic Sensor API] can be found [here](https://github.com/w3c/sensors/blob/master/security-questionnaire.md).
+[Generic Sensor API] can be found [here](https://github.com/w3c/sensors/blob/main/security-questionnaire.md).
 
 ## [3.1 Does this specification deal with personally-identifiable information?] 
 
