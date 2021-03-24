@@ -299,6 +299,18 @@ The {{Accelerometer/z!!attribute}} attribute of the {{Accelerometer}}
 interface returns the result of invoking [=get value from latest reading=] with
 `this` and "z" as arguments. It represents the [=acceleration=] along z-axis.
 
+### Permissions Policy Integration ### {#permissions-policy-integration}
+
+This specification defines a <a>policy-controlled feature</a> identified by the
+string "<code><dfn data-lt="accelerometer-feature">accelerometer</dfn></code>".
+Its <a>default allowlist</a> is <code>'self'</code>.
+
+<div class="note">
+A <a>document</a>'s <a for=Document>permissions policy</a> determines whether
+any content in that document is <a>allowed to use</a> information about the
+acceleration of the device gathered through the {{Accelerometer}} interface.
+</div>
+
 The LinearAccelerationSensor Interface {#linearaccelerationsensor-interface}
 --------------------------------
 
