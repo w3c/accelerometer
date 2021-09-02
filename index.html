@@ -5,9 +5,9 @@
   <title>Accelerometer</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version 59d067506, updated Fri Jul 23 15:43:29 2021 -0700" name="generator">
+  <meta content="Bikeshed version 4f053d00e, updated Tue Aug 10 14:13:32 2021 -0700" name="generator">
   <link href="https://www.w3.org/TR/accelerometer/" rel="canonical">
-  <meta content="f3acddc5941e36a6f7cb7748839ae9d19977da05" name="document-revision">
+  <meta content="8f1c081d9d0bf680f3dc649f7ea5dcec2b64f6ec" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -635,7 +635,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-07-24">24 July 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-09-02">2 September 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -821,8 +821,9 @@ in the Generic Sensor API <a data-link-type="biblio" href="#biblio-generic-senso
    <h2 class="heading settled" data-level="5" id="model"><span class="secno">5. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="accelerometer-sensor-type">Accelerometer</dfn> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-type" id="ref-for-sensor-type">sensor type</a>’s associated <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor">Sensor</a></code> subclass is the <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer②">Accelerometer</a></code> class.</p>
    <p>The <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type">Accelerometer</a> has a <a data-link-type="dfn" href="https://w3c.github.io/sensors/#default-sensor" id="ref-for-default-sensor">default sensor</a>, which is the device’s main accelerometer sensor.</p>
-   <p>The <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type①">Accelerometer</a> has an associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-permission-names" id="ref-for-sensor-permission-names">sensor permission name</a> which is <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/permissions/#dom-permissionname-accelerometer" id="ref-for-dom-permissionname-accelerometer">"accelerometer"</a>.</p>
-   <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors/#latest-reading" id="ref-for-latest-reading">latest reading</a> for a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor①">Sensor</a></code> of <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type②">Accelerometer</a> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-type" id="ref-for-sensor-type①">sensor type</a> includes three <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry" id="ref-for-map-entry">entries</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-getting-the-keys" id="ref-for-map-getting-the-keys">keys</a> are "x", "y", "z" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-getting-the-values" id="ref-for-map-getting-the-values">values</a> contain device’s <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration②">acceleration</a> about the corresponding axes. Values can contain also device’s <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration">linear acceleration</a> or <a data-link-type="dfn" href="#gravity" id="ref-for-gravity">gravity</a> depending on which object was instantiated.</p>
+   <p>The <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type①">Accelerometer</a> has an associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-permission-names" id="ref-for-sensor-permission-names">sensor permission name</a>, which is <a class="idl-code" data-link-type="enum-value" href="https://w3c.github.io/permissions/#dom-permissionname-accelerometer" id="ref-for-dom-permissionname-accelerometer">"accelerometer"</a>.</p>
+   <p>The <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type②">Accelerometer</a> is a <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature" id="ref-for-policy-controlled-feature">policy-controlled feature</a> identified by the string "accelerometer". Its <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#default-allowlist" id="ref-for-default-allowlist">default allowlist</a> is <code>'self'</code>.</p>
+   <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors/#latest-reading" id="ref-for-latest-reading">latest reading</a> for a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor①">Sensor</a></code> of <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type③">Accelerometer</a> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-type" id="ref-for-sensor-type①">sensor type</a> includes three <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry" id="ref-for-map-entry">entries</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-getting-the-keys" id="ref-for-map-getting-the-keys">keys</a> are "x", "y", "z" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-getting-the-values" id="ref-for-map-getting-the-values">values</a> contain device’s <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration②">acceleration</a> about the corresponding axes. Values can contain also device’s <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration">linear acceleration</a> or <a data-link-type="dfn" href="#gravity" id="ref-for-gravity">gravity</a> depending on which object was instantiated.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="acceleration">acceleration</dfn> is the rate of change of velocity of a device with respect to time. Its
 unit is the metre per second squared (m/s<sup>2</sup>) <a data-link-type="biblio" href="#biblio-si">[SI]</a>.</p>
    <p>The frame of reference for the <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration③">acceleration</a> measurement must be inertial, such as, the device in free fall would
@@ -835,7 +836,7 @@ system</a> (see figure below).</p>
 the sensor, without the contribution of a <a data-link-type="dfn" href="#gravity" id="ref-for-gravity①">gravity</a> force.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor②">GravitySensor</a></code> class is an <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer④">Accelerometer</a></code>'s subclass. The <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor③">GravitySensor</a></code>'s <a data-link-type="dfn" href="https://w3c.github.io/sensors/#latest-reading" id="ref-for-latest-reading②">latest reading</a> contains device’s <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration⑦">acceleration</a> due to the effect of <a data-link-type="dfn" href="#gravity" id="ref-for-gravity②">gravity</a> force about the corresponding axes.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="gravity">gravity</dfn> is the component of the device’s acceleration that prevents its velocity from increasing toward nearby masses. Devices in free fall for more than a short period of time may compute incorrect values for the gravity.</p>
-   <p class="note" role="note"><span>Note:</span> The relationship between <a data-link-type="dfn" href="#gravity" id="ref-for-gravity③">gravity</a> and <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration②">linear acceleration</a> is discussed in <a href="https://www.w3.org/TR/motion-sensors/#gravity-and-linear-acceleration">Motion Sensors Explainer §gravity-and-linear-acceleration</a>.</p>
+   <p class="note" role="note"><span>Note:</span> The relationship between <a data-link-type="dfn" href="#gravity" id="ref-for-gravity③">gravity</a> and <a data-link-type="dfn" href="#linear-acceleration" id="ref-for-linear-acceleration②">linear acceleration</a> is discussed in <a href="https://www.w3.org/TR/motion-sensors/#gravity-and-linear-acceleration">Motion Sensors Explainer § gravity-and-linear-acceleration</a>.</p>
    <h3 class="heading settled" data-level="5.1" id="reference-frame"><span class="secno">5.1. </span><span class="content">Reference Frame</span><a class="self-link" href="#reference-frame"></a></h3>
    <p>The <a data-link-type="dfn" href="https://w3c.github.io/sensors/#local-coordinate-system" id="ref-for-local-coordinate-system②">local coordinate system</a> represents the reference frame for the <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer⑤">Accelerometer</a></code>, <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor④">LinearAccelerationSensor</a></code>, and the <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor④">GravitySensor</a></code> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-reading" id="ref-for-sensor-reading②">readings</a>. It can be either the <a data-link-type="dfn" href="#device-coordinate-system" id="ref-for-device-coordinate-system">device coordinate system</a> or the <a data-link-type="dfn" href="#screen-coordinate-system" id="ref-for-screen-coordinate-system①">screen coordinate system</a>.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="device-coordinate-system">device coordinate system</dfn> is defined as a three dimensional
@@ -1074,7 +1075,7 @@ the <a data-link-type="dfn" href="#construct-an-accelerometer-object" id="ref-fo
     </dl>
     <ol>
      <li data-md>
-      <p>Let <var>allowed</var> be the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#check-sensor-policy-controlled-features" id="ref-for-check-sensor-policy-controlled-features">check sensor policy-controlled features</a> with <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type③">Accelerometer</a>.</p>
+      <p>Let <var>allowed</var> be the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#check-sensor-policy-controlled-features" id="ref-for-check-sensor-policy-controlled-features">check sensor policy-controlled features</a> with <a data-link-type="dfn" href="#accelerometer-sensor-type" id="ref-for-accelerometer-sensor-type④">Accelerometer</a>.</p>
      <li data-md>
       <p>If <var>allowed</var> is false, then:</p>
       <ol>
@@ -1137,66 +1138,66 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#acceleration">acceleration</a><span>, in §5</span>
+   <li><a href="#acceleration">acceleration</a><span>, in § 5</span>
    <li>
     Accelerometer
     <ul>
-     <li><a href="#accelerometer">(interface)</a><span>, in §6.1</span>
-     <li><a href="#accelerometer-sensor-type">definition of</a><span>, in §5</span>
+     <li><a href="#accelerometer">(interface)</a><span>, in § 6.1</span>
+     <li><a href="#accelerometer-sensor-type">definition of</a><span>, in § 5</span>
     </ul>
-   <li><a href="#dom-accelerometer-accelerometer">Accelerometer()</a><span>, in §6.1</span>
-   <li><a href="#enumdef-accelerometerlocalcoordinatesystem">AccelerometerLocalCoordinateSystem</a><span>, in §6.1</span>
-   <li><a href="#dom-accelerometer-accelerometer">Accelerometer(options)</a><span>, in §6.1</span>
-   <li><a href="#dictdef-accelerometerreadingvalues">AccelerometerReadingValues</a><span>, in §8.1</span>
-   <li><a href="#dictdef-accelerometersensoroptions">AccelerometerSensorOptions</a><span>, in §6.1</span>
-   <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §10</span>
-   <li><a href="#construct-an-accelerometer-object">Construct an accelerometer object</a><span>, in §7</span>
+   <li><a href="#dom-accelerometer-accelerometer">Accelerometer()</a><span>, in § 6.1</span>
+   <li><a href="#enumdef-accelerometerlocalcoordinatesystem">AccelerometerLocalCoordinateSystem</a><span>, in § 6.1</span>
+   <li><a href="#dom-accelerometer-accelerometer">Accelerometer(options)</a><span>, in § 6.1</span>
+   <li><a href="#dictdef-accelerometerreadingvalues">AccelerometerReadingValues</a><span>, in § 8.1</span>
+   <li><a href="#dictdef-accelerometersensoroptions">AccelerometerSensorOptions</a><span>, in § 6.1</span>
+   <li><a href="#conformant-user-agent">conformant user agent</a><span>, in § 10</span>
+   <li><a href="#construct-an-accelerometer-object">Construct an accelerometer object</a><span>, in § 7</span>
    <li>
     constructor()
     <ul>
-     <li><a href="#dom-accelerometer-accelerometer">constructor for Accelerometer</a><span>, in §6.1</span>
-     <li><a href="#dom-gravitysensor-gravitysensor">constructor for GravitySensor</a><span>, in §6.3</span>
-     <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">constructor for LinearAccelerationSensor</a><span>, in §6.2</span>
+     <li><a href="#dom-accelerometer-accelerometer">constructor for Accelerometer</a><span>, in § 6.1</span>
+     <li><a href="#dom-gravitysensor-gravitysensor">constructor for GravitySensor</a><span>, in § 6.3</span>
+     <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">constructor for LinearAccelerationSensor</a><span>, in § 6.2</span>
     </ul>
    <li>
     constructor(options)
     <ul>
-     <li><a href="#dom-accelerometer-accelerometer">constructor for Accelerometer</a><span>, in §6.1</span>
-     <li><a href="#dom-gravitysensor-gravitysensor">constructor for GravitySensor</a><span>, in §6.3</span>
-     <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">constructor for LinearAccelerationSensor</a><span>, in §6.2</span>
+     <li><a href="#dom-accelerometer-accelerometer">constructor for Accelerometer</a><span>, in § 6.1</span>
+     <li><a href="#dom-gravitysensor-gravitysensor">constructor for GravitySensor</a><span>, in § 6.3</span>
+     <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">constructor for LinearAccelerationSensor</a><span>, in § 6.2</span>
     </ul>
-   <li><a href="#dom-accelerometerlocalcoordinatesystem-device">"device"</a><span>, in §6.1</span>
-   <li><a href="#device-coordinate-system">device coordinate system</a><span>, in §5.1</span>
-   <li><a href="#gravity">gravity</a><span>, in §5</span>
-   <li><a href="#dictdef-gravityreadingvalues">GravityReadingValues</a><span>, in §8.1</span>
-   <li><a href="#gravitysensor">GravitySensor</a><span>, in §6.3</span>
-   <li><a href="#dom-gravitysensor-gravitysensor">GravitySensor()</a><span>, in §6.3</span>
-   <li><a href="#dom-gravitysensor-gravitysensor">GravitySensor(options)</a><span>, in §6.3</span>
-   <li><a href="#linear-acceleration">linear acceleration</a><span>, in §5</span>
-   <li><a href="#dictdef-linearaccelerationreadingvalues">LinearAccelerationReadingValues</a><span>, in §8.1</span>
-   <li><a href="#linearaccelerationsensor">LinearAccelerationSensor</a><span>, in §6.2</span>
-   <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">LinearAccelerationSensor()</a><span>, in §6.2</span>
-   <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">LinearAccelerationSensor(options)</a><span>, in §6.2</span>
-   <li><a href="#dom-accelerometersensoroptions-referenceframe">referenceFrame</a><span>, in §6.1</span>
-   <li><a href="#dom-accelerometerlocalcoordinatesystem-screen">"screen"</a><span>, in §6.1</span>
-   <li><a href="#screen-coordinate-system">screen coordinate system</a><span>, in §5.1</span>
+   <li><a href="#dom-accelerometerlocalcoordinatesystem-device">"device"</a><span>, in § 6.1</span>
+   <li><a href="#device-coordinate-system">device coordinate system</a><span>, in § 5.1</span>
+   <li><a href="#gravity">gravity</a><span>, in § 5</span>
+   <li><a href="#dictdef-gravityreadingvalues">GravityReadingValues</a><span>, in § 8.1</span>
+   <li><a href="#gravitysensor">GravitySensor</a><span>, in § 6.3</span>
+   <li><a href="#dom-gravitysensor-gravitysensor">GravitySensor()</a><span>, in § 6.3</span>
+   <li><a href="#dom-gravitysensor-gravitysensor">GravitySensor(options)</a><span>, in § 6.3</span>
+   <li><a href="#linear-acceleration">linear acceleration</a><span>, in § 5</span>
+   <li><a href="#dictdef-linearaccelerationreadingvalues">LinearAccelerationReadingValues</a><span>, in § 8.1</span>
+   <li><a href="#linearaccelerationsensor">LinearAccelerationSensor</a><span>, in § 6.2</span>
+   <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">LinearAccelerationSensor()</a><span>, in § 6.2</span>
+   <li><a href="#dom-linearaccelerationsensor-linearaccelerationsensor">LinearAccelerationSensor(options)</a><span>, in § 6.2</span>
+   <li><a href="#dom-accelerometersensoroptions-referenceframe">referenceFrame</a><span>, in § 6.1</span>
+   <li><a href="#dom-accelerometerlocalcoordinatesystem-screen">"screen"</a><span>, in § 6.1</span>
+   <li><a href="#screen-coordinate-system">screen coordinate system</a><span>, in § 5.1</span>
    <li>
     x
     <ul>
-     <li><a href="#dom-accelerometer-x">attribute for Accelerometer</a><span>, in §6.1</span>
-     <li><a href="#dom-accelerometerreadingvalues-x">dict-member for AccelerometerReadingValues</a><span>, in §8.1</span>
+     <li><a href="#dom-accelerometer-x">attribute for Accelerometer</a><span>, in § 6.1</span>
+     <li><a href="#dom-accelerometerreadingvalues-x">dict-member for AccelerometerReadingValues</a><span>, in § 8.1</span>
     </ul>
    <li>
     y
     <ul>
-     <li><a href="#dom-accelerometer-y">attribute for Accelerometer</a><span>, in §6.1</span>
-     <li><a href="#dom-accelerometerreadingvalues-y">dict-member for AccelerometerReadingValues</a><span>, in §8.1</span>
+     <li><a href="#dom-accelerometer-y">attribute for Accelerometer</a><span>, in § 6.1</span>
+     <li><a href="#dom-accelerometerreadingvalues-y">dict-member for AccelerometerReadingValues</a><span>, in § 8.1</span>
     </ul>
    <li>
     z
     <ul>
-     <li><a href="#dom-accelerometer-z">attribute for Accelerometer</a><span>, in §6.1</span>
-     <li><a href="#dom-accelerometerreadingvalues-z">dict-member for AccelerometerReadingValues</a><span>, in §8.1</span>
+     <li><a href="#dom-accelerometer-z">attribute for Accelerometer</a><span>, in § 6.1</span>
+     <li><a href="#dom-accelerometerreadingvalues-z">dict-member for AccelerometerReadingValues</a><span>, in § 8.1</span>
     </ul>
   </ul>
   <aside class="dfn-panel" data-for="term-for-dom-mocksensortype-accelerometer">
@@ -1376,6 +1377,18 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <li><a href="#ref-for-dom-permissionname-accelerometer">5. Model</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-default-allowlist">
+   <a href="https://w3c.github.io/webappsec-permissions-policy/#default-allowlist">https://w3c.github.io/webappsec-permissions-policy/#default-allowlist</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-default-allowlist">5. Model</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-policy-controlled-feature">
+   <a href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature">https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-policy-controlled-feature">5. Model</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-dfn-current-orientation-type">
    <a href="https://www.w3.org/TR/screen-orientation/#dfn-current-orientation-type">https://www.w3.org/TR/screen-orientation/#dfn-current-orientation-type</a><b>Referenced in:</b>
    <ul>
@@ -1487,7 +1500,13 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li>
     <a data-link-type="biblio">[permissions]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-dom-permissionname-accelerometer">"accelerometer"</span>
+     <li><span class="dfn-paneled" id="term-for-dom-permissionname-accelerometer">accelerometer</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[permissions-policy-1]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="term-for-default-allowlist">default allowlist</span>
+     <li><span class="dfn-paneled" id="term-for-policy-controlled-feature">policy-controlled feature</span>
     </ul>
    <li>
     <a data-link-type="biblio">[screen-orientation]</a> defines the following terms:
@@ -1513,28 +1532,30 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-generic-sensor">[GENERIC-SENSOR]
-   <dd>Rick Waldron; et al. <a href="https://w3c.github.io/sensors/">Generic Sensor API</a>. URL: <a href="https://w3c.github.io/sensors/">https://w3c.github.io/sensors/</a>
+   <dd>Rick Waldron; et al. <a href="https://w3c.github.io/sensors/"><cite>Generic Sensor API</cite></a>. URL: <a href="https://w3c.github.io/sensors/">https://w3c.github.io/sensors/</a>
    <dt id="biblio-infra">[INFRA]
-   <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/">Infra Standard</a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
+   <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
    <dt id="biblio-permissions">[PERMISSIONS]
-   <dd>Mounir Lamouri; Marcos Caceres; Jeffrey Yasskin. <a href="https://w3c.github.io/permissions/">Permissions</a>. URL: <a href="https://w3c.github.io/permissions/">https://w3c.github.io/permissions/</a>
+   <dd>Marcos Caceres; Micheal Taylor; Jeffrey Yasskin. <a href="https://w3c.github.io/permissions/"><cite>Permissions</cite></a>. URL: <a href="https://w3c.github.io/permissions/">https://w3c.github.io/permissions/</a>
+   <dt id="biblio-permissions-policy-1">[PERMISSIONS-POLICY-1]
+   <dd>Ian Clelland. <a href="https://w3c.github.io/webappsec-permissions-policy/"><cite>Permissions Policy</cite></a>. URL: <a href="https://w3c.github.io/webappsec-permissions-policy/">https://w3c.github.io/webappsec-permissions-policy/</a>
    <dt id="biblio-rfc2119">[RFC2119]
-   <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
+   <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
    <dt id="biblio-screen-orientation">[SCREEN-ORIENTATION]
-   <dd>Mounir Lamouri; Marcos Caceres; Johanna Herman. <a href="https://w3c.github.io/screen-orientation/">The Screen Orientation API</a>. URL: <a href="https://w3c.github.io/screen-orientation/">https://w3c.github.io/screen-orientation/</a>
+   <dd>Mounir Lamouri; Marcos Caceres; Johanna Herman. <a href="https://w3c.github.io/screen-orientation/"><cite>The Screen Orientation API</cite></a>. URL: <a href="https://w3c.github.io/screen-orientation/">https://w3c.github.io/screen-orientation/</a>
    <dt id="biblio-webidl">[WEBIDL]
-   <dd>Boris Zbarsky. <a href="https://heycam.github.io/webidl/">Web IDL</a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dd>Boris Zbarsky. <a href="https://heycam.github.io/webidl/"><cite>Web IDL</cite></a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
    <dt id="biblio-accessory">[ACCESSORY]
-   <dd>Owusu, Emmanuel, et al. <a href="https://dl.acm.org/citation.cfm?id=2162095">ACCessory: password inference using accelerometers on smartphones</a>. 2012. Informational. URL: <a href="https://dl.acm.org/citation.cfm?id=2162095">https://dl.acm.org/citation.cfm?id=2162095</a>
+   <dd>Owusu, Emmanuel, et al. <a href="https://dl.acm.org/citation.cfm?id=2162095"><cite>ACCessory: password inference using accelerometers on smartphones</cite></a>. 2012. Informational. URL: <a href="https://dl.acm.org/citation.cfm?id=2162095">https://dl.acm.org/citation.cfm?id=2162095</a>
    <dt id="biblio-keystrokedefense">[KEYSTROKEDEFENSE]
-   <dd>Song, Yihang, et al. <a href="https://arxiv.org/abs/1410.7746">Two novel defenses against motion-based keystroke inference attacks</a>. 2014. Informational. URL: <a href="https://arxiv.org/abs/1410.7746">https://arxiv.org/abs/1410.7746</a>
+   <dd>Song, Yihang, et al. <a href="https://arxiv.org/abs/1410.7746"><cite>Two novel defenses against motion-based keystroke inference attacks</cite></a>. 2014. Informational. URL: <a href="https://arxiv.org/abs/1410.7746">https://arxiv.org/abs/1410.7746</a>
    <dt id="biblio-si">[SI]
-   <dd><a href="http://www.bipm.org/en/publications/si-brochure/">SI Brochure: The International System of Units (SI), 8th edition</a>. 2014. URL: <a href="http://www.bipm.org/en/publications/si-brochure/">http://www.bipm.org/en/publications/si-brochure/</a>
+   <dd><a href="http://www.bipm.org/en/publications/si-brochure/"><cite>SI Brochure: The International System of Units (SI), 8th edition</cite></a>. 2014. URL: <a href="http://www.bipm.org/en/publications/si-brochure/">http://www.bipm.org/en/publications/si-brochure/</a>
    <dt id="biblio-touchsignatures">[TOUCHSIGNATURES]
-   <dd>Mehrnezhad, Maryam, et al. <a href="https://arxiv.org/abs/1602.04115">Touchsignatures: identification of user touch actions and pins based on mobile sensor data via javascript</a>. 2016. Informational. URL: <a href="https://arxiv.org/abs/1602.04115">https://arxiv.org/abs/1602.04115</a>
+   <dd>Mehrnezhad, Maryam, et al. <a href="https://arxiv.org/abs/1602.04115"><cite>Touchsignatures: identification of user touch actions and pins based on mobile sensor data via javascript</cite></a>. 2016. Informational. URL: <a href="https://arxiv.org/abs/1602.04115">https://arxiv.org/abs/1602.04115</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
@@ -1577,8 +1598,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <aside class="dfn-panel" data-for="accelerometer-sensor-type">
    <b><a href="#accelerometer-sensor-type">#accelerometer-sensor-type</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-accelerometer-sensor-type">5. Model</a> <a href="#ref-for-accelerometer-sensor-type①">(2)</a> <a href="#ref-for-accelerometer-sensor-type②">(3)</a>
-    <li><a href="#ref-for-accelerometer-sensor-type③">7.1. Construct an accelerometer object</a>
+    <li><a href="#ref-for-accelerometer-sensor-type">5. Model</a> <a href="#ref-for-accelerometer-sensor-type①">(2)</a> <a href="#ref-for-accelerometer-sensor-type②">(3)</a> <a href="#ref-for-accelerometer-sensor-type③">(4)</a>
+    <li><a href="#ref-for-accelerometer-sensor-type④">7.1. Construct an accelerometer object</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="acceleration">
