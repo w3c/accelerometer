@@ -188,7 +188,9 @@ The <dfn id="accelerometer-sensor-type">Accelerometer</dfn> <a>sensor type</a>'s
 
 The <a>Accelerometer</a> has a [=default sensor=], which is the device's main accelerometer sensor.
 
-The <a>Accelerometer</a> has an associated [=sensor permission name=] which is <a for="PermissionName" enum-value>"accelerometer"</a>.
+The <a>Accelerometer</a> has an associated [=sensor permission name=], which is <a for="PermissionName" enum-value>"accelerometer"</a>.
+
+The <a>Accelerometer</a> is a [=policy-controlled feature=] identified by the string "accelerometer". Its [=default allowlist=] is `'self'`.
 
 A [=latest reading=] for a {{Sensor}} of <a>Accelerometer</a> <a>sensor type</a> includes three [=map/entries=]
 whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain device's [=acceleration=]
