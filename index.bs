@@ -51,6 +51,9 @@ urlPrefix: https://www.w3.org/TR/screen-orientation/; spec: SCREEN-ORIENTATION
   type: dfn
     text: current orientation type;  url: dfn-current-orientation-type
     text: dom screen; url: dom-screen
+urlPrefix: https://www.w3.org/TR/permissions/; spec: PERMISSIONS
+  type: dfn
+    text: name; url: dfn-name
 </pre>
 
 <pre class=link-defaults>
@@ -188,7 +191,11 @@ The <dfn id="accelerometer-sensor-type">Accelerometer</dfn> <a>sensor type</a>'s
 
 The <a>Accelerometer</a> has a [=default sensor=], which is the device's main accelerometer sensor.
 
-The <a>Accelerometer</a> has an associated [=sensor permission name=], which is <a for="PermissionName" enum-value>"accelerometer"</a>.
+The <a>Accelerometer</a> is a [=powerful feature=] that is identified by the
+[=name=] "accelerometer", which is also its associated
+[=sensor permission name=]. Its [=powerful feature/permission revocation algorithm=] is the
+result of calling the [=generic sensor permission revocation algorithm=] with
+"accelerometer".
 
 The <a>Accelerometer</a> is a [=policy-controlled feature=] identified by the string "accelerometer". Its [=default allowlist=] is `'self'`.
 
