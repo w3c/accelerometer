@@ -23,6 +23,7 @@ Boilerplate: omit issues-index, omit conformance, repository-issue-tracking no
 Include MDN Panels: if possible
 Implementation Report: https://www.w3.org/wiki/DAS/Implementations
 Default Biblio Status: current
+Status Text: This document is maintained and updated at any time. Some parts of this document are work in progress.
 Note class: note
 </pre>
 <pre class="anchors">
