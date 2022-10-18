@@ -187,7 +187,7 @@ The <dfn id="accelerometer-sensor-type">Accelerometer</dfn> <a>sensor type</a>'s
 The <a>Accelerometer</a> has a [=default sensor=], which is the device's main accelerometer sensor.
 
 The <a>Accelerometer</a> is a [=powerful feature=] that is identified by the
-[=powerful feature/name=] "accelerometer", which is also its associated
+[=powerful feature/name=] "<dfn permission export>accelerometer</dfn>", which is also its associated
 [=sensor permission name=]. Its [=powerful feature/permission revocation algorithm=] is the
 result of calling the [=generic sensor permission revocation algorithm=] with
 "accelerometer".
@@ -199,7 +199,7 @@ whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain device's [
 about the corresponding axes. Values can contain also device's [=linear acceleration=] or [=gravity=]
 depending on which object was instantiated.
 
-The <dfn>acceleration</dfn> is the rate of change of velocity of a device with respect to time. Its 
+The <dfn>acceleration</dfn> is the rate of change of velocity of a device with respect to time. Its
 unit is the metre per second squared (m/s<sup>2</sup>) [[SI]].
 
 The frame of reference for the [=acceleration=] measurement must be inertial, such as, the device in free fall would
