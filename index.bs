@@ -32,13 +32,11 @@ urlPrefix: https://w3c.github.io/sensors/; spec: GENERIC-SENSOR
     text: default sensor
     text: sensor type
     text: local coordinate system
-    text: check sensor policy-controlled features; url: check-sensor-policy-controlled-features
     text: location tracking; url: location-tracking
     text: keylogging; url: keystroke-monitoring
     text: fingerprinting; url: device-fingerprinting
     text: user identifying; url: user-identifying
     text: generic mitigations; url: mitigation-strategies
-    text: sensor permission name; url: sensor-permission-names
     text: supported sensor options
     text: automation
     text: mock sensor type
@@ -171,25 +169,33 @@ provide visual indication when inertial sensors are in use and/or require explic
 access [=sensor readings=]. These mitigation strategies complement the [=generic mitigations=] defined
 in the Generic Sensor API [[!GENERIC-SENSOR]].
 
+Permissions Policy integration {#permissions-policy-integration}
+==============================
+
+This specification defines a [=policy-controlled feature=] identified by the string "<code><dfn data-lt="accelerometer-feature" export>accelerometer</dfn></code>". Its [=default allowlist=] is "`self`".
+
 Model {#model}
 =====
 
-The <dfn id="accelerometer-sensor-type">Accelerometer</dfn> <a>sensor type</a>'s associated {{Sensor}} subclass is the {{Accelerometer}} class.
+Accelerometer {#accelerometer-model}
+-------------
 
-The <a>Accelerometer</a> has a [=default sensor=], which is the device's main accelerometer sensor.
+The <dfn id="accelerometer-sensor-type">Accelerometer</dfn> <a>sensor type</a> has the following associated data:
 
-The <a>Accelerometer</a> is a [=powerful feature=] that is identified by the
-[=powerful feature/name=] "<dfn permission export>accelerometer</dfn>", which is also its associated
-[=sensor permission name=]. Its [=powerful feature/permission revocation algorithm=] is the
-result of calling the [=generic sensor permission revocation algorithm=] with
-"accelerometer".
-
-The <a>Accelerometer</a> is a [=policy-controlled feature=] identified by the string "accelerometer". Its [=default allowlist=] is `'self'`.
+ : [=Extension sensor interface=]
+ :: {{Accelerometer}}
+ : [=Sensor permission names=]
+ :: "<code><dfn permission export>accelerometer</dfn></code>"
+ : [=Sensor feature names=]
+ :: "[=accelerometer-feature|accelerometer=]"
+ : [=powerful feature/Permission revocation algorithm=]
+ :: Invoke the [=generic sensor permission revocation algorithm=] with "<code><a permission>accelerometer</a></code>".
+ : [=Default sensor=]
+ :: The device's main accelerometer sensor.
 
 A [=latest reading=] for a {{Sensor}} of <a>Accelerometer</a> <a>sensor type</a> includes three [=map/entries=]
 whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain device's [=acceleration=]
-about the corresponding axes. Values can contain also device's [=linear acceleration=] or [=gravity=]
-depending on which object was instantiated.
+about the corresponding axes.
 
 The <dfn>acceleration</dfn> is the rate of change of velocity of a device with respect to time. Its
 unit is the metre per second squared (m/s<sup>2</sup>) [[SI]].
@@ -202,14 +208,46 @@ system=] (see figure below).
 
 <img src="images/accelerometer_coordinate_system.svg" onerror="if (/\.svg$/.test(this.src)) this.src='images/accelerometer_coordinate_system.png'" style="display: block;margin: auto;" alt="Accelerometer coordinate system.">
 
-The {{LinearAccelerationSensor}} class is an {{Accelerometer}}'s subclass. The {{LinearAccelerationSensor}}'s
-[=latest reading=] contains device's [=linear acceleration=] about the corresponding axes.
+Linear Acceleration Sensor {#linear-acceleration-sensor-model}
+--------------------------
+
+The <dfn id="linear-acceleration-sensor-sensor-type">Linear Acceleration Sensor</dfn> <a>sensor type</a> has the following associated data:
+
+ : [=Extension sensor interface=]
+ :: {{LinearAccelerationSensor}}
+ : [=Sensor permission names=]
+ :: "<code><a permission>accelerometer</a></code>"
+ : [=Sensor feature names=]
+ :: "[=accelerometer-feature|accelerometer=]"
+ : [=powerful feature/Permission revocation algorithm=]
+ :: Invoke the [=generic sensor permission revocation algorithm=] with "<code><a permission>accelerometer</a></code>".
+
+A [=latest reading=] for a {{Sensor}} of <a>Linear Acceleration Sensor</a> <a>sensor type</a> includes three [=map/entries=]
+whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain device's [=linear acceleration=]
+about the corresponding axes.
 
 The <dfn>linear acceleration</dfn> is an [=acceleration=] that is applied to the device that hosts
 the sensor, without the contribution of a [=gravity=] force.
 
-The {{GravitySensor}} class is an {{Accelerometer}}'s subclass. The {{GravitySensor}}'s
-[=latest reading=] contains device's [=acceleration=] due to the effect of [=gravity=] force about the corresponding axes.
+Note: The relationship between [=gravity=] and [=linear acceleration=] is discussed in [[MOTION-SENSORS#gravity-and-linear-acceleration]].
+
+Gravity Sensor {#gravity-sensor-model}
+--------------
+
+The <dfn id="gravity-sensor-sensor-type">Gravity Sensor</dfn> <a>sensor type</a> has the following associated data:
+
+ : [=Extension sensor interface=]
+ :: {{GravitySensor}}
+ : [=Sensor permission names=]
+ :: "<code><a permission>accelerometer</a></code>"
+ : [=Sensor feature names=]
+ :: "[=accelerometer-feature|accelerometer=]"
+ : [=powerful feature/Permission revocation algorithm=]
+ :: Invoke the [=generic sensor permission revocation algorithm=] with "<code><a permission>accelerometer</a></code>".
+
+A [=latest reading=] for a {{Sensor}} of <a>Gravity Sensor</a> <a>sensor type</a> includes three [=map/entries=]
+whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain the acceleration due to [=gravity=]
+about the corresponding axes.
 
 The <dfn>gravity</dfn> is the component of the device's acceleration that prevents its velocity from increasing toward nearby masses. Devices in free fall for more than a short period of time may compute incorrect values for the gravity.
 
