@@ -30,7 +30,6 @@ urlPrefix: https://w3c.github.io/sensors/; spec: GENERIC-SENSOR
     text: sensor
     text: latest reading
     text: default sensor
-    text: initialize a sensor object; url: initialize-a-sensor-object
     text: sensor type
     text: local coordinate system
     text: check sensor policy-controlled features; url: check-sensor-policy-controlled-features
@@ -48,12 +47,6 @@ urlPrefix: https://www.w3.org/TR/screen-orientation/; spec: SCREEN-ORIENTATION
   type: dfn
     text: current orientation type;  url: dfn-current-orientation-type
     text: dom screen; url: dom-screen
-</pre>
-
-<pre class=link-defaults>
-  spec: webidl;
-    type:dfn;
-      text:identifier
 </pre>
 
 <pre class=biblio>
@@ -279,9 +272,9 @@ The Accelerometer Interface {#accelerometer-interface}
   };
 </pre>
 
-To construct an {{Accelerometer}} object the user agent must invoke
-the [=construct an accelerometer object=] abstract operation for the
-{{Accelerometer}} interface.
+<div algorithm>
+The <dfn constructor for="Accelerometer" lt="Accelerometer(options)"><code>new Accelerometer(|options|)</code></dfn> constructor steps are to invoke the [=construct an accelerometer object=] abstract operation with [=this=] and |options|.
+</div>
 
 [=Supported sensor options=] for {{Accelerometer}} are "frequency" and "referenceFrame".
 
@@ -313,9 +306,9 @@ The LinearAccelerationSensor Interface {#linearaccelerationsensor-interface}
   };
 </pre>
 
-To construct a {{LinearAccelerationSensor}} object the user agent must invoke
-the [=construct an accelerometer object=] abstract operation for the
-{{LinearAccelerationSensor}} interface.
+<div algorithm>
+The <dfn constructor for="LinearAccelerationSensor" lt="LinearAccelerationSensor(options)"><code>new LinearAccelerationSensor(|options|)</code></dfn> constructor steps are to invoke the [=construct an accelerometer object=] abstract operation with [=this=] and |options|.
+</div>
 
 [=Supported sensor options=] for {{LinearAccelerationSensor}} are "frequency" and "referenceFrame".
 
@@ -347,9 +340,9 @@ The GravitySensor Interface {#gravitysensor-interface}
   };
 </pre>
 
-To construct a {{GravitySensor}} object the user agent must invoke
-the [=construct an accelerometer object=] abstract operation for the
-{{GravitySensor}} interface.
+<div algorithm>
+The <dfn constructor for="GravitySensor" lt="GravitySensor(options)"><code>new GravitySensor(|options|)</code></dfn> constructor steps are to invoke the [=construct an accelerometer object=] abstract operation with [=this=] and |options|.
+</div>
 
 [=Supported sensor options=] for {{GravitySensor}} are "frequency" and "referenceFrame".
 
@@ -382,24 +375,17 @@ Abstract Operations {#abstract-opertaions}
 <div algorithm="construct an accelerometer object">
 
     : input
-    :: |accelerometer_interface|, an {{Accelerometer}} [=interface=] [=identifier=] or
-       an [=interface=] [=identifier=] whose [=inherited interfaces=] contains {{Accelerometer}}.
+    :: |object|, an {{Accelerometer}}, {{LinearAccelerationSensor}} or {{GravitySensor}} object.
     :: |options|, a {{AccelerometerSensorOptions}} object.
-    : output
-    :: An {{Accelerometer}} object.
 
     1.  Let |allowed| be the result of invoking [=check sensor policy-controlled features=]
-        with <a>Accelerometer</a>.
+        with |object|'s [=sensor type=].
     1.  If |allowed| is false, then:
         1.  [=Throw=] a {{SecurityError}} {{DOMException}}.
-    1.  Let |accelerometer| be a new instance of the [=interface=] identified by |accelerometer_interface|.
-    1.  Invoke [=initialize a sensor object=] with |accelerometer| and |options|.
+    1.  Invoke [=initialize a sensor object=] with |object| and |options|.
     1.  If |options|.{{referenceFrame!!dict-member}} is "screen", then:
-        1.  Define [=local coordinate system=] for |accelerometer|
-            as the [=screen coordinate system=].
-    1.  Otherwise, define [=local coordinate system=] for |accelerometer|
-        as the [=device coordinate system=].
-    1.  Return |accelerometer|.
+        1.  Set |object|'s [=local coordinate system=] to the [=screen coordinate system=].
+    1.  Otherwise, define |object|'s [=local coordinate system=] to the [=device coordinate system=].
 </div>
 
 Automation {#automation}
