@@ -253,7 +253,7 @@ The <dfn id="gravity-sensor-sensor-type">Gravity Sensor</dfn> <a>sensor type</a>
  :: Invoke the [=generic sensor permission revocation algorithm=] with "<code><a permission>accelerometer</a></code>".
 
 A [=latest reading=] for a {{Sensor}} of <a>Gravity Sensor</a> <a>sensor type</a> includes three [=map/entries=]
-whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain device's [=gravity=]
+whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain the acceleration due to [=gravity=]
 about the corresponding axes.
 
 The <dfn>gravity</dfn> is the component of the device's acceleration that prevents its velocity from increasing toward nearby masses. Devices in free fall for more than a short period of time may compute incorrect values for the gravity.
