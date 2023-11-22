@@ -189,6 +189,8 @@ The <dfn id="accelerometer-sensor-type">Accelerometer</dfn> <a>sensor type</a> h
  :: Invoke the [=generic sensor permission revocation algorithm=] with "<code><a permission>accelerometer</a></code>".
  : [=Default sensor=]
  :: The device's main accelerometer sensor.
+ : [=Virtual sensor type=]
+ :: "<code><dfn data-lt="accelerometer virtual sensor type">accelerometer</dfn></code>"
 
 A [=latest reading=] for a {{Sensor}} of <a>Accelerometer</a> <a>sensor type</a> includes three [=map/entries=]
 whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain device's [=acceleration=]
@@ -218,6 +220,8 @@ The <dfn id="linear-acceleration-sensor-sensor-type">Linear Acceleration Sensor<
  :: "[=accelerometer-feature|accelerometer=]"
  : [=powerful feature/Permission revocation algorithm=]
  :: Invoke the [=generic sensor permission revocation algorithm=] with "<code><a permission>accelerometer</a></code>".
+ : [=Virtual sensor type=]
+ :: "<code><dfn data-lt="linear-acceleration virtual sensor type">linear-acceleration</dfn></code>"
 
 A [=latest reading=] for a {{Sensor}} of <a>Linear Acceleration Sensor</a> <a>sensor type</a> includes three [=map/entries=]
 whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain device's [=linear acceleration=]
@@ -241,6 +245,8 @@ The <dfn id="gravity-sensor-sensor-type">Gravity Sensor</dfn> <a>sensor type</a>
  :: "[=accelerometer-feature|accelerometer=]"
  : [=powerful feature/Permission revocation algorithm=]
  :: Invoke the [=generic sensor permission revocation algorithm=] with "<code><a permission>accelerometer</a></code>".
+ : [=Virtual sensor type=]
+ :: "<code><dfn data-lt="gravity virtual sensor type">gravity</dfn></code>"
 
 A [=latest reading=] for a {{Sensor}} of <a>Gravity Sensor</a> <a>sensor type</a> includes three [=map/entries=]
 whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain the acceleration due to [=gravity=]
@@ -433,27 +439,27 @@ Accelerometer automation {#accelerometer-automation}
 
 The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
 : [=map/key=]
-:: "`accelerometer`"
+:: "<code>[=accelerometer virtual sensor type|accelerometer=]</code>"
 : [=map/value=]
-:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/virtual sensor type=] is [=Accelerometer=] and [=reading parsing algorithm=] is [=parse xyz reading=].
+:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/reading parsing algorithm=] is [=parse xyz reading=].
 
 Linear Accelerometer automation {#linear-accelerometer-automation}
 -----------------------
 
 The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
 : [=map/key=]
-:: "`linear-acceleration`"
+:: "<code>[=linear-acceleration virtual sensor type|linear-acceleration=]</code>"
 : [=map/value=]
-:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/virtual sensor type=] is [=Linear Acceleration Sensor=] and [=reading parsing algorithm=] is [=parse xyz reading=].
+:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/reading parsing algorithm=] is [=parse xyz reading=].
 
 Gravity automation {#gravity-automation}
 -----------------------
 
 The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
 : [=map/key=]
-:: "`gravity`"
+:: "<code>[=gravity virtual sensor type|gravity=]</code>"
 : [=map/value=]
-:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/virtual sensor type=] is [=Gravity Sensor=] and [=reading parsing algorithm=] is [=parse xyz reading=].
+:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/reading parsing algorithm=] is [=parse xyz reading=].
 
 Acknowledgements {#acknowledgements}
 ================
