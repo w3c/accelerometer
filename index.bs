@@ -43,6 +43,10 @@ urlPrefix: https://www.w3.org/TR/screen-orientation/; spec: SCREEN-ORIENTATION
     text: current orientation type;  url: dfn-current-orientation-type
     text: dom screen; url: dom-screen
 </pre>
+<pre class=link-defaults>
+spec:orientation-event; type:dfn; text:accelerometer-feature
+spec:orientation-event; type:permission; text:accelerometer
+</pre>
 
 <pre class=biblio>
 {
@@ -169,7 +173,7 @@ in the Generic Sensor API [[!GENERIC-SENSOR]].
 Permissions Policy integration {#permissions-policy-integration}
 ==============================
 
-This specification defines a [=policy-controlled feature=] identified by the string "<code><dfn data-lt="accelerometer-feature" export>accelerometer</dfn></code>". Its [=default allowlist=] is "`self`".
+This specification utilizes the [=policy-controlled feature=] identified by the string "<code><a data-lt="accelerometer-feature">accelerometer</a></code>" defined in [[DEVICE-ORIENTATION#permissions-policy-integration]].
 
 Model {#model}
 =====
@@ -182,7 +186,7 @@ The <dfn id="accelerometer-sensor-type">Accelerometer</dfn> <a>sensor type</a> h
  : [=Extension sensor interface=]
  :: {{Accelerometer}}
  : [=Sensor permission names=]
- :: "<code><dfn permission export>accelerometer</dfn></code>"
+ :: "<code><a permission>accelerometer</a></code>"
  : [=Sensor feature names=]
  :: "[=accelerometer-feature|accelerometer=]"
  : [=powerful feature/Permission revocation algorithm=]
