@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/accelerometer/" rel="canonical">
-  <meta content="7fd366f1d08309dc85e24b98a6ca3ed938d3b218" name="document-revision">
+  <meta content="01e6eb724177b253a09bcb8f1ba26f5328fb8174" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -889,7 +889,7 @@ var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-11-28">28 November 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-01-04">4 January 2024</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -915,7 +915,7 @@ var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
     </div>
    </details>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2023 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2024 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
@@ -1087,7 +1087,7 @@ provide visual indication when inertial sensors are in use and/or require explic
 access <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-reading" id="ref-for-sensor-reading①">sensor readings</a>. These mitigation strategies complement the <a data-link-type="dfn" href="https://w3c.github.io/sensors/#mitigation-strategies" id="ref-for-mitigation-strategies">generic mitigations</a> defined
 in the Generic Sensor API <a data-link-type="biblio" href="#biblio-generic-sensor" title="Generic Sensor API">[GENERIC-SENSOR]</a>.</p>
    <h2 class="heading settled" data-level="5" id="permissions-policy-integration"><span class="secno">5. </span><span class="content">Permissions Policy integration</span><a class="self-link" href="#permissions-policy-integration"></a></h2>
-   <p>This specification defines a <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature" id="ref-for-policy-controlled-feature">policy-controlled feature</a> identified by the string "<code><dfn class="dfn-paneled" data-dfn-type="dfn" data-export data-lt="accelerometer-feature" id="accelerometer-feature">accelerometer</dfn></code>". Its <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist" id="ref-for-policy-controlled-feature-default-allowlist">default allowlist</a> is "<code>self</code>".</p>
+   <p>This specification utilizes the <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature" id="ref-for-policy-controlled-feature">policy-controlled feature</a> identified by the string "<code><a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#accelerometer-feature" id="ref-for-accelerometer-feature">accelerometer</a></code>" defined in <a href="https://w3c.github.io/deviceorientation/#permissions-policy-integration">DeviceOrientation Event Specification § permissions-policy-integration</a>.</p>
    <h2 class="heading settled" data-level="6" id="model"><span class="secno">6. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
    <h3 class="heading settled" data-level="6.1" id="accelerometer-model"><span class="secno">6.1. </span><span class="content">Accelerometer</span><a class="self-link" href="#accelerometer-model"></a></h3>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="accelerometer-sensor-type">Accelerometer</dfn> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-type" id="ref-for-sensor-type">sensor type</a> has the following associated data:</p>
@@ -1097,13 +1097,13 @@ in the Generic Sensor API <a data-link-type="biblio" href="#biblio-generic-senso
      <p><code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer②">Accelerometer</a></code></p>
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-permission-names" id="ref-for-sensor-permission-names">Sensor permission names</a>
     <dd data-md>
-     <p>"<code><dfn class="dfn-paneled idl-code" data-dfn-type="permission" data-export id="permissiondef-accelerometer"><code>accelerometer</code></dfn></code>"</p>
+     <p>"<code><a class="idl-code" data-link-type="permission" href="https://w3c.github.io/deviceorientation/#permissiondef-accelerometer" id="ref-for-permissiondef-accelerometer">accelerometer</a></code>"</p>
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-feature-names" id="ref-for-sensor-feature-names">Sensor feature names</a>
     <dd data-md>
-     <p>"<a data-link-type="dfn" href="#accelerometer-feature" id="ref-for-accelerometer-feature">accelerometer</a>"</p>
+     <p>"<a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#accelerometer-feature" id="ref-for-accelerometer-feature①">accelerometer</a>"</p>
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-permission-revocation-algorithm" id="ref-for-dfn-permission-revocation-algorithm">Permission revocation algorithm</a>
     <dd data-md>
-     <p>Invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm" id="ref-for-generic-sensor-permission-revocation-algorithm">generic sensor permission revocation algorithm</a> with "<code><a class="idl-code" data-link-type="permission" href="#permissiondef-accelerometer" id="ref-for-permissiondef-accelerometer">accelerometer</a></code>".</p>
+     <p>Invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm" id="ref-for-generic-sensor-permission-revocation-algorithm">generic sensor permission revocation algorithm</a> with "<code><a class="idl-code" data-link-type="permission" href="https://w3c.github.io/deviceorientation/#permissiondef-accelerometer" id="ref-for-permissiondef-accelerometer①">accelerometer</a></code>".</p>
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/sensors/#default-sensor" id="ref-for-default-sensor">Default sensor</a>
     <dd data-md>
      <p>The device’s main accelerometer sensor.</p>
@@ -1127,13 +1127,13 @@ system</a> (see figure below).</p>
      <p><code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor②">LinearAccelerationSensor</a></code></p>
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-permission-names" id="ref-for-sensor-permission-names①">Sensor permission names</a>
     <dd data-md>
-     <p>"<code><a class="idl-code" data-link-type="permission" href="#permissiondef-accelerometer" id="ref-for-permissiondef-accelerometer①">accelerometer</a></code>"</p>
+     <p>"<code><a class="idl-code" data-link-type="permission" href="https://w3c.github.io/deviceorientation/#permissiondef-accelerometer" id="ref-for-permissiondef-accelerometer②">accelerometer</a></code>"</p>
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-feature-names" id="ref-for-sensor-feature-names①">Sensor feature names</a>
     <dd data-md>
-     <p>"<a data-link-type="dfn" href="#accelerometer-feature" id="ref-for-accelerometer-feature①">accelerometer</a>"</p>
+     <p>"<a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#accelerometer-feature" id="ref-for-accelerometer-feature②">accelerometer</a>"</p>
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-permission-revocation-algorithm" id="ref-for-dfn-permission-revocation-algorithm①">Permission revocation algorithm</a>
     <dd data-md>
-     <p>Invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm" id="ref-for-generic-sensor-permission-revocation-algorithm①">generic sensor permission revocation algorithm</a> with "<code><a class="idl-code" data-link-type="permission" href="#permissiondef-accelerometer" id="ref-for-permissiondef-accelerometer②">accelerometer</a></code>".</p>
+     <p>Invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm" id="ref-for-generic-sensor-permission-revocation-algorithm①">generic sensor permission revocation algorithm</a> with "<code><a class="idl-code" data-link-type="permission" href="https://w3c.github.io/deviceorientation/#permissiondef-accelerometer" id="ref-for-permissiondef-accelerometer③">accelerometer</a></code>".</p>
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-type" id="ref-for-virtual-sensor-type①">Virtual sensor type</a>
     <dd data-md>
      <p>"<code><dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="linear-acceleration virtual sensor type" data-noexport id="linear-acceleration-virtual-sensor-type">linear-acceleration</dfn></code>"</p>
@@ -1150,13 +1150,13 @@ the sensor, without the contribution of a <a data-link-type="dfn" href="#gravity
      <p><code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor②">GravitySensor</a></code></p>
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-permission-names" id="ref-for-sensor-permission-names②">Sensor permission names</a>
     <dd data-md>
-     <p>"<code><a class="idl-code" data-link-type="permission" href="#permissiondef-accelerometer" id="ref-for-permissiondef-accelerometer③">accelerometer</a></code>"</p>
+     <p>"<code><a class="idl-code" data-link-type="permission" href="https://w3c.github.io/deviceorientation/#permissiondef-accelerometer" id="ref-for-permissiondef-accelerometer④">accelerometer</a></code>"</p>
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-feature-names" id="ref-for-sensor-feature-names②">Sensor feature names</a>
     <dd data-md>
-     <p>"<a data-link-type="dfn" href="#accelerometer-feature" id="ref-for-accelerometer-feature②">accelerometer</a>"</p>
+     <p>"<a data-link-type="dfn" href="https://w3c.github.io/deviceorientation/#accelerometer-feature" id="ref-for-accelerometer-feature③">accelerometer</a>"</p>
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-permission-revocation-algorithm" id="ref-for-dfn-permission-revocation-algorithm②">Permission revocation algorithm</a>
     <dd data-md>
-     <p>Invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm" id="ref-for-generic-sensor-permission-revocation-algorithm②">generic sensor permission revocation algorithm</a> with "<code><a class="idl-code" data-link-type="permission" href="#permissiondef-accelerometer" id="ref-for-permissiondef-accelerometer④">accelerometer</a></code>".</p>
+     <p>Invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm" id="ref-for-generic-sensor-permission-revocation-algorithm②">generic sensor permission revocation algorithm</a> with "<code><a class="idl-code" data-link-type="permission" href="https://w3c.github.io/deviceorientation/#permissiondef-accelerometer" id="ref-for-permissiondef-accelerometer⑤">accelerometer</a></code>".</p>
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-type" id="ref-for-virtual-sensor-type②">Virtual sensor type</a>
     <dd data-md>
      <p>"<code><dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="gravity virtual sensor type" data-noexport id="gravity-virtual-sensor-type">gravity</dfn></code>"</p>
@@ -1359,9 +1359,7 @@ the device.</p>
      <li><a href="#accelerometer">(interface)</a><span>, in § 7.1</span>
      <li><a href="#accelerometer-sensor-type">definition of</a><span>, in § 6.1</span>
     </ul>
-   <li><a href="#permissiondef-accelerometer">accelerometer</a><span>, in § 6.1</span>
    <li><a href="#dom-accelerometer-accelerometer">Accelerometer()</a><span>, in § 7.1</span>
-   <li><a href="#accelerometer-feature">accelerometer-feature</a><span>, in § 5</span>
    <li><a href="#enumdef-accelerometerlocalcoordinatesystem">AccelerometerLocalCoordinateSystem</a><span>, in § 7.1</span>
    <li><a href="#dom-accelerometer-accelerometer">Accelerometer(options)</a><span>, in § 7.1</span>
    <li><a href="#dictdef-accelerometersensoroptions">AccelerometerSensorOptions</a><span>, in § 7.1</span>
@@ -1444,6 +1442,12 @@ the device.</p>
      <li><span class="dfn-paneled" id="12d6b9a8">values</span>
     </ul>
    <li>
+    <a data-link-type="biblio">[ORIENTATION-EVENT]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="d5b3d29d">accelerometer</span>
+     <li><span class="dfn-paneled" id="ca25842a">accelerometer-feature</span>
+    </ul>
+   <li>
     <a data-link-type="biblio">[PERMISSIONS]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="409a61ca">permission revocation algorithm</span>
@@ -1451,7 +1455,6 @@ the device.</p>
    <li>
     <a data-link-type="biblio">[PERMISSIONS-POLICY-1]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="1570624a">default allowlist</span>
      <li><span class="dfn-paneled" id="cc890cc1">policy-controlled feature</span>
     </ul>
    <li>
@@ -1479,6 +1482,8 @@ the device.</p>
    <dd>Rick Waldron. <a href="https://w3c.github.io/sensors/"><cite>Generic Sensor API</cite></a>. URL: <a href="https://w3c.github.io/sensors/">https://w3c.github.io/sensors/</a>
    <dt id="biblio-infra">[INFRA]
    <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
+   <dt id="biblio-orientation-event">[ORIENTATION-EVENT]
+   <dd>Reilly Grant; Raphael Kubo da Costa. <a href="https://w3c.github.io/deviceorientation/"><cite>DeviceOrientation Event Specification</cite></a>. URL: <a href="https://w3c.github.io/deviceorientation/">https://w3c.github.io/deviceorientation/</a>
    <dt id="biblio-permissions">[PERMISSIONS]
    <dd>Marcos Caceres; Mike Taylor. <a href="https://w3c.github.io/permissions/"><cite>Permissions</cite></a>. URL: <a href="https://w3c.github.io/permissions/">https://w3c.github.io/permissions/</a>
    <dt id="biblio-permissions-policy-1">[PERMISSIONS-POLICY-1]
@@ -2028,8 +2033,9 @@ window.dfnpanelData['31db57e6'] = {"dfnID": "31db57e6", "url": "https://infra.sp
 window.dfnpanelData['3fca5a9e'] = {"dfnID": "3fca5a9e", "url": "https://infra.spec.whatwg.org/#ordered-map", "dfnText": "map", "refSections": [{"refs": [{"id": "ref-for-ordered-map"}], "title": "9.1. Accelerometer automation"}, {"refs": [{"id": "ref-for-ordered-map\u2460"}], "title": "9.2. Linear Accelerometer automation"}, {"refs": [{"id": "ref-for-ordered-map\u2461"}], "title": "9.3. Gravity automation"}], "external": true};
 window.dfnpanelData['802b0fdd'] = {"dfnID": "802b0fdd", "url": "https://infra.spec.whatwg.org/#map-value", "dfnText": "value", "refSections": [{"refs": [{"id": "ref-for-map-value"}], "title": "9.1. Accelerometer automation"}, {"refs": [{"id": "ref-for-map-value\u2460"}], "title": "9.2. Linear Accelerometer automation"}, {"refs": [{"id": "ref-for-map-value\u2461"}], "title": "9.3. Gravity automation"}], "external": true};
 window.dfnpanelData['12d6b9a8'] = {"dfnID": "12d6b9a8", "url": "https://infra.spec.whatwg.org/#map-getting-the-values", "dfnText": "values", "refSections": [{"refs": [{"id": "ref-for-map-getting-the-values"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-map-getting-the-values\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-map-getting-the-values\u2461"}], "title": "6.3. Gravity Sensor"}], "external": true};
+window.dfnpanelData['d5b3d29d'] = {"dfnID": "d5b3d29d", "url": "https://w3c.github.io/deviceorientation/#permissiondef-accelerometer", "dfnText": "accelerometer", "refSections": [{"refs": [{"id": "ref-for-permissiondef-accelerometer"}, {"id": "ref-for-permissiondef-accelerometer\u2460"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-permissiondef-accelerometer\u2461"}, {"id": "ref-for-permissiondef-accelerometer\u2462"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-permissiondef-accelerometer\u2463"}, {"id": "ref-for-permissiondef-accelerometer\u2464"}], "title": "6.3. Gravity Sensor"}], "external": true};
+window.dfnpanelData['ca25842a'] = {"dfnID": "ca25842a", "url": "https://w3c.github.io/deviceorientation/#accelerometer-feature", "dfnText": "accelerometer-feature", "refSections": [{"refs": [{"id": "ref-for-accelerometer-feature"}], "title": "5. Permissions Policy integration"}, {"refs": [{"id": "ref-for-accelerometer-feature\u2460"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-accelerometer-feature\u2461"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-accelerometer-feature\u2462"}], "title": "6.3. Gravity Sensor"}], "external": true};
 window.dfnpanelData['409a61ca'] = {"dfnID": "409a61ca", "url": "https://w3c.github.io/permissions/#dfn-permission-revocation-algorithm", "dfnText": "permission revocation algorithm", "refSections": [{"refs": [{"id": "ref-for-dfn-permission-revocation-algorithm"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-dfn-permission-revocation-algorithm\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-dfn-permission-revocation-algorithm\u2461"}], "title": "6.3. Gravity Sensor"}], "external": true};
-window.dfnpanelData['1570624a'] = {"dfnID": "1570624a", "url": "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist", "dfnText": "default allowlist", "refSections": [{"refs": [{"id": "ref-for-policy-controlled-feature-default-allowlist"}], "title": "5. Permissions Policy integration"}], "external": true};
 window.dfnpanelData['cc890cc1'] = {"dfnID": "cc890cc1", "url": "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature", "dfnText": "policy-controlled feature", "refSections": [{"refs": [{"id": "ref-for-policy-controlled-feature"}], "title": "5. Permissions Policy integration"}], "external": true};
 window.dfnpanelData['bb91d953'] = {"dfnID": "bb91d953", "url": "https://www.w3.org/TR/screen-orientation/#dfn-current-orientation-type", "dfnText": "current orientation type", "refSections": [{"refs": [{"id": "ref-for-dfn-current-orientation-type"}], "title": "6.4. Reference Frame"}], "external": true};
 window.dfnpanelData['435b7a7b'] = {"dfnID": "435b7a7b", "url": "https://www.w3.org/TR/screen-orientation/#dom-screen", "dfnText": "dom screen", "refSections": [{"refs": [{"id": "ref-for-dom-screen"}, {"id": "ref-for-dom-screen\u2460"}], "title": "2. Examples"}, {"refs": [{"id": "ref-for-dom-screen\u2461"}, {"id": "ref-for-dom-screen\u2462"}, {"id": "ref-for-dom-screen\u2463"}, {"id": "ref-for-dom-screen\u2464"}, {"id": "ref-for-dom-screen\u2465"}, {"id": "ref-for-dom-screen\u2466"}, {"id": "ref-for-dom-screen\u2467"}], "title": "6.4. Reference Frame"}], "external": true};
@@ -2040,9 +2046,7 @@ window.dfnpanelData['c3e881ef'] = {"dfnID": "c3e881ef", "url": "https://webidl.s
 window.dfnpanelData['8c800cdf'] = {"dfnID": "8c800cdf", "url": "https://webidl.spec.whatwg.org/#idl-double", "dfnText": "double", "refSections": [{"refs": [{"id": "ref-for-idl-double"}, {"id": "ref-for-idl-double\u2460"}, {"id": "ref-for-idl-double\u2461"}], "title": "7.1. The Accelerometer Interface"}], "external": true};
 window.dfnpanelData['4013a022'] = {"dfnID": "4013a022", "url": "https://webidl.spec.whatwg.org/#this", "dfnText": "this", "refSections": [{"refs": [{"id": "ref-for-this"}], "title": "7.1. The Accelerometer Interface"}, {"refs": [{"id": "ref-for-this\u2460"}], "title": "7.2. The LinearAccelerationSensor Interface"}, {"refs": [{"id": "ref-for-this\u2461"}], "title": "7.3. The GravitySensor Interface"}], "external": true};
 window.dfnpanelData['b4cfa5ce'] = {"dfnID": "b4cfa5ce", "url": "https://webidl.spec.whatwg.org/#dfn-throw", "dfnText": "throw", "refSections": [{"refs": [{"id": "ref-for-dfn-throw"}], "title": "8.1. Construct an accelerometer object"}], "external": true};
-window.dfnpanelData['accelerometer-feature'] = {"dfnID": "accelerometer-feature", "url": "#accelerometer-feature", "dfnText": "accelerometer", "refSections": [{"refs": [{"id": "ref-for-accelerometer-feature"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-accelerometer-feature\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-accelerometer-feature\u2461"}], "title": "6.3. Gravity Sensor"}], "external": false};
 window.dfnpanelData['accelerometer-sensor-type'] = {"dfnID": "accelerometer-sensor-type", "url": "#accelerometer-sensor-type", "dfnText": "Accelerometer", "refSections": [{"refs": [{"id": "ref-for-accelerometer-sensor-type"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-accelerometer-sensor-type\u2460"}], "title": "9. Automation"}], "external": false};
-window.dfnpanelData['permissiondef-accelerometer'] = {"dfnID": "permissiondef-accelerometer", "url": "#permissiondef-accelerometer", "dfnText": "accelerometer", "refSections": [{"refs": [{"id": "ref-for-permissiondef-accelerometer"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-permissiondef-accelerometer\u2460"}, {"id": "ref-for-permissiondef-accelerometer\u2461"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-permissiondef-accelerometer\u2462"}, {"id": "ref-for-permissiondef-accelerometer\u2463"}], "title": "6.3. Gravity Sensor"}], "external": false};
 window.dfnpanelData['accelerometer-virtual-sensor-type'] = {"dfnID": "accelerometer-virtual-sensor-type", "url": "#accelerometer-virtual-sensor-type", "dfnText": "accelerometer", "refSections": [{"refs": [{"id": "ref-for-accelerometer-virtual-sensor-type"}], "title": "9.1. Accelerometer automation"}], "external": false};
 window.dfnpanelData['acceleration'] = {"dfnID": "acceleration", "url": "#acceleration", "dfnText": "acceleration", "refSections": [{"refs": [{"id": "ref-for-acceleration\u2460"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-acceleration\u2461"}, {"id": "ref-for-acceleration\u2462"}, {"id": "ref-for-acceleration\u2463"}, {"id": "ref-for-acceleration\u2464"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-acceleration\u2465"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-acceleration\u2466"}], "title": "7.1.1. Accelerometer.x"}, {"refs": [{"id": "ref-for-acceleration\u2467"}], "title": "7.1.2. Accelerometer.y"}, {"refs": [{"id": "ref-for-acceleration\u2468"}], "title": "7.1.3. Accelerometer.z"}, {"refs": [{"id": "ref-for-acceleration\u2460\u24ea"}], "title": "7.3.1. GravitySensor.x"}, {"refs": [{"id": "ref-for-acceleration\u2460\u2460"}], "title": "7.3.2. GravitySensor.y"}, {"refs": [{"id": "ref-for-acceleration\u2460\u2461"}], "title": "7.3.3. GravitySensor.z"}], "external": false};
 window.dfnpanelData['linear-acceleration-sensor-sensor-type'] = {"dfnID": "linear-acceleration-sensor-sensor-type", "url": "#linear-acceleration-sensor-sensor-type", "dfnText": "Linear Acceleration Sensor", "refSections": [{"refs": [{"id": "ref-for-linear-acceleration-sensor-sensor-type"}], "title": "6.2. Linear Acceleration Sensor"}], "external": false};
