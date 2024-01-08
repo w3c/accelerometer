@@ -194,7 +194,7 @@ The <dfn id="accelerometer-sensor-type">Accelerometer</dfn> <a>sensor type</a> h
  : [=Default sensor=]
  :: The device's main accelerometer sensor.
  : [=Virtual sensor type=]
- :: "<code><dfn data-lt="accelerometer virtual sensor type">accelerometer</dfn></code>"
+ :: "<code><a data-lt="accelerometer virtual sensor type">accelerometer</a></code>"
 
 A [=latest reading=] for a {{Sensor}} of <a>Accelerometer</a> <a>sensor type</a> includes three [=map/entries=]
 whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain device's [=acceleration=]
@@ -225,7 +225,7 @@ The <dfn id="linear-acceleration-sensor-sensor-type">Linear Acceleration Sensor<
  : [=powerful feature/Permission revocation algorithm=]
  :: Invoke the [=generic sensor permission revocation algorithm=] with "<code><a permission>accelerometer</a></code>".
  : [=Virtual sensor type=]
- :: "<code><dfn data-lt="linear-acceleration virtual sensor type">linear-acceleration</dfn></code>"
+ :: "<code><a data-lt="linear-acceleration virtual sensor type">linear-acceleration</a></code>"
 
 A [=latest reading=] for a {{Sensor}} of <a>Linear Acceleration Sensor</a> <a>sensor type</a> includes three [=map/entries=]
 whose [=map/keys=] are "x", "y", "z" and whose [=map/values=] contain device's [=linear acceleration=]
@@ -436,25 +436,17 @@ Abstract Operations {#abstract-opertaions}
 Automation {#automation}
 ==========
 
-This section extends [[GENERIC-SENSOR#automation]] by providing [=Accelerometer=]-specific virtual sensor metadata.
+This section extends [[GENERIC-SENSOR#automation]] by providing [=Accelerometer=]-specific virtual sensor metadata. Some of the [=virtual sensor types=] used by this specification are defined in [[DEVICE-ORIENTATION]].
 
 Accelerometer automation {#accelerometer-automation}
 -----------------------
 
-The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
-: [=map/key=]
-:: "<code>[=accelerometer virtual sensor type|accelerometer=]</code>"
-: [=map/value=]
-:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/reading parsing algorithm=] is [=parse xyz reading=].
+The [=accelerometer virtual sensor type=] and its corresponding entry in the [=per-type virtual sensor metadata=] [=map=] are defined in [[DEVICE-ORIENTATION#automation]].
 
 Linear Accelerometer automation {#linear-accelerometer-automation}
 -----------------------
 
-The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
-: [=map/key=]
-:: "<code>[=linear-acceleration virtual sensor type|linear-acceleration=]</code>"
-: [=map/value=]
-:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/reading parsing algorithm=] is [=parse xyz reading=].
+The [=linear-acceleration virtual sensor type=] and its corresponding entry in the [=per-type virtual sensor metadata=] [=map=] are defined in [[DEVICE-ORIENTATION#automation]].
 
 Gravity automation {#gravity-automation}
 -----------------------
