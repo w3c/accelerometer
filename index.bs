@@ -277,7 +277,7 @@ the display and Z-axis is the vector product of X and Y axes and it points outwa
 the display, and towards the viewer. The [=device coordinate system=] remains stationary
 regardless of the [=dom screen=] orientation (see figure below).
 
-<img src="images/device_coordinate_system.svg" onerror="this.src='images/device_coordinate_system.png'" style="display: block;margin: auto;" alt="Device coordinate system.">
+<img src="images/device_coordinate_system.svg" onerror="if (/\.svg$/.test(this.src)) this.src='images/device_coordinate_system.png'" style="display: block;margin: auto;" alt="Device coordinate system.">
 
 The <dfn export>screen coordinate system</dfn> is defined as a three dimensional
 Cartesian coordinate system (x, y, z), which is bound to the [=dom screen=].
@@ -287,7 +287,7 @@ the X-axis points towards the right of the [=dom screen=] and Z-axis is the
 vector product of X and Y axes and it and it points outwards from the [=dom screen=],
 and towards the viewer (see figure below).
 
-<img src="images/screen_coordinate_system.svg" onerror="this.src='images/screen_coordinate_system.png'" style="display: block;margin: auto;" alt="Screen coordinate system.">
+<img src="images/screen_coordinate_system.svg" onerror="if (/\.svg$/.test(this.src)) this.src='images/screen_coordinate_system.png'" style="display: block;margin: auto;" alt="Screen coordinate system.">
 
 The main difference between the [=device coordinate system=] and the [=screen coordinate system=],
 is that the [=screen coordinate system=] always follows the [=dom screen=] orientation,
