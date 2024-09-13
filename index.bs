@@ -173,7 +173,7 @@ in the Generic Sensor API [[!GENERIC-SENSOR]].
 Permissions Policy integration {#permissions-policy-integration}
 ==============================
 
-This specification utilizes the [=policy-controlled feature=] identified by the string "<code><a data-lt="accelerometer-feature">accelerometer</a></code>" defined in [[DEVICE-ORIENTATION#permissions-policy-integration]].
+This specification utilizes the [=policy-controlled feature=] identified by the string "<code><a data-lt="accelerometer-feature">accelerometer</a></code>" defined in [[DEVICE-ORIENTATION#permissions-integration]].
 
 Model {#model}
 =====
