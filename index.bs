@@ -43,10 +43,6 @@ urlPrefix: https://www.w3.org/TR/screen-orientation/; spec: SCREEN-ORIENTATION
     text: current orientation type;  url: dfn-current-orientation-type
     text: dom screen; url: dom-screen
 </pre>
-<pre class=link-defaults>
-spec:orientation-event; type:dfn; text:accelerometer-feature
-spec:orientation-event; type:permission; text:accelerometer
-</pre>
 
 <pre class=biblio>
 {
@@ -173,7 +169,7 @@ in the Generic Sensor API [[!GENERIC-SENSOR]].
 Permissions Policy integration {#permissions-policy-integration}
 ==============================
 
-This specification utilizes the [=policy-controlled feature=] identified by the string "<code><a data-lt="accelerometer-feature">accelerometer</a></code>" defined in [[DEVICE-ORIENTATION#permissions-policy-integration]].
+This specification utilizes the [=policy-controlled feature=] identified by the string <code><a permission>"accelerometer"</a></code> defined in [[DEVICE-ORIENTATION#permissions-integration]].
 
 Model {#model}
 =====
@@ -188,7 +184,7 @@ The <dfn id="accelerometer-sensor-type">Accelerometer</dfn> <a>sensor type</a> h
  : [=Sensor permission names=]
  :: "<code><a permission>accelerometer</a></code>"
  : [=Sensor feature names=]
- :: "[=accelerometer-feature|accelerometer=]"
+ :: <a permission>"accelerometer"</a>
  : [=powerful feature/Permission revocation algorithm=]
  :: Invoke the [=generic sensor permission revocation algorithm=] with "<code><a permission>accelerometer</a></code>".
  : [=Default sensor=]
@@ -221,7 +217,7 @@ The <dfn id="linear-acceleration-sensor-sensor-type">Linear Acceleration Sensor<
  : [=Sensor permission names=]
  :: "<code><a permission>accelerometer</a></code>"
  : [=Sensor feature names=]
- :: "[=accelerometer-feature|accelerometer=]"
+ :: <a permission>"accelerometer"</a>
  : [=powerful feature/Permission revocation algorithm=]
  :: Invoke the [=generic sensor permission revocation algorithm=] with "<code><a permission>accelerometer</a></code>".
  : [=Virtual sensor type=]
@@ -246,7 +242,7 @@ The <dfn id="gravity-sensor-sensor-type">Gravity Sensor</dfn> <a>sensor type</a>
  : [=Sensor permission names=]
  :: "<code><a permission>accelerometer</a></code>"
  : [=Sensor feature names=]
- :: "[=accelerometer-feature|accelerometer=]"
+ :: <a permission>"accelerometer"</a>
  : [=powerful feature/Permission revocation algorithm=]
  :: Invoke the [=generic sensor permission revocation algorithm=] with "<code><a permission>accelerometer</a></code>".
  : [=Virtual sensor type=]
