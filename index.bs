@@ -78,7 +78,18 @@ urlPrefix: https://www.w3.org/TR/screen-orientation/; spec: SCREEN-ORIENTATION
         "date": "2012",
         "status": "Informational",
         "publisher": "Proceedings of the Twelfth Workshop on Mobile Computing Systems & Applications"
-     }
+     },
+    "SENSORID": {
+        "href": "https://doi.org/10.1109/SP.2019.00072",
+        "title": "SensorID: Sensor Calibration Fingerprinting for Smartphones",
+        "date": "2019",
+        "authors": [
+            "Zhang, Jiexin",
+            "Beresford, Alastair R.",
+            "Sheret, Ian"
+        ],
+        "publisher": "IEEE Symposium on Security and Privacy"
+    }
 }
 </pre>
 
@@ -165,6 +176,11 @@ The [[TOUCHSIGNATURES]] and [[ACCESSORY]] research papers propose that implement
 provide visual indication when inertial sensors are in use and/or require explicit user consent to
 access [=sensor readings=]. These mitigation strategies complement the [=generic mitigations=] defined
 in the Generic Sensor API [[!GENERIC-SENSOR]].
+
+This specification defines an [=accelerometer reading quantization algorithm=] (called from the
+[=get value from latest reading=] operation) to mitigate sensor calibration fingerprinting [[SENSORID]]
+and attacks that rely on high precision sensor readings. The details of the quantization algorithm
+follow W3C Privacy Interest Group's <a href="https://github.com/w3c/accelerometer/issues/54">recommendation</a>.
 
 Permissions Policy integration {#permissions-policy-integration}
 ==============================
@@ -429,6 +445,23 @@ Abstract Operations {#abstract-opertaions}
     1.  Otherwise, define |object|'s [=local coordinate system=] to the [=device coordinate system=].
 </div>
 
+<h3 dfn>Accelerometer reading quantization algorithm</h3>
+
+The [=Accelerometer=] [=sensor type=] defines the following [=reading quantization algorithm=]:
+
+<div algorithm="accelerometer reading quantization">
+  : input
+  :: |reading|, a [=sensor reading=]
+  : output
+  :: A [=sensor reading=]
+
+  1. Let |quantizedReading| be |reading|.
+  1. If |quantizedReading|["x"] is not null, set |quantizedReading|["x"] to its nearest tenth.
+  1. If |quantizedReading|["y"] is not null, set |quantizedReading|["y"] to its nearest tenth.
+  1. If |quantizedReading|["z"] is not null, set |quantizedReading|["z"] to its nearest tenth.
+  1. Return |quantizedReading|.
+</div>
+
 Automation {#automation}
 ==========
 
@@ -457,3 +490,5 @@ Acknowledgements {#acknowledgements}
 ================
 
 Tobie Langel for the work on Generic Sensor API.
+
+W3C Privacy Interest Group and Paul Jensen for the sensor calibration fingerprinting mitigation proposal and discussion.
