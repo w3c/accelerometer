@@ -456,9 +456,9 @@ The [=Accelerometer=] [=sensor type=] defines the following [=reading quantizati
   :: A [=sensor reading=]
 
   1. Let |quantizedReading| be |reading|.
-  1. If |quantizedReading|["x"] is not null, set |quantizedReading|["x"] to its nearest tenth.
-  1. If |quantizedReading|["y"] is not null, set |quantizedReading|["y"] to its nearest tenth.
-  1. If |quantizedReading|["z"] is not null, set |quantizedReading|["z"] to its nearest tenth.
+  1. If |quantizedReading|["x"] is not null, set |quantizedReading|["x"] to the nearest 0.1 m/s<sup>2</sup>.
+  1. If |quantizedReading|["y"] is not null, set |quantizedReading|["y"] to the nearest 0.1 m/s<sup>2</sup>.
+  1. If |quantizedReading|["z"] is not null, set |quantizedReading|["z"] to the nearest 0.1 m/s<sup>2</sup>.
   1. Return |quantizedReading|.
 </div>
 
