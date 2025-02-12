@@ -5,9 +5,11 @@
   <title>Accelerometer</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
+  <meta content="Bikeshed version 97a1608be, updated Mon Feb 3 16:09:34 2025 -0800" name="generator">
   <link href="https://www.w3.org/TR/accelerometer/" rel="canonical">
-  <meta content="00ba9713d947b750da18aec619065f2c3bea2eeb" name="document-revision">
+  <meta content="8f50f9342be062dca5e36b8d6c90c8561e85dd21" name="revision">
+  <meta content="dark light" name="color-scheme">
+  <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -79,7 +81,6 @@ pre .property::before, pre .property::after {
 }
 </style>
 <style>/* Boilerplate: style-colors */
-
 /* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
 :root {
     color-scheme: light dark;
@@ -333,11 +334,15 @@ figcaption:not(.no-marker)::before {
 :root {
     --dfnpanel-bg: #ddd;
     --dfnpanel-text: var(--text);
+    --dfnpanel-target-bg: #ffc;
+    --dfnpanel-target-outline: orange;
 }
 @media (prefers-color-scheme: dark) {
     :root {
         --dfnpanel-bg: #222;
         --dfnpanel-text: var(--text);
+        --dfnpanel-target-bg: #333;
+        --dfnpanel-target-outline: silver;
     }
 }
 .dfn-panel {
@@ -360,11 +365,13 @@ figcaption:not(.no-marker)::before {
 .dfn-panel > b { display: block; }
 .dfn-panel a { color: var(--dfnpanel-text); }
 .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel a:focus {
+    outline: 5px auto Highlight;
+    outline: 5px auto -webkit-focus-ring-color;
+}
 .dfn-panel > b + b { margin-top: 0.25em; }
 .dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
 .dfn-panel li a {
-    white-space: pre;
-    display: inline-block;
     max-width: calc(300px - 1.5em - 1em);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -373,67 +380,84 @@ figcaption:not(.no-marker)::before {
 .dfn-panel.activated {
     display: inline-block;
     position: fixed;
-    left: .5em;
+    left: 8px;
     bottom: 2em;
     margin: 0 auto;
     max-width: calc(100vw - 1.5em - .4em - .5em);
     max-height: 30vh;
+    transition: left 1s ease-out, bottom 1s ease-out;
 }
 
-.dfn-paneled[role="button"] { cursor: pointer; }
+.dfn-panel .link-item:hover {
+    text-decoration: underline;
+}
+.dfn-panel .link-item .copy-icon {
+    opacity: 0;
+}
+.dfn-panel .link-item:hover .copy-icon,
+.dfn-panel .link-item .copy-icon:focus {
+    opacity: 1;
+}
+
+.dfn-panel .copy-icon {
+    display: inline-block;
+    margin-right: 0.5em;
+    width: 0.85em;
+    height: 1em;
+    border-radius: 3px;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.dfn-panel .copy-icon .icon {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.dfn-panel .copy-icon .icon::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    background-color: #ccc;
+    opacity: 0.25;
+    transform: translate(3px, -3px);
+}
+
+.dfn-panel .copy-icon:active .icon::before {
+    opacity: 1;
+}
+
+.dfn-paneled[role="button"] { cursor: help; }
+
+.highlighted {
+    animation: target-fade 3s;
+}
+
+@keyframes target-fade {
+    from {
+        background-color: var(--dfnpanel-target-bg);
+        outline: 5px solid var(--dfnpanel-target-outline);
+    }
+    to {
+        color: var(--a-normal-text);
+        background-color: transparent;
+        outline: transparent;
+    }
+}
 </style>
-<style>/* Boilerplate: style-dfn-panel */
-:root {
-    --dfnpanel-bg: #ddd;
-    --dfnpanel-text: var(--text);
+<style>/* Boilerplate: style-idl-highlighting */
+pre.idl.highlight {
+    background: var(--borderedblock-bg, var(--def-bg));
 }
-@media (prefers-color-scheme: dark) {
-    :root {
-        --dfnpanel-bg: #222;
-        --dfnpanel-text: var(--text);
-    }
-}
-.dfn-panel {
-    position: absolute;
-    z-index: 35;
-    width: 20em;
-    width: 300px;
-    height: auto;
-    max-height: 500px;
-    overflow: auto;
-    padding: 0.5em 0.75em;
-    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
-    background: var(--dfnpanel-bg);
-    color: var(--dfnpanel-text);
-    border: outset 0.2em;
-    white-space: normal; /* in case it's moved into a pre */
-}
-.dfn-panel:not(.on) { display: none; }
-.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
-.dfn-panel > b { display: block; }
-.dfn-panel a { color: var(--dfnpanel-text); }
-.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
-.dfn-panel > b + b { margin-top: 0.25em; }
-.dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
-.dfn-panel li a {
-    white-space: pre;
-    display: inline-block;
-    max-width: calc(300px - 1.5em - 1em);
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.dfn-panel.activated {
-    display: inline-block;
-    position: fixed;
-    left: .5em;
-    bottom: 2em;
-    margin: 0 auto;
-    max-width: calc(100vw - 1.5em - .4em - .5em);
-    max-height: 30vh;
-}
-
-.dfn-paneled[role="button"] { cursor: pointer; }
 </style>
 <style>/* Boilerplate: style-issues */
 a[href].issue-return {
@@ -459,12 +483,16 @@ a[href].issue-return {
 	--mdn-bg: #EEE;
 	--mdn-shadow: #999;
 	--mdn-nosupport-text: #ccc;
+	--mdn-pass: green;
+	--mdn-fail: red;
 }
 @media (prefers-color-scheme: dark) {
 	:root {
 		--mdn-bg: #222;
 		--mdn-shadow: #444;
 		--mdn-nosupport-text: #666;
+		--mdn-pass: #690;
+		--mdn-fail: #d22;
 	}
 }
 .mdn-anno {
@@ -507,11 +535,11 @@ a[href].issue-return {
 	display: block;
 }
 .mdn-anno > summary > .less-than-two-engines-flag {
-	color: red;
+	color: var(--mdn-fail);
 	padding-right: 2px;
 }
 .mdn-anno > summary > .all-engines-flag {
-	color: green;
+	color: var(--mdn-pass);
 	padding-right: 2px;
 }
 .mdn-anno > summary > span {
@@ -532,10 +560,10 @@ a[href].issue-return {
 	padding-top: 2px;
 }
 .mdn-anno > .feature > .less-than-two-engines-text {
-	color: red;
+	color: var(--mdn-fail);
 }
 .mdn-anno > .feature > .all-engines-text {
-	color: green;
+	color: var(--mdn-pass);
 }
 .mdn-anno > .feature > p {
 	font-size: .75em;
@@ -628,7 +656,7 @@ a[href].issue-return {
 	background-image: url(https://resources.whatwg.org/browser-logos/safari-ios.svg);
 }
 .mdn-anno > .feature > .support > .nodejs::before {
-	background-image: url(https://nodejs.org/static/images/favicons/favicon.ico);
+	background-image: url(https://nodejs.org/favicon.ico);
 }
 .mdn-anno > .feature > .support > .opera_android::before {
 	background-image: url(https://resources.whatwg.org/browser-logos/opera.svg);
@@ -674,8 +702,40 @@ a[href].issue-return {
 	margin: -40px 0 0 0;
 }
 </style>
-<style>/* Boilerplate: style-selflinks */
+<style>/* Boilerplate: style-ref-hints */
+:root {
+    --ref-hint-bg: #ddd;
+    --ref-hint-text: var(--text);
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ref-hint-bg: #222;
+        --ref-hint-text: var(--text);
+    }
+}
 
+.ref-hint {
+    display: inline-block;
+    position: absolute;
+    z-index: 35;
+    width: 20em;
+    width: 300px;
+    height: auto;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.5em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: var(--ref-hint-bg);
+    color: var(--ref-hint-text);
+    border: outset 0.2em;
+    white-space: normal; /* in case it's moved into a pre */
+}
+
+.ref-hint * { margin: 0; padding: 0; text-indent: 0; }
+
+.ref-hint ul { padding: 0 0 0 1em; list-style: none; }
+</style>
+<style>/* Boilerplate: style-selflinks */
 :root {
     --selflink-text: white;
     --selflink-bg: gray;
@@ -735,14 +795,6 @@ a.self-link::before            { content: "¶"; }
 dfn > a.self-link::before      { content: "#"; }
 </style>
 <style>/* Boilerplate: style-syntax-highlighting */
-
-            pre.idl.highlight {
-                background: var(--borderedblock-bg, var(--def-bg));
-            }
-            
-</style>
-<style>/* Boilerplate: style-syntax-highlighting */
-
 code.highlight { padding: .1em; border-radius: .3em; }
 pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
 
@@ -799,7 +851,6 @@ c-[vc] { color: #0077aa } /* Name.Variable.Class */
 c-[vg] { color: #0077aa } /* Name.Variable.Global */
 c-[vi] { color: #0077aa } /* Name.Variable.Instance */
 c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
-
 
 @media (prefers-color-scheme: dark) {
     .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
@@ -875,21 +926,43 @@ D50 2deg illuminant, L in [0,100], a and b in [-128, 128]
 4 = lab(85,5,15)
 5 = lab(85,-10,-50)
 6 = lab(85,35,-15)
+
+For darkmode:
+0 = oklab(50%   0%  108%)
+1 = oklab(50% -51%   51%)
+2 = oklab(50% -64%  -20%)
+3 = oklab(50%   6%   19%)
+4 = oklab(50% -12%  -64%)
+5 = oklab(50%  44%  -19%)  
+6 = oklab(50% 102%   38%)
 */
-var { cursor: pointer; }
-var.selected0 { background-color: #F4D200; box-shadow: 0 0 0 2px #F4D200; }
-var.selected1 { background-color: #FF87A2; box-shadow: 0 0 0 2px #FF87A2; }
-var.selected2 { background-color: #96E885; box-shadow: 0 0 0 2px #96E885; }
-var.selected3 { background-color: #3EEED2; box-shadow: 0 0 0 2px #3EEED2; }
-var.selected4 { background-color: #EACFB6; box-shadow: 0 0 0 2px #EACFB6; }
-var.selected5 { background-color: #82DDFF; box-shadow: 0 0 0 2px #82DDFF; }
-var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
+
+[data-algorithm] var { cursor: pointer; }
+var[data-var-color] { background-color: var(--var-bg); box-shadow: 0 0 0 2px var(--var-bg); }
+
+var[data-var-color] { --var-bg: #F4D200; }
+var[data-var-color="1"] { --var-bg: #FF87A2; }
+var[data-var-color="2"] { --var-bg: #96E885; }
+var[data-var-color="3"] { --var-bg: #3EEED2; }
+var[data-var-color="4"] { --var-bg: #EACFB6; }
+var[data-var-color="5"] { --var-bg: #82DDFF; }
+var[data-var-color="6"] { --var-vg: #FFBCF2; }
+
+@media (prefers-color-scheme: dark) {
+	var[data-var-color] { --var-bg: #bc1a00; }
+	var[data-var-color="1"] { --var-bg: #007f00; }
+	var[data-var-color="2"] { --var-bg: #008698; }
+	var[data-var-color="3"] { --var-bg: #7f5b2b; }
+	var[data-var-color="4"] { --var-bg: #004df3; }
+	var[data-var-color="5"] { --var-bg: #a1248a; }
+	var[data-var-color="6"] { --var-vg: #ff0000; }
+}
 </style>
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Accelerometer</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-10-09">9 October 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2025-02-12">12 February 2025</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -915,15 +988,14 @@ var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
     </div>
    </details>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2024 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2025 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
    <p>This specification defines <code class="idl"><a data-link-type="idl" href="#accelerometer" id="ref-for-accelerometer">Accelerometer</a></code>, <code class="idl"><a data-link-type="idl" href="#linearaccelerationsensor" id="ref-for-linearaccelerationsensor">LinearAccelerationSensor</a></code> and <code class="idl"><a data-link-type="idl" href="#gravitysensor" id="ref-for-gravitysensor">GravitySensor</a></code> interfaces for
-
-  obtaining information about <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration">acceleration</a> applied to the X, Y and Z axis
-  of a device that hosts the sensor.</p>
+obtaining information about <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration">acceleration</a> applied to the X, Y and Z axis
+of a device that hosts the sensor.</p>
   </div>
   <h2 class="no-num no-toc no-ref heading settled" id="sotd"><span class="content">Status of this document</span></h2>
   <div data-fill-with="status">
@@ -1119,8 +1191,7 @@ follow W3C Privacy Interest Group’s <a href="https://github.com/w3c/accelerome
 unit is the metre per second squared (m/s<sup>2</sup>) <a data-link-type="biblio" href="#biblio-si" title="SI Brochure: The International System of Units (SI), 8th edition">[SI]</a>.</p>
    <p>The frame of reference for the <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration③">acceleration</a> measurement must be inertial, such as, the device in free fall would
 provide 0 (m/s<sup>2</sup>) <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration④">acceleration</a> value for each axis.</p>
-   <p>The sign of the <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration⑤">acceleration</a> values must be according to the right-hand convention in a <a data-link-type="dfn" href="https://w3c.github.io/sensors/#local-coordinate-system" id="ref-for-local-coordinate-system①">local coordinate
-system</a> (see figure below).</p>
+   <p>The sign of the <a data-link-type="dfn" href="#acceleration" id="ref-for-acceleration⑤">acceleration</a> values must be according to the right-hand convention in a <a data-link-type="dfn" href="https://w3c.github.io/sensors/#local-coordinate-system" id="ref-for-local-coordinate-system①">local coordinate system</a> (see figure below).</p>
    <p><img alt="Accelerometer coordinate system." onerror="if (/\.svg$/.test(this.src)) this.src=&apos;images/accelerometer_coordinate_system.png&apos;" src="images/accelerometer_coordinate_system.svg" style="display: block;margin: auto;"></p>
    <h3 class="heading settled" data-level="6.2" id="linear-acceleration-sensor-model"><span class="secno">6.2. </span><span class="content">Linear Acceleration Sensor</span><a class="self-link" href="#linear-acceleration-sensor-model"></a></h3>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="linear-acceleration-sensor-sensor-type">Linear Acceleration Sensor</dfn> <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-type" id="ref-for-sensor-type②">sensor type</a> has the following associated data:</p>
@@ -1194,16 +1265,16 @@ the device.</p>
    <h3 class="heading settled" data-level="7.1" id="accelerometer-interface"><span class="secno">7.1. </span><span class="content">The Accelerometer Interface</span><a class="self-link" href="#accelerometer-interface"></a></h3>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="accelerometer"><code><c- g>Accelerometer</c-></code></dfn> : <a data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor③"><c- n>Sensor</c-></a> {
-  <a class="idl-code" data-link-type="constructor" href="#dom-accelerometer-accelerometer" id="ref-for-dom-accelerometer-accelerometer"><c- g>constructor</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions"><c- n>AccelerometerSensorOptions</c-></a> <dfn class="idl-code" data-dfn-for="Accelerometer/Accelerometer(options), Accelerometer/constructor(options), Accelerometer/Accelerometer(), Accelerometer/constructor()" data-dfn-type="argument" data-export id="dom-accelerometer-accelerometer-options-options"><code><c- g>options</c-></code><a class="self-link" href="#dom-accelerometer-accelerometer-options-options"></a></dfn> = {});
+  <a class="idl-code" data-link-type="constructor" href="#dom-accelerometer-accelerometer" id="ref-for-dom-accelerometer-accelerometer"><c- g>constructor</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions"><c- n>AccelerometerSensorOptions</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Accelerometer/Accelerometer(options), Accelerometer/constructor(options), Accelerometer/Accelerometer(), Accelerometer/constructor()" data-dfn-type="argument" data-export id="dom-accelerometer-accelerometer-options-options"><code><c- g>options</c-></code></dfn> = {});
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double"><c- b>double</c-></a>? <dfn class="dfn-paneled idl-code" data-dfn-for="Accelerometer" data-dfn-type="attribute" data-export data-readonly data-type="double?" id="dom-accelerometer-x"><code><c- g>x</c-></code></dfn>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double①"><c- b>double</c-></a>? <dfn class="dfn-paneled idl-code" data-dfn-for="Accelerometer" data-dfn-type="attribute" data-export data-readonly data-type="double?" id="dom-accelerometer-y"><code><c- g>y</c-></code></dfn>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double②"><c- b>double</c-></a>? <dfn class="dfn-paneled idl-code" data-dfn-for="Accelerometer" data-dfn-type="attribute" data-export data-readonly data-type="double?" id="dom-accelerometer-z"><code><c- g>z</c-></code></dfn>;
 };
 
-<c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-accelerometerlocalcoordinatesystem"><code><c- g>AccelerometerLocalCoordinateSystem</c-></code></dfn> { <dfn class="idl-code" data-dfn-for="AccelerometerLocalCoordinateSystem" data-dfn-type="enum-value" data-export id="dom-accelerometerlocalcoordinatesystem-device"><code><c- s>"device"</c-></code><a class="self-link" href="#dom-accelerometerlocalcoordinatesystem-device"></a></dfn>, <dfn class="idl-code" data-dfn-for="AccelerometerLocalCoordinateSystem" data-dfn-type="enum-value" data-export id="dom-accelerometerlocalcoordinatesystem-screen"><code><c- s>"screen"</c-></code><a class="self-link" href="#dom-accelerometerlocalcoordinatesystem-screen"></a></dfn> };
+<c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-accelerometerlocalcoordinatesystem"><code><c- g>AccelerometerLocalCoordinateSystem</c-></code></dfn> { <dfn class="dfn-paneled idl-code" data-dfn-for="AccelerometerLocalCoordinateSystem" data-dfn-type="enum-value" data-export id="dom-accelerometerlocalcoordinatesystem-device"><code><c- s>"device"</c-></code></dfn>, <dfn class="dfn-paneled idl-code" data-dfn-for="AccelerometerLocalCoordinateSystem" data-dfn-type="enum-value" data-export id="dom-accelerometerlocalcoordinatesystem-screen"><code><c- s>"screen"</c-></code></dfn> };
 
 <c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-accelerometersensoroptions"><code><c- g>AccelerometerSensorOptions</c-></code></dfn> : <a data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions"><c- n>SensorOptions</c-></a> {
-  <a data-link-type="idl-name" href="#enumdef-accelerometerlocalcoordinatesystem" id="ref-for-enumdef-accelerometerlocalcoordinatesystem"><c- n>AccelerometerLocalCoordinateSystem</c-></a> <dfn class="dfn-paneled idl-code" data-default="&quot;device&quot;" data-dfn-for="AccelerometerSensorOptions" data-dfn-type="dict-member" data-export data-type="AccelerometerLocalCoordinateSystem " id="dom-accelerometersensoroptions-referenceframe"><code><c- g>referenceFrame</c-></code></dfn> = "device";
+  <a data-link-type="idl-name" href="#enumdef-accelerometerlocalcoordinatesystem" id="ref-for-enumdef-accelerometerlocalcoordinatesystem"><c- n>AccelerometerLocalCoordinateSystem</c-></a> <dfn class="dfn-paneled idl-code" data-default="&quot;device&quot;" data-dfn-for="AccelerometerSensorOptions" data-dfn-type="dict-member" data-export data-type="AccelerometerLocalCoordinateSystem" id="dom-accelerometersensoroptions-referenceframe"><code><c- g>referenceFrame</c-></code></dfn> = "device";
 };
 </pre>
    <div class="algorithm" data-algorithm="Accelerometer(options)" data-algorithm-for="Accelerometer"> The <dfn class="dfn-paneled idl-code" data-dfn-for="Accelerometer" data-dfn-type="constructor" data-export data-lt="Accelerometer(options)|constructor(options)|Accelerometer()|constructor()" id="dom-accelerometer-accelerometer"><code>new Accelerometer(<var>options</var>)</code></dfn> constructor steps are to invoke the <a data-link-type="dfn" href="#construct-an-accelerometer-object" id="ref-for-construct-an-accelerometer-object">construct an accelerometer object</a> abstract operation with <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this">this</a> and <var>options</var>. </div>
@@ -1217,7 +1288,7 @@ the device.</p>
    <h3 class="heading settled" data-level="7.2" id="linearaccelerationsensor-interface"><span class="secno">7.2. </span><span class="content">The LinearAccelerationSensor Interface</span><a class="self-link" href="#linearaccelerationsensor-interface"></a></h3>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext①"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="linearaccelerationsensor"><code><c- g>LinearAccelerationSensor</c-></code></dfn> : <a data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer⑧"><c- n>Accelerometer</c-></a> {
-  <a class="idl-code" data-link-type="constructor" href="#dom-linearaccelerationsensor-linearaccelerationsensor" id="ref-for-dom-linearaccelerationsensor-linearaccelerationsensor"><c- g>constructor</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions①"><c- n>AccelerometerSensorOptions</c-></a> <dfn class="idl-code" data-dfn-for="LinearAccelerationSensor/LinearAccelerationSensor(options), LinearAccelerationSensor/constructor(options), LinearAccelerationSensor/LinearAccelerationSensor(), LinearAccelerationSensor/constructor()" data-dfn-type="argument" data-export id="dom-linearaccelerationsensor-linearaccelerationsensor-options-options"><code><c- g>options</c-></code><a class="self-link" href="#dom-linearaccelerationsensor-linearaccelerationsensor-options-options"></a></dfn> = {});
+  <a class="idl-code" data-link-type="constructor" href="#dom-linearaccelerationsensor-linearaccelerationsensor" id="ref-for-dom-linearaccelerationsensor-linearaccelerationsensor"><c- g>constructor</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions①"><c- n>AccelerometerSensorOptions</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="LinearAccelerationSensor/LinearAccelerationSensor(options), LinearAccelerationSensor/constructor(options), LinearAccelerationSensor/LinearAccelerationSensor(), LinearAccelerationSensor/constructor()" data-dfn-type="argument" data-export id="dom-linearaccelerationsensor-linearaccelerationsensor-options-options"><code><c- g>options</c-></code></dfn> = {});
 };
 </pre>
    <div class="algorithm" data-algorithm="LinearAccelerationSensor(options)" data-algorithm-for="LinearAccelerationSensor"> The <dfn class="dfn-paneled idl-code" data-dfn-for="LinearAccelerationSensor" data-dfn-type="constructor" data-export data-lt="LinearAccelerationSensor(options)|constructor(options)|LinearAccelerationSensor()|constructor()" id="dom-linearaccelerationsensor-linearaccelerationsensor"><code>new LinearAccelerationSensor(<var>options</var>)</code></dfn> constructor steps are to invoke the <a data-link-type="dfn" href="#construct-an-accelerometer-object" id="ref-for-construct-an-accelerometer-object①">construct an accelerometer object</a> abstract operation with <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this①">this</a> and <var>options</var>. </div>
@@ -1231,7 +1302,7 @@ the device.</p>
    <h3 class="heading settled" data-level="7.3" id="gravitysensor-interface"><span class="secno">7.3. </span><span class="content">The GravitySensor Interface</span><a class="self-link" href="#gravitysensor-interface"></a></h3>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext②"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed②"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="gravitysensor"><code><c- g>GravitySensor</c-></code></dfn> : <a data-link-type="idl-name" href="#accelerometer" id="ref-for-accelerometer⑨"><c- n>Accelerometer</c-></a> {
-  <a class="idl-code" data-link-type="constructor" href="#dom-gravitysensor-gravitysensor" id="ref-for-dom-gravitysensor-gravitysensor"><c- g>constructor</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions②"><c- n>AccelerometerSensorOptions</c-></a> <dfn class="idl-code" data-dfn-for="GravitySensor/GravitySensor(options), GravitySensor/constructor(options), GravitySensor/GravitySensor(), GravitySensor/constructor()" data-dfn-type="argument" data-export id="dom-gravitysensor-gravitysensor-options-options"><code><c- g>options</c-></code><a class="self-link" href="#dom-gravitysensor-gravitysensor-options-options"></a></dfn> = {});
+  <a class="idl-code" data-link-type="constructor" href="#dom-gravitysensor-gravitysensor" id="ref-for-dom-gravitysensor-gravitysensor"><c- g>constructor</c-></a>(<c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-accelerometersensoroptions" id="ref-for-dictdef-accelerometersensoroptions②"><c- n>AccelerometerSensorOptions</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="GravitySensor/GravitySensor(options), GravitySensor/constructor(options), GravitySensor/GravitySensor(), GravitySensor/constructor()" data-dfn-type="argument" data-export id="dom-gravitysensor-gravitysensor-options-options"><code><c- g>options</c-></code></dfn> = {});
 };
 </pre>
    <div class="algorithm" data-algorithm="GravitySensor(options)" data-algorithm-for="GravitySensor"> The <dfn class="dfn-paneled idl-code" data-dfn-for="GravitySensor" data-dfn-type="constructor" data-export data-lt="GravitySensor(options)|constructor(options)|GravitySensor()|constructor()" id="dom-gravitysensor-gravitysensor"><code>new GravitySensor(<var>options</var>)</code></dfn> constructor steps are to invoke the <a data-link-type="dfn" href="#construct-an-accelerometer-object" id="ref-for-construct-an-accelerometer-object②">construct an accelerometer object</a> abstract operation with <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this②">this</a> and <var>options</var>. </div>
@@ -1360,7 +1431,7 @@ the device.</p>
     Implementers are encouraged to optimize. </p>
    </section>
   </div>
-<script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script>
+  <script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
@@ -1430,14 +1501,14 @@ the device.</p>
      <li><span class="dfn-paneled" id="beb7996f">extension sensor interface</span>
      <li><span class="dfn-paneled" id="8e858db8">fingerprinting</span>
      <li><span class="dfn-paneled" id="5af83a7f">generic mitigations</span>
-     <li><span class="dfn-paneled" id="a09cf46b">generic sensor permission revocation algorithm</span>
+     <li><span class="dfn-paneled" id="a09cf46b">Generic Sensor permission revocation algorithm</span>
      <li><span class="dfn-paneled" id="fd4ad34f">get value from latest reading</span>
      <li><span class="dfn-paneled" id="0026f53f">initialize a sensor object</span>
      <li><span class="dfn-paneled" id="7272b427">keylogging</span>
      <li><span class="dfn-paneled" id="378064f9">latest reading</span>
      <li><span class="dfn-paneled" id="95a8cb5f">local coordinate system</span>
      <li><span class="dfn-paneled" id="47391bd7">location tracking</span>
-     <li><span class="dfn-paneled" id="64ade43d">parse xyz reading</span>
+     <li><span class="dfn-paneled" id="64ade43d">Parse XYZ reading</span>
      <li><span class="dfn-paneled" id="5d47b5a4">per-type virtual sensor metadata</span>
      <li><span class="dfn-paneled" id="611c5008">reading parsing algorithm</span>
      <li><span class="dfn-paneled" id="1f45ff31">reading quantization algorithm</span>
@@ -1492,7 +1563,7 @@ the device.</p>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-device-orientation">[DEVICE-ORIENTATION]
-   <dd>Reilly Grant; Raphael Kubo da Costa; Marcos Caceres. <a href="https://w3c.github.io/deviceorientation/"><cite>Device Orientation and Motion</cite></a>. URL: <a href="https://w3c.github.io/deviceorientation/">https://w3c.github.io/deviceorientation/</a>
+   <dd>Reilly Grant; Marcos Caceres. <a href="https://w3c.github.io/deviceorientation/"><cite>Device Orientation and Motion</cite></a>. URL: <a href="https://w3c.github.io/deviceorientation/">https://w3c.github.io/deviceorientation/</a>
    <dt id="biblio-generic-sensor">[GENERIC-SENSOR]
    <dd>Rick Waldron. <a href="https://w3c.github.io/sensors/"><cite>Generic Sensor API</cite></a>. URL: <a href="https://w3c.github.io/sensors/">https://w3c.github.io/sensors/</a>
    <dt id="biblio-infra">[INFRA]
@@ -1519,7 +1590,7 @@ the device.</p>
    <dt id="biblio-sensorid">[SENSORID]
    <dd>Zhang, Jiexin; Beresford, Alastair R.; Sheret, Ian. <a href="https://doi.org/10.1109/SP.2019.00072"><cite>SensorID: Sensor Calibration Fingerprinting for Smartphones</cite></a>. 2019. URL: <a href="https://doi.org/10.1109/SP.2019.00072">https://doi.org/10.1109/SP.2019.00072</a>
    <dt id="biblio-si">[SI]
-   <dd><a href="http://www.bipm.org/en/publications/si-brochure/"><cite>SI Brochure: The International System of Units (SI), 8th edition</cite></a>. 2014. URL: <a href="http://www.bipm.org/en/publications/si-brochure/">http://www.bipm.org/en/publications/si-brochure/</a>
+   <dd><a href="http://www.bipm.org/en/publications/si-brochure/"><cite>SI Brochure: The International System of Units (SI), 8th edition</cite></a>. 2014. 8th Edition. URL: <a href="http://www.bipm.org/en/publications/si-brochure/">http://www.bipm.org/en/publications/si-brochure/</a>
    <dt id="biblio-touchsignatures">[TOUCHSIGNATURES]
    <dd>Mehrnezhad, Maryam, et al. <a href="https://arxiv.org/abs/1602.04115"><cite>Touchsignatures: identification of user touch actions and pins based on mobile sensor data via javascript</cite></a>. 2016. Informational. URL: <a href="https://arxiv.org/abs/1602.04115">https://arxiv.org/abs/1602.04115</a>
   </dl>
@@ -1535,7 +1606,7 @@ the device.</p>
 <c- b>enum</c-> <a href="#enumdef-accelerometerlocalcoordinatesystem"><code><c- g>AccelerometerLocalCoordinateSystem</c-></code></a> { <a href="#dom-accelerometerlocalcoordinatesystem-device"><code><c- s>"device"</c-></code></a>, <a href="#dom-accelerometerlocalcoordinatesystem-screen"><code><c- s>"screen"</c-></code></a> };
 
 <c- b>dictionary</c-> <a href="#dictdef-accelerometersensoroptions"><code><c- g>AccelerometerSensorOptions</c-></code></a> : <a data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions"><c- n>SensorOptions</c-></a> {
-  <a data-link-type="idl-name" href="#enumdef-accelerometerlocalcoordinatesystem"><c- n>AccelerometerLocalCoordinateSystem</c-></a> <a data-default="&quot;device&quot;" data-type="AccelerometerLocalCoordinateSystem " href="#dom-accelerometersensoroptions-referenceframe"><code><c- g>referenceFrame</c-></code></a> = "device";
+  <a data-link-type="idl-name" href="#enumdef-accelerometerlocalcoordinatesystem"><c- n>AccelerometerLocalCoordinateSystem</c-></a> <a data-default="&quot;device&quot;" data-type="AccelerometerLocalCoordinateSystem" href="#dom-accelerometersensoroptions-referenceframe"><code><c- g>referenceFrame</c-></code></a> = "device";
 };
 
 [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
@@ -1709,385 +1780,8 @@ the device.</p>
     </div>
    </div>
   </details>
-<script>/* Boilerplate: script-dfn-panel */
-"use strict";
-{
-    const dfnsJson = window.dfnsJson || {};
-
-    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
-        return mk.aside({
-            class: "dfn-panel",
-            id: `infopanel-for-${dfnID}`,
-            "data-for": dfnID,
-            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
-            },
-            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
-                `Info about the '${dfnText}' ${external?"external":""} reference.`),
-            mk.a({href:url}, url),
-            mk.b({}, "Referenced in:"),
-            mk.ul({},
-                ...refSections.map(section=>
-                    mk.li({},
-                        ...section.refs.map((ref, refI)=>
-                            [
-                                mk.a({
-                                    href: `#${ref.id}`
-                                    },
-                                    (refI == 0) ? section.title : `(${refI + 1})`
-                                ),
-                                " ",
-                            ]
-                        ),
-                    ),
-                ),
-            ),
-        );
-    }
-
-    function genAllDfnPanels() {
-        for(const panelData of Object.values(window.dfnpanelData)) {
-            const dfnID = panelData.dfnID;
-            const dfn = document.getElementById(dfnID);
-            if(!dfn) {
-                console.log(`Can't find dfn#${dfnID}.`, panelData);
-            } else {
-                const panel = genDfnPanel(panelData);
-                append(document.body, panel);
-                insertDfnPopupAction(dfn, panel)
-            }
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", ()=>{
-        genAllDfnPanels();
-
-        // Add popup behavior to all dfns to show the corresponding dfn-panel.
-        var dfns = queryAll('.dfn-paneled');
-        for(let dfn of dfns) { ; }
-
-        document.body.addEventListener("click", (e) => {
-            // If not handled already, just hide all dfn panels.
-            hideAllDfnPanels();
-        });
-    })
-
-
-    function hideAllDfnPanels() {
-        // Turn off any currently "on" or "activated" panels.
-        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
-    }
-
-    function showDfnPanel(dfnPanel, dfn) {
-        hideAllDfnPanels(); // Only display one at this time.
-        dfn.setAttribute("aria-expanded", "true");
-        dfnPanel.classList.add("on");
-        dfnPanel.style.left = "5px";
-        dfnPanel.style.top = "0px";
-        const panelRect = dfnPanel.getBoundingClientRect();
-        const panelWidth = panelRect.right - panelRect.left;
-        if (panelRect.right > document.body.scrollWidth) {
-            // Panel's overflowing the screen.
-            // Just drop it below the dfn and flip it rightward instead.
-            // This still wont' fix things if the screen is *really* wide,
-            // but fixing that's a lot harder without 'anchor()'.
-            dfnPanel.style.top = "1.5em";
-            dfnPanel.style.left = "auto";
-            dfnPanel.style.right = "0px";
-        }
-    }
-
-    function pinDfnPanel(dfnPanel) {
-        // Switch it to "activated" state, which pins it.
-        dfnPanel.classList.add("activated");
-        dfnPanel.style.left = null;
-        dfnPanel.style.top = null;
-    }
-
-    function hideDfnPanel(dfnPanel, dfn) {
-        if(!dfn) {
-            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
-        }
-        dfn.setAttribute("aria-expanded", "false")
-        dfnPanel.classList.remove("on");
-        dfnPanel.classList.remove("activated");
-    }
-
-    function toggleDfnPanel(dfnPanel, dfn) {
-        if(dfnPanel.classList.contains("on")) {
-            hideDfnPanel(dfnPanel, dfn);
-        } else {
-            showDfnPanel(dfnPanel, dfn);
-        }
-    }
-
-    function insertDfnPopupAction(dfn, dfnPanel) {
-        // Find dfn panel
-        const panelWrapper = document.createElement('span');
-        panelWrapper.appendChild(dfnPanel);
-        panelWrapper.style.position = "relative";
-        panelWrapper.style.height = "0px";
-        dfn.insertAdjacentElement("afterend", panelWrapper);
-        dfn.setAttribute('role', 'button');
-        dfn.setAttribute('aria-expanded', 'false')
-        dfn.tabIndex = 0;
-        dfn.classList.add('has-dfn-panel');
-        dfn.addEventListener('click', (event) => {
-            showDfnPanel(dfnPanel, dfn);
-            event.stopPropagation();
-        });
-        dfn.addEventListener('keypress', (event) => {
-            const kc = event.keyCode;
-            // 32->Space, 13->Enter
-            if(kc == 32 || kc == 13) {
-                toggleDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        });
-
-        dfnPanel.addEventListener('click', (event) => {
-            if (event.target.nodeName == 'A') {
-                pinDfnPanel(dfnPanel);
-            }
-            event.stopPropagation();
-        });
-
-        dfnPanel.addEventListener('keydown', (event) => {
-            if(event.keyCode == 27) { // Escape key
-                hideDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        })
-    }
-}
-</script>
-<script>/* Boilerplate: script-dfn-panel */
-"use strict";
-{
-    const dfnsJson = window.dfnsJson || {};
-
-    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
-        return mk.aside({
-            class: "dfn-panel",
-            id: `infopanel-for-${dfnID}`,
-            "data-for": dfnID,
-            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
-            },
-            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
-                `Info about the '${dfnText}' ${external?"external":""} reference.`),
-            mk.a({href:url}, url),
-            mk.b({}, "Referenced in:"),
-            mk.ul({},
-                ...refSections.map(section=>
-                    mk.li({},
-                        ...section.refs.map((ref, refI)=>
-                            [
-                                mk.a({
-                                    href: `#${ref.id}`
-                                    },
-                                    (refI == 0) ? section.title : `(${refI + 1})`
-                                ),
-                                " ",
-                            ]
-                        ),
-                    ),
-                ),
-            ),
-        );
-    }
-
-    function genAllDfnPanels() {
-        for(const panelData of Object.values(window.dfnpanelData)) {
-            const dfnID = panelData.dfnID;
-            const dfn = document.getElementById(dfnID);
-            if(!dfn) {
-                console.log(`Can't find dfn#${dfnID}.`, panelData);
-            } else {
-                const panel = genDfnPanel(panelData);
-                append(document.body, panel);
-                insertDfnPopupAction(dfn, panel)
-            }
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", ()=>{
-        genAllDfnPanels();
-
-        // Add popup behavior to all dfns to show the corresponding dfn-panel.
-        var dfns = queryAll('.dfn-paneled');
-        for(let dfn of dfns) { ; }
-
-        document.body.addEventListener("click", (e) => {
-            // If not handled already, just hide all dfn panels.
-            hideAllDfnPanels();
-        });
-    })
-
-
-    function hideAllDfnPanels() {
-        // Turn off any currently "on" or "activated" panels.
-        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
-    }
-
-    function showDfnPanel(dfnPanel, dfn) {
-        hideAllDfnPanels(); // Only display one at this time.
-        dfn.setAttribute("aria-expanded", "true");
-        dfnPanel.classList.add("on");
-        dfnPanel.style.left = "5px";
-        dfnPanel.style.top = "0px";
-        const panelRect = dfnPanel.getBoundingClientRect();
-        const panelWidth = panelRect.right - panelRect.left;
-        if (panelRect.right > document.body.scrollWidth) {
-            // Panel's overflowing the screen.
-            // Just drop it below the dfn and flip it rightward instead.
-            // This still wont' fix things if the screen is *really* wide,
-            // but fixing that's a lot harder without 'anchor()'.
-            dfnPanel.style.top = "1.5em";
-            dfnPanel.style.left = "auto";
-            dfnPanel.style.right = "0px";
-        }
-    }
-
-    function pinDfnPanel(dfnPanel) {
-        // Switch it to "activated" state, which pins it.
-        dfnPanel.classList.add("activated");
-        dfnPanel.style.left = null;
-        dfnPanel.style.top = null;
-    }
-
-    function hideDfnPanel(dfnPanel, dfn) {
-        if(!dfn) {
-            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
-        }
-        dfn.setAttribute("aria-expanded", "false")
-        dfnPanel.classList.remove("on");
-        dfnPanel.classList.remove("activated");
-    }
-
-    function toggleDfnPanel(dfnPanel, dfn) {
-        if(dfnPanel.classList.contains("on")) {
-            hideDfnPanel(dfnPanel, dfn);
-        } else {
-            showDfnPanel(dfnPanel, dfn);
-        }
-    }
-
-    function insertDfnPopupAction(dfn, dfnPanel) {
-        // Find dfn panel
-        const panelWrapper = document.createElement('span');
-        panelWrapper.appendChild(dfnPanel);
-        panelWrapper.style.position = "relative";
-        panelWrapper.style.height = "0px";
-        dfn.insertAdjacentElement("afterend", panelWrapper);
-        dfn.setAttribute('role', 'button');
-        dfn.setAttribute('aria-expanded', 'false')
-        dfn.tabIndex = 0;
-        dfn.classList.add('has-dfn-panel');
-        dfn.addEventListener('click', (event) => {
-            showDfnPanel(dfnPanel, dfn);
-            event.stopPropagation();
-        });
-        dfn.addEventListener('keypress', (event) => {
-            const kc = event.keyCode;
-            // 32->Space, 13->Enter
-            if(kc == 32 || kc == 13) {
-                toggleDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        });
-
-        dfnPanel.addEventListener('click', (event) => {
-            if (event.target.nodeName == 'A') {
-                pinDfnPanel(dfnPanel);
-            }
-            event.stopPropagation();
-        });
-
-        dfnPanel.addEventListener('keydown', (event) => {
-            if(event.keyCode == 27) { // Escape key
-                hideDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        })
-    }
-}
-</script>
-<script>/* Boilerplate: script-dfn-panel-json */
-window.dfnpanelData = {};
-window.dfnpanelData['0db88ee6'] = {"dfnID": "0db88ee6", "url": "https://w3c.github.io/deviceorientation/#permissiondef-accelerometer", "dfnText": "\"accelerometer\"", "refSections": [{"refs": [{"id": "ref-for-permissiondef-accelerometer"}], "title": "5. Permissions Policy integration"}, {"refs": [{"id": "ref-for-permissiondef-accelerometer\u2460"}, {"id": "ref-for-permissiondef-accelerometer\u2461"}, {"id": "ref-for-permissiondef-accelerometer\u2462"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-permissiondef-accelerometer\u2463"}, {"id": "ref-for-permissiondef-accelerometer\u2464"}, {"id": "ref-for-permissiondef-accelerometer\u2465"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-permissiondef-accelerometer\u2466"}, {"id": "ref-for-permissiondef-accelerometer\u2467"}, {"id": "ref-for-permissiondef-accelerometer\u2468"}], "title": "6.3. Gravity Sensor"}], "external": true};
-window.dfnpanelData['86139dd1'] = {"dfnID": "86139dd1", "url": "https://w3c.github.io/deviceorientation/#accelerometer-virtual-sensor-type", "dfnText": "accelerometer virtual sensor type", "refSections": [{"refs": [{"id": "ref-for-accelerometer-virtual-sensor-type"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-accelerometer-virtual-sensor-type\u2460"}], "title": "9.1. Accelerometer automation"}], "external": true};
-window.dfnpanelData['110eb0e4'] = {"dfnID": "110eb0e4", "url": "https://w3c.github.io/deviceorientation/#linear-acceleration-virtual-sensor-type", "dfnText": "linear-acceleration virtual sensor type", "refSections": [{"refs": [{"id": "ref-for-linear-acceleration-virtual-sensor-type"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-linear-acceleration-virtual-sensor-type\u2460"}], "title": "9.2. Linear Accelerometer automation"}], "external": true};
-window.dfnpanelData['1b956603'] = {"dfnID": "1b956603", "url": "https://w3c.github.io/sensors/#sensor", "dfnText": "Sensor", "refSections": [{"refs": [{"id": "ref-for-sensor"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-sensor\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-sensor\u2461"}], "title": "6.3. Gravity Sensor"}, {"refs": [{"id": "ref-for-sensor\u2462"}], "title": "7.1. The Accelerometer Interface"}], "external": true};
-window.dfnpanelData['207de9db'] = {"dfnID": "207de9db", "url": "https://w3c.github.io/sensors/#dictdef-sensoroptions", "dfnText": "SensorOptions", "refSections": [{"refs": [{"id": "ref-for-dictdef-sensoroptions"}], "title": "7.1. The Accelerometer Interface"}], "external": true};
-window.dfnpanelData['5822d2f3'] = {"dfnID": "5822d2f3", "url": "https://w3c.github.io/sensors/#check-sensor-policy-controlled-features", "dfnText": "check sensor policy-controlled features", "refSections": [{"refs": [{"id": "ref-for-check-sensor-policy-controlled-features"}], "title": "8.1. Construct an accelerometer object"}], "external": true};
-window.dfnpanelData['2797dd43'] = {"dfnID": "2797dd43", "url": "https://w3c.github.io/sensors/#default-sensor", "dfnText": "default sensor", "refSections": [{"refs": [{"id": "ref-for-default-sensor"}], "title": "6.1. Accelerometer"}], "external": true};
-window.dfnpanelData['beb7996f'] = {"dfnID": "beb7996f", "url": "https://w3c.github.io/sensors/#extension-sensor-interface", "dfnText": "extension sensor interface", "refSections": [{"refs": [{"id": "ref-for-extension-sensor-interface"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-extension-sensor-interface\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-extension-sensor-interface\u2461"}], "title": "6.3. Gravity Sensor"}], "external": true};
-window.dfnpanelData['8e858db8'] = {"dfnID": "8e858db8", "url": "https://w3c.github.io/sensors/#device-fingerprinting", "dfnText": "fingerprinting", "refSections": [{"refs": [{"id": "ref-for-device-fingerprinting"}], "title": "4. Security and Privacy Considerations"}], "external": true};
-window.dfnpanelData['5af83a7f'] = {"dfnID": "5af83a7f", "url": "https://w3c.github.io/sensors/#mitigation-strategies", "dfnText": "generic mitigations", "refSections": [{"refs": [{"id": "ref-for-mitigation-strategies"}], "title": "4. Security and Privacy Considerations"}], "external": true};
-window.dfnpanelData['a09cf46b'] = {"dfnID": "a09cf46b", "url": "https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm", "dfnText": "generic sensor permission revocation algorithm", "refSections": [{"refs": [{"id": "ref-for-generic-sensor-permission-revocation-algorithm"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-generic-sensor-permission-revocation-algorithm\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-generic-sensor-permission-revocation-algorithm\u2461"}], "title": "6.3. Gravity Sensor"}], "external": true};
-window.dfnpanelData['fd4ad34f'] = {"dfnID": "fd4ad34f", "url": "https://w3c.github.io/sensors/#get-value-from-latest-reading", "dfnText": "get value from latest reading", "refSections": [{"refs": [{"id": "ref-for-get-value-from-latest-reading"}], "title": "4. Security and Privacy Considerations"}, {"refs": [{"id": "ref-for-get-value-from-latest-reading\u2460"}], "title": "7.1.1. Accelerometer.x"}, {"refs": [{"id": "ref-for-get-value-from-latest-reading\u2461"}], "title": "7.1.2. Accelerometer.y"}, {"refs": [{"id": "ref-for-get-value-from-latest-reading\u2462"}], "title": "7.1.3. Accelerometer.z"}, {"refs": [{"id": "ref-for-get-value-from-latest-reading\u2463"}], "title": "7.2.1. LinearAccelerationSensor.x"}, {"refs": [{"id": "ref-for-get-value-from-latest-reading\u2464"}], "title": "7.2.2. LinearAccelerationSensor.y"}, {"refs": [{"id": "ref-for-get-value-from-latest-reading\u2465"}], "title": "7.2.3. LinearAccelerationSensor.z"}, {"refs": [{"id": "ref-for-get-value-from-latest-reading\u2466"}], "title": "7.3.1. GravitySensor.x"}, {"refs": [{"id": "ref-for-get-value-from-latest-reading\u2467"}], "title": "7.3.2. GravitySensor.y"}, {"refs": [{"id": "ref-for-get-value-from-latest-reading\u2468"}], "title": "7.3.3. GravitySensor.z"}], "external": true};
-window.dfnpanelData['0026f53f'] = {"dfnID": "0026f53f", "url": "https://w3c.github.io/sensors/#initialize-a-sensor-object", "dfnText": "initialize a sensor object", "refSections": [{"refs": [{"id": "ref-for-initialize-a-sensor-object"}], "title": "8.1. Construct an accelerometer object"}], "external": true};
-window.dfnpanelData['7272b427'] = {"dfnID": "7272b427", "url": "https://w3c.github.io/sensors/#keystroke-monitoring", "dfnText": "keylogging", "refSections": [{"refs": [{"id": "ref-for-keystroke-monitoring"}], "title": "4. Security and Privacy Considerations"}], "external": true};
-window.dfnpanelData['378064f9'] = {"dfnID": "378064f9", "url": "https://w3c.github.io/sensors/#latest-reading", "dfnText": "latest reading", "refSections": [{"refs": [{"id": "ref-for-latest-reading"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-latest-reading\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-latest-reading\u2461"}], "title": "6.3. Gravity Sensor"}], "external": true};
-window.dfnpanelData['95a8cb5f'] = {"dfnID": "95a8cb5f", "url": "https://w3c.github.io/sensors/#local-coordinate-system", "dfnText": "local coordinate system", "refSections": [{"refs": [{"id": "ref-for-local-coordinate-system"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-local-coordinate-system\u2460"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-local-coordinate-system\u2461"}], "title": "6.4. Reference Frame"}, {"refs": [{"id": "ref-for-local-coordinate-system\u2462"}, {"id": "ref-for-local-coordinate-system\u2463"}], "title": "8.1. Construct an accelerometer object"}], "external": true};
-window.dfnpanelData['47391bd7'] = {"dfnID": "47391bd7", "url": "https://w3c.github.io/sensors/#location-tracking", "dfnText": "location tracking", "refSections": [{"refs": [{"id": "ref-for-location-tracking"}], "title": "4. Security and Privacy Considerations"}], "external": true};
-window.dfnpanelData['64ade43d'] = {"dfnID": "64ade43d", "url": "https://w3c.github.io/sensors/#parse-xyz-reading", "dfnText": "parse xyz reading", "refSections": [{"refs": [{"id": "ref-for-parse-xyz-reading"}], "title": "9.3. Gravity automation"}], "external": true};
-window.dfnpanelData['5d47b5a4'] = {"dfnID": "5d47b5a4", "url": "https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata", "dfnText": "per-type virtual sensor metadata", "refSections": [{"refs": [{"id": "ref-for-per-type-virtual-sensor-metadata"}], "title": "9.1. Accelerometer automation"}, {"refs": [{"id": "ref-for-per-type-virtual-sensor-metadata\u2460"}], "title": "9.2. Linear Accelerometer automation"}, {"refs": [{"id": "ref-for-per-type-virtual-sensor-metadata\u2461"}], "title": "9.3. Gravity automation"}], "external": true};
-window.dfnpanelData['611c5008'] = {"dfnID": "611c5008", "url": "https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm", "dfnText": "reading parsing algorithm", "refSections": [{"refs": [{"id": "ref-for-virtual-sensor-metadata-reading-parsing-algorithm"}], "title": "9.3. Gravity automation"}], "external": true};
-window.dfnpanelData['1f45ff31'] = {"dfnID": "1f45ff31", "url": "https://w3c.github.io/sensors/#reading-quantization-algorithm", "dfnText": "reading quantization algorithm", "refSections": [{"refs": [{"id": "ref-for-reading-quantization-algorithm"}], "title": "8.2. Accelerometer reading quantization algorithm"}], "external": true};
-window.dfnpanelData['7470ffcc'] = {"dfnID": "7470ffcc", "url": "https://w3c.github.io/sensors/#sensor-feature-names", "dfnText": "sensor feature names", "refSections": [{"refs": [{"id": "ref-for-sensor-feature-names"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-sensor-feature-names\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-sensor-feature-names\u2461"}], "title": "6.3. Gravity Sensor"}], "external": true};
-window.dfnpanelData['80bf03eb'] = {"dfnID": "80bf03eb", "url": "https://w3c.github.io/sensors/#sensor-permission-names", "dfnText": "sensor permission names", "refSections": [{"refs": [{"id": "ref-for-sensor-permission-names"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-sensor-permission-names\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-sensor-permission-names\u2461"}], "title": "6.3. Gravity Sensor"}], "external": true};
-window.dfnpanelData['5afb8cab'] = {"dfnID": "5afb8cab", "url": "https://w3c.github.io/sensors/#sensor-reading", "dfnText": "sensor reading", "refSections": [{"refs": [{"id": "ref-for-sensor-reading"}, {"id": "ref-for-sensor-reading\u2460"}], "title": "4. Security and Privacy Considerations"}, {"refs": [{"id": "ref-for-sensor-reading\u2461"}], "title": "6.4. Reference Frame"}, {"refs": [{"id": "ref-for-sensor-reading\u2462"}, {"id": "ref-for-sensor-reading\u2463"}], "title": "8.2. Accelerometer reading quantization algorithm"}], "external": true};
-window.dfnpanelData['f96b75e9'] = {"dfnID": "f96b75e9", "url": "https://w3c.github.io/sensors/#sensor-type", "dfnText": "sensor type", "refSections": [{"refs": [{"id": "ref-for-sensor-type"}, {"id": "ref-for-sensor-type\u2460"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-sensor-type\u2461"}, {"id": "ref-for-sensor-type\u2462"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-sensor-type\u2463"}, {"id": "ref-for-sensor-type\u2464"}], "title": "6.3. Gravity Sensor"}, {"refs": [{"id": "ref-for-sensor-type\u2465"}], "title": "8.1. Construct an accelerometer object"}, {"refs": [{"id": "ref-for-sensor-type\u2466"}], "title": "8.2. Accelerometer reading quantization algorithm"}], "external": true};
-window.dfnpanelData['13f5be19'] = {"dfnID": "13f5be19", "url": "https://w3c.github.io/sensors/#supported-sensor-options", "dfnText": "supported sensor options", "refSections": [{"refs": [{"id": "ref-for-supported-sensor-options"}], "title": "7.1. The Accelerometer Interface"}, {"refs": [{"id": "ref-for-supported-sensor-options\u2460"}], "title": "7.2. The LinearAccelerationSensor Interface"}, {"refs": [{"id": "ref-for-supported-sensor-options\u2461"}], "title": "7.3. The GravitySensor Interface"}], "external": true};
-window.dfnpanelData['eed9938b'] = {"dfnID": "eed9938b", "url": "https://w3c.github.io/sensors/#user-identifying", "dfnText": "user identifying", "refSections": [{"refs": [{"id": "ref-for-user-identifying"}], "title": "4. Security and Privacy Considerations"}], "external": true};
-window.dfnpanelData['bb15fee5'] = {"dfnID": "bb15fee5", "url": "https://w3c.github.io/sensors/#virtual-sensor-metadata", "dfnText": "virtual sensor metadata", "refSections": [{"refs": [{"id": "ref-for-virtual-sensor-metadata"}], "title": "9.3. Gravity automation"}], "external": true};
-window.dfnpanelData['4fa114dd'] = {"dfnID": "4fa114dd", "url": "https://w3c.github.io/sensors/#virtual-sensor-type", "dfnText": "virtual sensor type", "refSections": [{"refs": [{"id": "ref-for-virtual-sensor-type"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-virtual-sensor-type\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-virtual-sensor-type\u2461"}], "title": "6.3. Gravity Sensor"}, {"refs": [{"id": "ref-for-virtual-sensor-type\u2462"}], "title": "9. Automation"}], "external": true};
-window.dfnpanelData['8958b003'] = {"dfnID": "8958b003", "url": "https://infra.spec.whatwg.org/#map-entry", "dfnText": "entry", "refSections": [{"refs": [{"id": "ref-for-map-entry"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-map-entry\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-map-entry\u2461"}], "title": "6.3. Gravity Sensor"}, {"refs": [{"id": "ref-for-map-entry\u2462"}], "title": "9.3. Gravity automation"}], "external": true};
-window.dfnpanelData['d14a6f26'] = {"dfnID": "d14a6f26", "url": "https://infra.spec.whatwg.org/#map-key", "dfnText": "key", "refSections": [{"refs": [{"id": "ref-for-map-key"}], "title": "9.3. Gravity automation"}], "external": true};
-window.dfnpanelData['31db57e6'] = {"dfnID": "31db57e6", "url": "https://infra.spec.whatwg.org/#map-getting-the-keys", "dfnText": "keys", "refSections": [{"refs": [{"id": "ref-for-map-getting-the-keys"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-map-getting-the-keys\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-map-getting-the-keys\u2461"}], "title": "6.3. Gravity Sensor"}], "external": true};
-window.dfnpanelData['3fca5a9e'] = {"dfnID": "3fca5a9e", "url": "https://infra.spec.whatwg.org/#ordered-map", "dfnText": "map", "refSections": [{"refs": [{"id": "ref-for-ordered-map"}], "title": "9.1. Accelerometer automation"}, {"refs": [{"id": "ref-for-ordered-map\u2460"}], "title": "9.2. Linear Accelerometer automation"}, {"refs": [{"id": "ref-for-ordered-map\u2461"}], "title": "9.3. Gravity automation"}], "external": true};
-window.dfnpanelData['802b0fdd'] = {"dfnID": "802b0fdd", "url": "https://infra.spec.whatwg.org/#map-value", "dfnText": "value", "refSections": [{"refs": [{"id": "ref-for-map-value"}], "title": "9.3. Gravity automation"}], "external": true};
-window.dfnpanelData['12d6b9a8'] = {"dfnID": "12d6b9a8", "url": "https://infra.spec.whatwg.org/#map-getting-the-values", "dfnText": "values", "refSections": [{"refs": [{"id": "ref-for-map-getting-the-values"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-map-getting-the-values\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-map-getting-the-values\u2461"}], "title": "6.3. Gravity Sensor"}], "external": true};
-window.dfnpanelData['409a61ca'] = {"dfnID": "409a61ca", "url": "https://w3c.github.io/permissions/#dfn-permission-revocation-algorithm", "dfnText": "permission revocation algorithm", "refSections": [{"refs": [{"id": "ref-for-dfn-permission-revocation-algorithm"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-dfn-permission-revocation-algorithm\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-dfn-permission-revocation-algorithm\u2461"}], "title": "6.3. Gravity Sensor"}], "external": true};
-window.dfnpanelData['cc890cc1'] = {"dfnID": "cc890cc1", "url": "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature", "dfnText": "policy-controlled feature", "refSections": [{"refs": [{"id": "ref-for-policy-controlled-feature"}], "title": "5. Permissions Policy integration"}], "external": true};
-window.dfnpanelData['bb91d953'] = {"dfnID": "bb91d953", "url": "https://www.w3.org/TR/screen-orientation/#dfn-current-orientation-type", "dfnText": "current orientation type", "refSections": [{"refs": [{"id": "ref-for-dfn-current-orientation-type"}], "title": "6.4. Reference Frame"}], "external": true};
-window.dfnpanelData['435b7a7b'] = {"dfnID": "435b7a7b", "url": "https://www.w3.org/TR/screen-orientation/#dom-screen", "dfnText": "dom screen", "refSections": [{"refs": [{"id": "ref-for-dom-screen"}, {"id": "ref-for-dom-screen\u2460"}], "title": "2. Examples"}, {"refs": [{"id": "ref-for-dom-screen\u2461"}, {"id": "ref-for-dom-screen\u2462"}, {"id": "ref-for-dom-screen\u2463"}, {"id": "ref-for-dom-screen\u2464"}, {"id": "ref-for-dom-screen\u2465"}, {"id": "ref-for-dom-screen\u2466"}, {"id": "ref-for-dom-screen\u2467"}], "title": "6.4. Reference Frame"}], "external": true};
-window.dfnpanelData['dca2de17'] = {"dfnID": "dca2de17", "url": "https://webidl.spec.whatwg.org/#idl-DOMException", "dfnText": "DOMException", "refSections": [{"refs": [{"id": "ref-for-idl-DOMException"}], "title": "8.1. Construct an accelerometer object"}], "external": true};
-window.dfnpanelData['889e932f'] = {"dfnID": "889e932f", "url": "https://webidl.spec.whatwg.org/#Exposed", "dfnText": "Exposed", "refSections": [{"refs": [{"id": "ref-for-Exposed"}], "title": "7.1. The Accelerometer Interface"}, {"refs": [{"id": "ref-for-Exposed\u2460"}], "title": "7.2. The LinearAccelerationSensor Interface"}, {"refs": [{"id": "ref-for-Exposed\u2461"}], "title": "7.3. The GravitySensor Interface"}], "external": true};
-window.dfnpanelData['b75bb3bd'] = {"dfnID": "b75bb3bd", "url": "https://webidl.spec.whatwg.org/#SecureContext", "dfnText": "SecureContext", "refSections": [{"refs": [{"id": "ref-for-SecureContext"}], "title": "7.1. The Accelerometer Interface"}, {"refs": [{"id": "ref-for-SecureContext\u2460"}], "title": "7.2. The LinearAccelerationSensor Interface"}, {"refs": [{"id": "ref-for-SecureContext\u2461"}], "title": "7.3. The GravitySensor Interface"}], "external": true};
-window.dfnpanelData['c3e881ef'] = {"dfnID": "c3e881ef", "url": "https://webidl.spec.whatwg.org/#securityerror", "dfnText": "SecurityError", "refSections": [{"refs": [{"id": "ref-for-securityerror"}], "title": "8.1. Construct an accelerometer object"}], "external": true};
-window.dfnpanelData['8c800cdf'] = {"dfnID": "8c800cdf", "url": "https://webidl.spec.whatwg.org/#idl-double", "dfnText": "double", "refSections": [{"refs": [{"id": "ref-for-idl-double"}, {"id": "ref-for-idl-double\u2460"}, {"id": "ref-for-idl-double\u2461"}], "title": "7.1. The Accelerometer Interface"}], "external": true};
-window.dfnpanelData['4013a022'] = {"dfnID": "4013a022", "url": "https://webidl.spec.whatwg.org/#this", "dfnText": "this", "refSections": [{"refs": [{"id": "ref-for-this"}], "title": "7.1. The Accelerometer Interface"}, {"refs": [{"id": "ref-for-this\u2460"}], "title": "7.2. The LinearAccelerationSensor Interface"}, {"refs": [{"id": "ref-for-this\u2461"}], "title": "7.3. The GravitySensor Interface"}], "external": true};
-window.dfnpanelData['b4cfa5ce'] = {"dfnID": "b4cfa5ce", "url": "https://webidl.spec.whatwg.org/#dfn-throw", "dfnText": "throw", "refSections": [{"refs": [{"id": "ref-for-dfn-throw"}], "title": "8.1. Construct an accelerometer object"}], "external": true};
-window.dfnpanelData['accelerometer-sensor-type'] = {"dfnID": "accelerometer-sensor-type", "url": "#accelerometer-sensor-type", "dfnText": "Accelerometer", "refSections": [{"refs": [{"id": "ref-for-accelerometer-sensor-type"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-accelerometer-sensor-type\u2460"}], "title": "8.2. Accelerometer reading quantization algorithm"}, {"refs": [{"id": "ref-for-accelerometer-sensor-type\u2461"}], "title": "9. Automation"}], "external": false};
-window.dfnpanelData['acceleration'] = {"dfnID": "acceleration", "url": "#acceleration", "dfnText": "acceleration", "refSections": [{"refs": [{"id": "ref-for-acceleration\u2460"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-acceleration\u2461"}, {"id": "ref-for-acceleration\u2462"}, {"id": "ref-for-acceleration\u2463"}, {"id": "ref-for-acceleration\u2464"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-acceleration\u2465"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-acceleration\u2466"}], "title": "7.1.1. Accelerometer.x"}, {"refs": [{"id": "ref-for-acceleration\u2467"}], "title": "7.1.2. Accelerometer.y"}, {"refs": [{"id": "ref-for-acceleration\u2468"}], "title": "7.1.3. Accelerometer.z"}, {"refs": [{"id": "ref-for-acceleration\u2460\u24ea"}], "title": "7.3.1. GravitySensor.x"}, {"refs": [{"id": "ref-for-acceleration\u2460\u2460"}], "title": "7.3.2. GravitySensor.y"}, {"refs": [{"id": "ref-for-acceleration\u2460\u2461"}], "title": "7.3.3. GravitySensor.z"}], "external": false};
-window.dfnpanelData['linear-acceleration-sensor-sensor-type'] = {"dfnID": "linear-acceleration-sensor-sensor-type", "url": "#linear-acceleration-sensor-sensor-type", "dfnText": "Linear Acceleration Sensor", "refSections": [{"refs": [{"id": "ref-for-linear-acceleration-sensor-sensor-type"}], "title": "6.2. Linear Acceleration Sensor"}], "external": false};
-window.dfnpanelData['linear-acceleration'] = {"dfnID": "linear-acceleration", "url": "#linear-acceleration", "dfnText": "linear acceleration", "refSections": [{"refs": [{"id": "ref-for-linear-acceleration"}, {"id": "ref-for-linear-acceleration\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-linear-acceleration\u2461"}], "title": "6.3. Gravity Sensor"}, {"refs": [{"id": "ref-for-linear-acceleration\u2462"}], "title": "7.2.1. LinearAccelerationSensor.x"}, {"refs": [{"id": "ref-for-linear-acceleration\u2463"}], "title": "7.2.2. LinearAccelerationSensor.y"}, {"refs": [{"id": "ref-for-linear-acceleration\u2464"}], "title": "7.2.3. LinearAccelerationSensor.z"}], "external": false};
-window.dfnpanelData['gravity-sensor-sensor-type'] = {"dfnID": "gravity-sensor-sensor-type", "url": "#gravity-sensor-sensor-type", "dfnText": "Gravity Sensor", "refSections": [{"refs": [{"id": "ref-for-gravity-sensor-sensor-type"}], "title": "6.3. Gravity Sensor"}], "external": false};
-window.dfnpanelData['gravity-virtual-sensor-type'] = {"dfnID": "gravity-virtual-sensor-type", "url": "#gravity-virtual-sensor-type", "dfnText": "gravity", "refSections": [{"refs": [{"id": "ref-for-gravity-virtual-sensor-type"}], "title": "9.3. Gravity automation"}], "external": false};
-window.dfnpanelData['gravity'] = {"dfnID": "gravity", "url": "#gravity", "dfnText": "gravity", "refSections": [{"refs": [{"id": "ref-for-gravity"}, {"id": "ref-for-gravity\u2460"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-gravity\u2461"}, {"id": "ref-for-gravity\u2462"}], "title": "6.3. Gravity Sensor"}, {"refs": [{"id": "ref-for-gravity\u2463"}], "title": "7.3.1. GravitySensor.x"}, {"refs": [{"id": "ref-for-gravity\u2464"}], "title": "7.3.2. GravitySensor.y"}, {"refs": [{"id": "ref-for-gravity\u2465"}], "title": "7.3.3. GravitySensor.z"}], "external": false};
-window.dfnpanelData['device-coordinate-system'] = {"dfnID": "device-coordinate-system", "url": "#device-coordinate-system", "dfnText": "device coordinate system", "refSections": [{"refs": [{"id": "ref-for-device-coordinate-system"}, {"id": "ref-for-device-coordinate-system\u2460"}, {"id": "ref-for-device-coordinate-system\u2461"}, {"id": "ref-for-device-coordinate-system\u2462"}, {"id": "ref-for-device-coordinate-system\u2463"}], "title": "6.4. Reference Frame"}, {"refs": [{"id": "ref-for-device-coordinate-system\u2464"}], "title": "8.1. Construct an accelerometer object"}], "external": false};
-window.dfnpanelData['screen-coordinate-system'] = {"dfnID": "screen-coordinate-system", "url": "#screen-coordinate-system", "dfnText": "screen coordinate system", "refSections": [{"refs": [{"id": "ref-for-screen-coordinate-system"}], "title": "2. Examples"}, {"refs": [{"id": "ref-for-screen-coordinate-system\u2460"}, {"id": "ref-for-screen-coordinate-system\u2461"}, {"id": "ref-for-screen-coordinate-system\u2462"}, {"id": "ref-for-screen-coordinate-system\u2463"}], "title": "6.4. Reference Frame"}, {"refs": [{"id": "ref-for-screen-coordinate-system\u2464"}], "title": "8.1. Construct an accelerometer object"}], "external": false};
-window.dfnpanelData['accelerometer'] = {"dfnID": "accelerometer", "url": "#accelerometer", "dfnText": "Accelerometer", "refSections": [{"refs": [{"id": "ref-for-accelerometer\u2460"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-accelerometer\u2461"}], "title": "6.1. Accelerometer"}, {"refs": [{"id": "ref-for-accelerometer\u2462"}], "title": "6.4. Reference Frame"}, {"refs": [{"id": "ref-for-accelerometer\u2463"}], "title": "7.1. The Accelerometer Interface"}, {"refs": [{"id": "ref-for-accelerometer\u2464"}], "title": "7.1.1. Accelerometer.x"}, {"refs": [{"id": "ref-for-accelerometer\u2465"}], "title": "7.1.2. Accelerometer.y"}, {"refs": [{"id": "ref-for-accelerometer\u2466"}], "title": "7.1.3. Accelerometer.z"}, {"refs": [{"id": "ref-for-accelerometer\u2467"}], "title": "7.2. The LinearAccelerationSensor Interface"}, {"refs": [{"id": "ref-for-accelerometer\u2468"}], "title": "7.3. The GravitySensor Interface"}, {"refs": [{"id": "ref-for-accelerometer\u2460\u24ea"}], "title": "8.1. Construct an accelerometer object"}], "external": false};
-window.dfnpanelData['dom-accelerometer-x'] = {"dfnID": "dom-accelerometer-x", "url": "#dom-accelerometer-x", "dfnText": "x", "refSections": [{"refs": [{"id": "ref-for-dom-accelerometer-x"}], "title": "7.1.1. Accelerometer.x"}, {"refs": [{"id": "ref-for-dom-accelerometer-x\u2460"}], "title": "7.2.1. LinearAccelerationSensor.x"}, {"refs": [{"id": "ref-for-dom-accelerometer-x\u2461"}], "title": "7.3.1. GravitySensor.x"}], "external": false};
-window.dfnpanelData['dom-accelerometer-y'] = {"dfnID": "dom-accelerometer-y", "url": "#dom-accelerometer-y", "dfnText": "y", "refSections": [{"refs": [{"id": "ref-for-dom-accelerometer-y"}], "title": "7.1.2. Accelerometer.y"}, {"refs": [{"id": "ref-for-dom-accelerometer-y\u2460"}], "title": "7.2.2. LinearAccelerationSensor.y"}, {"refs": [{"id": "ref-for-dom-accelerometer-y\u2461"}], "title": "7.3.2. GravitySensor.y"}], "external": false};
-window.dfnpanelData['dom-accelerometer-z'] = {"dfnID": "dom-accelerometer-z", "url": "#dom-accelerometer-z", "dfnText": "z", "refSections": [{"refs": [{"id": "ref-for-dom-accelerometer-z"}], "title": "7.1.3. Accelerometer.z"}, {"refs": [{"id": "ref-for-dom-accelerometer-z\u2460"}], "title": "7.2.3. LinearAccelerationSensor.z"}, {"refs": [{"id": "ref-for-dom-accelerometer-z\u2461"}], "title": "7.3.3. GravitySensor.z"}], "external": false};
-window.dfnpanelData['enumdef-accelerometerlocalcoordinatesystem'] = {"dfnID": "enumdef-accelerometerlocalcoordinatesystem", "url": "#enumdef-accelerometerlocalcoordinatesystem", "dfnText": "AccelerometerLocalCoordinateSystem", "refSections": [{"refs": [{"id": "ref-for-enumdef-accelerometerlocalcoordinatesystem"}], "title": "7.1. The Accelerometer Interface"}], "external": false};
-window.dfnpanelData['dictdef-accelerometersensoroptions'] = {"dfnID": "dictdef-accelerometersensoroptions", "url": "#dictdef-accelerometersensoroptions", "dfnText": "AccelerometerSensorOptions", "refSections": [{"refs": [{"id": "ref-for-dictdef-accelerometersensoroptions"}], "title": "7.1. The Accelerometer Interface"}, {"refs": [{"id": "ref-for-dictdef-accelerometersensoroptions\u2460"}], "title": "7.2. The LinearAccelerationSensor Interface"}, {"refs": [{"id": "ref-for-dictdef-accelerometersensoroptions\u2461"}], "title": "7.3. The GravitySensor Interface"}, {"refs": [{"id": "ref-for-dictdef-accelerometersensoroptions\u2462"}], "title": "8.1. Construct an accelerometer object"}], "external": false};
-window.dfnpanelData['dom-accelerometersensoroptions-referenceframe'] = {"dfnID": "dom-accelerometersensoroptions-referenceframe", "url": "#dom-accelerometersensoroptions-referenceframe", "dfnText": "referenceFrame", "refSections": [{"refs": [{"id": "ref-for-dom-accelerometersensoroptions-referenceframe"}], "title": "8.1. Construct an accelerometer object"}], "external": false};
-window.dfnpanelData['dom-accelerometer-accelerometer'] = {"dfnID": "dom-accelerometer-accelerometer", "url": "#dom-accelerometer-accelerometer", "dfnText": "new Accelerometer(options)", "refSections": [{"refs": [{"id": "ref-for-dom-accelerometer-accelerometer"}], "title": "7.1. The Accelerometer Interface"}], "external": false};
-window.dfnpanelData['linearaccelerationsensor'] = {"dfnID": "linearaccelerationsensor", "url": "#linearaccelerationsensor", "dfnText": "LinearAccelerationSensor", "refSections": [{"refs": [{"id": "ref-for-linearaccelerationsensor\u2460"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-linearaccelerationsensor\u2461"}], "title": "6.2. Linear Acceleration Sensor"}, {"refs": [{"id": "ref-for-linearaccelerationsensor\u2462"}], "title": "6.4. Reference Frame"}, {"refs": [{"id": "ref-for-linearaccelerationsensor\u2463"}], "title": "7.2. The LinearAccelerationSensor Interface"}, {"refs": [{"id": "ref-for-linearaccelerationsensor\u2464"}], "title": "7.2.1. LinearAccelerationSensor.x"}, {"refs": [{"id": "ref-for-linearaccelerationsensor\u2465"}], "title": "7.2.2. LinearAccelerationSensor.y"}, {"refs": [{"id": "ref-for-linearaccelerationsensor\u2466"}], "title": "7.2.3. LinearAccelerationSensor.z"}, {"refs": [{"id": "ref-for-linearaccelerationsensor\u2467"}], "title": "8.1. Construct an accelerometer object"}], "external": false};
-window.dfnpanelData['dom-linearaccelerationsensor-linearaccelerationsensor'] = {"dfnID": "dom-linearaccelerationsensor-linearaccelerationsensor", "url": "#dom-linearaccelerationsensor-linearaccelerationsensor", "dfnText": "new LinearAccelerationSensor(options)", "refSections": [{"refs": [{"id": "ref-for-dom-linearaccelerationsensor-linearaccelerationsensor"}], "title": "7.2. The LinearAccelerationSensor Interface"}], "external": false};
-window.dfnpanelData['gravitysensor'] = {"dfnID": "gravitysensor", "url": "#gravitysensor", "dfnText": "GravitySensor", "refSections": [{"refs": [{"id": "ref-for-gravitysensor\u2460"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-gravitysensor\u2461"}], "title": "6.3. Gravity Sensor"}, {"refs": [{"id": "ref-for-gravitysensor\u2462"}], "title": "6.4. Reference Frame"}, {"refs": [{"id": "ref-for-gravitysensor\u2463"}], "title": "7.3. The GravitySensor Interface"}, {"refs": [{"id": "ref-for-gravitysensor\u2464"}], "title": "7.3.1. GravitySensor.x"}, {"refs": [{"id": "ref-for-gravitysensor\u2465"}], "title": "7.3.2. GravitySensor.y"}, {"refs": [{"id": "ref-for-gravitysensor\u2466"}], "title": "7.3.3. GravitySensor.z"}, {"refs": [{"id": "ref-for-gravitysensor\u2467"}], "title": "8.1. Construct an accelerometer object"}], "external": false};
-window.dfnpanelData['dom-gravitysensor-gravitysensor'] = {"dfnID": "dom-gravitysensor-gravitysensor", "url": "#dom-gravitysensor-gravitysensor", "dfnText": "new GravitySensor(options)", "refSections": [{"refs": [{"id": "ref-for-dom-gravitysensor-gravitysensor"}], "title": "7.3. The GravitySensor Interface"}], "external": false};
-window.dfnpanelData['construct-an-accelerometer-object'] = {"dfnID": "construct-an-accelerometer-object", "url": "#construct-an-accelerometer-object", "dfnText": "8.1. Construct an accelerometer object", "refSections": [{"refs": [{"id": "ref-for-construct-an-accelerometer-object"}], "title": "7.1. The Accelerometer Interface"}, {"refs": [{"id": "ref-for-construct-an-accelerometer-object\u2460"}], "title": "7.2. The LinearAccelerationSensor Interface"}, {"refs": [{"id": "ref-for-construct-an-accelerometer-object\u2461"}], "title": "7.3. The GravitySensor Interface"}, {"refs": [{"id": "ref-for-construct-an-accelerometer-object"}], "title": "8.1. Construct an accelerometer object"}], "external": false};
-window.dfnpanelData['accelerometer-reading-quantization-algorithm'] = {"dfnID": "accelerometer-reading-quantization-algorithm", "url": "#accelerometer-reading-quantization-algorithm", "dfnText": "8.2. Accelerometer reading quantization algorithm", "refSections": [{"refs": [{"id": "ref-for-accelerometer-reading-quantization-algorithm"}], "title": "4. Security and Privacy Considerations"}, {"refs": [{"id": "ref-for-accelerometer-reading-quantization-algorithm"}], "title": "8.2. Accelerometer reading quantization algorithm"}], "external": false};
-</script>
 <script>/* Boilerplate: script-dom-helper */
+"use strict";
 function query(sel) { return document.querySelector(sel); }
 
 function queryAll(sel) { return [...document.querySelectorAll(sel)]; }
@@ -2281,34 +1975,475 @@ function parseHTML(markup) {
 		el.innerHTML = markup;
 		return el.content;
 	}
+}</script>
+<script>/* Boilerplate: script-dfn-panel */
+"use strict";
+{
+let dfnPanelData = {
+"0026f53f": {"dfnID":"0026f53f","dfnText":"initialize a sensor object","external":true,"refSections":[{"refs":[{"id":"ref-for-initialize-a-sensor-object"}],"title":"8.1. Construct an accelerometer object"}],"url":"https://w3c.github.io/sensors/#initialize-a-sensor-object"},
+"0db88ee6": {"dfnID":"0db88ee6","dfnText":"\"accelerometer\"","external":true,"refSections":[{"refs":[{"id":"ref-for-permissiondef-accelerometer"}],"title":"5. Permissions Policy integration"},{"refs":[{"id":"ref-for-permissiondef-accelerometer\u2460"},{"id":"ref-for-permissiondef-accelerometer\u2461"},{"id":"ref-for-permissiondef-accelerometer\u2462"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-permissiondef-accelerometer\u2463"},{"id":"ref-for-permissiondef-accelerometer\u2464"},{"id":"ref-for-permissiondef-accelerometer\u2465"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-permissiondef-accelerometer\u2466"},{"id":"ref-for-permissiondef-accelerometer\u2467"},{"id":"ref-for-permissiondef-accelerometer\u2468"}],"title":"6.3. Gravity Sensor"}],"url":"https://w3c.github.io/deviceorientation/#permissiondef-accelerometer"},
+"110eb0e4": {"dfnID":"110eb0e4","dfnText":"linear-acceleration virtual sensor type","external":true,"refSections":[{"refs":[{"id":"ref-for-linear-acceleration-virtual-sensor-type"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-linear-acceleration-virtual-sensor-type\u2460"}],"title":"9.2. Linear Accelerometer automation"}],"url":"https://w3c.github.io/deviceorientation/#linear-acceleration-virtual-sensor-type"},
+"12d6b9a8": {"dfnID":"12d6b9a8","dfnText":"values","external":true,"refSections":[{"refs":[{"id":"ref-for-map-getting-the-values"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-map-getting-the-values\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-map-getting-the-values\u2461"}],"title":"6.3. Gravity Sensor"}],"url":"https://infra.spec.whatwg.org/#map-getting-the-values"},
+"13f5be19": {"dfnID":"13f5be19","dfnText":"supported sensor options","external":true,"refSections":[{"refs":[{"id":"ref-for-supported-sensor-options"}],"title":"7.1. The Accelerometer Interface"},{"refs":[{"id":"ref-for-supported-sensor-options\u2460"}],"title":"7.2. The LinearAccelerationSensor Interface"},{"refs":[{"id":"ref-for-supported-sensor-options\u2461"}],"title":"7.3. The GravitySensor Interface"}],"url":"https://w3c.github.io/sensors/#supported-sensor-options"},
+"1b956603": {"dfnID":"1b956603","dfnText":"Sensor","external":true,"refSections":[{"refs":[{"id":"ref-for-sensor"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-sensor\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-sensor\u2461"}],"title":"6.3. Gravity Sensor"},{"refs":[{"id":"ref-for-sensor\u2462"}],"title":"7.1. The Accelerometer Interface"}],"url":"https://w3c.github.io/sensors/#sensor"},
+"1f45ff31": {"dfnID":"1f45ff31","dfnText":"reading quantization algorithm","external":true,"refSections":[{"refs":[{"id":"ref-for-reading-quantization-algorithm"}],"title":"8.2. Accelerometer reading quantization algorithm"}],"url":"https://w3c.github.io/sensors/#reading-quantization-algorithm"},
+"207de9db": {"dfnID":"207de9db","dfnText":"SensorOptions","external":true,"refSections":[{"refs":[{"id":"ref-for-dictdef-sensoroptions"}],"title":"7.1. The Accelerometer Interface"}],"url":"https://w3c.github.io/sensors/#dictdef-sensoroptions"},
+"2797dd43": {"dfnID":"2797dd43","dfnText":"default sensor","external":true,"refSections":[{"refs":[{"id":"ref-for-default-sensor"}],"title":"6.1. Accelerometer"}],"url":"https://w3c.github.io/sensors/#default-sensor"},
+"31db57e6": {"dfnID":"31db57e6","dfnText":"keys","external":true,"refSections":[{"refs":[{"id":"ref-for-map-getting-the-keys"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-map-getting-the-keys\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-map-getting-the-keys\u2461"}],"title":"6.3. Gravity Sensor"}],"url":"https://infra.spec.whatwg.org/#map-getting-the-keys"},
+"378064f9": {"dfnID":"378064f9","dfnText":"latest reading","external":true,"refSections":[{"refs":[{"id":"ref-for-latest-reading"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-latest-reading\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-latest-reading\u2461"}],"title":"6.3. Gravity Sensor"}],"url":"https://w3c.github.io/sensors/#latest-reading"},
+"3fca5a9e": {"dfnID":"3fca5a9e","dfnText":"map","external":true,"refSections":[{"refs":[{"id":"ref-for-ordered-map"}],"title":"9.1. Accelerometer automation"},{"refs":[{"id":"ref-for-ordered-map\u2460"}],"title":"9.2. Linear Accelerometer automation"},{"refs":[{"id":"ref-for-ordered-map\u2461"}],"title":"9.3. Gravity automation"}],"url":"https://infra.spec.whatwg.org/#ordered-map"},
+"4013a022": {"dfnID":"4013a022","dfnText":"this","external":true,"refSections":[{"refs":[{"id":"ref-for-this"}],"title":"7.1. The Accelerometer Interface"},{"refs":[{"id":"ref-for-this\u2460"}],"title":"7.2. The LinearAccelerationSensor Interface"},{"refs":[{"id":"ref-for-this\u2461"}],"title":"7.3. The GravitySensor Interface"}],"url":"https://webidl.spec.whatwg.org/#this"},
+"409a61ca": {"dfnID":"409a61ca","dfnText":"permission revocation algorithm","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-permission-revocation-algorithm"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-dfn-permission-revocation-algorithm\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-dfn-permission-revocation-algorithm\u2461"}],"title":"6.3. Gravity Sensor"}],"url":"https://w3c.github.io/permissions/#dfn-permission-revocation-algorithm"},
+"435b7a7b": {"dfnID":"435b7a7b","dfnText":"dom screen","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-screen"},{"id":"ref-for-dom-screen\u2460"}],"title":"2. Examples"},{"refs":[{"id":"ref-for-dom-screen\u2461"},{"id":"ref-for-dom-screen\u2462"},{"id":"ref-for-dom-screen\u2463"},{"id":"ref-for-dom-screen\u2464"},{"id":"ref-for-dom-screen\u2465"},{"id":"ref-for-dom-screen\u2466"},{"id":"ref-for-dom-screen\u2467"}],"title":"6.4. Reference Frame"}],"url":"https://www.w3.org/TR/screen-orientation/#dom-screen"},
+"47391bd7": {"dfnID":"47391bd7","dfnText":"location tracking","external":true,"refSections":[{"refs":[{"id":"ref-for-location-tracking"}],"title":"4. Security and Privacy Considerations"}],"url":"https://w3c.github.io/sensors/#location-tracking"},
+"4fa114dd": {"dfnID":"4fa114dd","dfnText":"virtual sensor type","external":true,"refSections":[{"refs":[{"id":"ref-for-virtual-sensor-type"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-virtual-sensor-type\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-virtual-sensor-type\u2461"}],"title":"6.3. Gravity Sensor"},{"refs":[{"id":"ref-for-virtual-sensor-type\u2462"}],"title":"9. Automation"}],"url":"https://w3c.github.io/sensors/#virtual-sensor-type"},
+"5822d2f3": {"dfnID":"5822d2f3","dfnText":"check sensor policy-controlled features","external":true,"refSections":[{"refs":[{"id":"ref-for-check-sensor-policy-controlled-features"}],"title":"8.1. Construct an accelerometer object"}],"url":"https://w3c.github.io/sensors/#check-sensor-policy-controlled-features"},
+"5af83a7f": {"dfnID":"5af83a7f","dfnText":"generic mitigations","external":true,"refSections":[{"refs":[{"id":"ref-for-mitigation-strategies"}],"title":"4. Security and Privacy Considerations"}],"url":"https://w3c.github.io/sensors/#mitigation-strategies"},
+"5afb8cab": {"dfnID":"5afb8cab","dfnText":"sensor reading","external":true,"refSections":[{"refs":[{"id":"ref-for-sensor-reading"},{"id":"ref-for-sensor-reading\u2460"}],"title":"4. Security and Privacy Considerations"},{"refs":[{"id":"ref-for-sensor-reading\u2461"}],"title":"6.4. Reference Frame"},{"refs":[{"id":"ref-for-sensor-reading\u2462"},{"id":"ref-for-sensor-reading\u2463"}],"title":"8.2. Accelerometer reading quantization algorithm"}],"url":"https://w3c.github.io/sensors/#sensor-reading"},
+"5d47b5a4": {"dfnID":"5d47b5a4","dfnText":"per-type virtual sensor metadata","external":true,"refSections":[{"refs":[{"id":"ref-for-per-type-virtual-sensor-metadata"}],"title":"9.1. Accelerometer automation"},{"refs":[{"id":"ref-for-per-type-virtual-sensor-metadata\u2460"}],"title":"9.2. Linear Accelerometer automation"},{"refs":[{"id":"ref-for-per-type-virtual-sensor-metadata\u2461"}],"title":"9.3. Gravity automation"}],"url":"https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata"},
+"611c5008": {"dfnID":"611c5008","dfnText":"reading parsing algorithm","external":true,"refSections":[{"refs":[{"id":"ref-for-virtual-sensor-metadata-reading-parsing-algorithm"}],"title":"9.3. Gravity automation"}],"url":"https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm"},
+"64ade43d": {"dfnID":"64ade43d","dfnText":"Parse XYZ reading","external":true,"refSections":[{"refs":[{"id":"ref-for-parse-xyz-reading"}],"title":"9.3. Gravity automation"}],"url":"https://w3c.github.io/sensors/#parse-xyz-reading"},
+"7272b427": {"dfnID":"7272b427","dfnText":"keylogging","external":true,"refSections":[{"refs":[{"id":"ref-for-keystroke-monitoring"}],"title":"4. Security and Privacy Considerations"}],"url":"https://w3c.github.io/sensors/#keystroke-monitoring"},
+"7470ffcc": {"dfnID":"7470ffcc","dfnText":"sensor feature names","external":true,"refSections":[{"refs":[{"id":"ref-for-sensor-feature-names"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-sensor-feature-names\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-sensor-feature-names\u2461"}],"title":"6.3. Gravity Sensor"}],"url":"https://w3c.github.io/sensors/#sensor-feature-names"},
+"802b0fdd": {"dfnID":"802b0fdd","dfnText":"value","external":true,"refSections":[{"refs":[{"id":"ref-for-map-value"}],"title":"9.3. Gravity automation"}],"url":"https://infra.spec.whatwg.org/#map-value"},
+"80bf03eb": {"dfnID":"80bf03eb","dfnText":"sensor permission names","external":true,"refSections":[{"refs":[{"id":"ref-for-sensor-permission-names"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-sensor-permission-names\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-sensor-permission-names\u2461"}],"title":"6.3. Gravity Sensor"}],"url":"https://w3c.github.io/sensors/#sensor-permission-names"},
+"86139dd1": {"dfnID":"86139dd1","dfnText":"accelerometer virtual sensor type","external":true,"refSections":[{"refs":[{"id":"ref-for-accelerometer-virtual-sensor-type"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-accelerometer-virtual-sensor-type\u2460"}],"title":"9.1. Accelerometer automation"}],"url":"https://w3c.github.io/deviceorientation/#accelerometer-virtual-sensor-type"},
+"889e932f": {"dfnID":"889e932f","dfnText":"Exposed","external":true,"refSections":[{"refs":[{"id":"ref-for-Exposed"}],"title":"7.1. The Accelerometer Interface"},{"refs":[{"id":"ref-for-Exposed\u2460"}],"title":"7.2. The LinearAccelerationSensor Interface"},{"refs":[{"id":"ref-for-Exposed\u2461"}],"title":"7.3. The GravitySensor Interface"}],"url":"https://webidl.spec.whatwg.org/#Exposed"},
+"8958b003": {"dfnID":"8958b003","dfnText":"entry","external":true,"refSections":[{"refs":[{"id":"ref-for-map-entry"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-map-entry\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-map-entry\u2461"}],"title":"6.3. Gravity Sensor"},{"refs":[{"id":"ref-for-map-entry\u2462"}],"title":"9.3. Gravity automation"}],"url":"https://infra.spec.whatwg.org/#map-entry"},
+"8c800cdf": {"dfnID":"8c800cdf","dfnText":"double","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-double"},{"id":"ref-for-idl-double\u2460"},{"id":"ref-for-idl-double\u2461"}],"title":"7.1. The Accelerometer Interface"}],"url":"https://webidl.spec.whatwg.org/#idl-double"},
+"8e858db8": {"dfnID":"8e858db8","dfnText":"fingerprinting","external":true,"refSections":[{"refs":[{"id":"ref-for-device-fingerprinting"}],"title":"4. Security and Privacy Considerations"}],"url":"https://w3c.github.io/sensors/#device-fingerprinting"},
+"95a8cb5f": {"dfnID":"95a8cb5f","dfnText":"local coordinate system","external":true,"refSections":[{"refs":[{"id":"ref-for-local-coordinate-system"}],"title":"1. Introduction"},{"refs":[{"id":"ref-for-local-coordinate-system\u2460"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-local-coordinate-system\u2461"}],"title":"6.4. Reference Frame"},{"refs":[{"id":"ref-for-local-coordinate-system\u2462"},{"id":"ref-for-local-coordinate-system\u2463"}],"title":"8.1. Construct an accelerometer object"}],"url":"https://w3c.github.io/sensors/#local-coordinate-system"},
+"a09cf46b": {"dfnID":"a09cf46b","dfnText":"Generic Sensor permission revocation algorithm","external":true,"refSections":[{"refs":[{"id":"ref-for-generic-sensor-permission-revocation-algorithm"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-generic-sensor-permission-revocation-algorithm\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-generic-sensor-permission-revocation-algorithm\u2461"}],"title":"6.3. Gravity Sensor"}],"url":"https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm"},
+"acceleration": {"dfnID":"acceleration","dfnText":"acceleration","external":false,"refSections":[{"refs":[{"id":"ref-for-acceleration\u2460"}],"title":"1. Introduction"},{"refs":[{"id":"ref-for-acceleration\u2461"},{"id":"ref-for-acceleration\u2462"},{"id":"ref-for-acceleration\u2463"},{"id":"ref-for-acceleration\u2464"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-acceleration\u2465"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-acceleration\u2466"}],"title":"7.1.1. Accelerometer.x"},{"refs":[{"id":"ref-for-acceleration\u2467"}],"title":"7.1.2. Accelerometer.y"},{"refs":[{"id":"ref-for-acceleration\u2468"}],"title":"7.1.3. Accelerometer.z"},{"refs":[{"id":"ref-for-acceleration\u2460\u24ea"}],"title":"7.3.1. GravitySensor.x"},{"refs":[{"id":"ref-for-acceleration\u2460\u2460"}],"title":"7.3.2. GravitySensor.y"},{"refs":[{"id":"ref-for-acceleration\u2460\u2461"}],"title":"7.3.3. GravitySensor.z"}],"url":"#acceleration"},
+"accelerometer": {"dfnID":"accelerometer","dfnText":"Accelerometer","external":false,"refSections":[{"refs":[{"id":"ref-for-accelerometer\u2460"}],"title":"1. Introduction"},{"refs":[{"id":"ref-for-accelerometer\u2461"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-accelerometer\u2462"}],"title":"6.4. Reference Frame"},{"refs":[{"id":"ref-for-accelerometer\u2463"}],"title":"7.1. The Accelerometer Interface"},{"refs":[{"id":"ref-for-accelerometer\u2464"}],"title":"7.1.1. Accelerometer.x"},{"refs":[{"id":"ref-for-accelerometer\u2465"}],"title":"7.1.2. Accelerometer.y"},{"refs":[{"id":"ref-for-accelerometer\u2466"}],"title":"7.1.3. Accelerometer.z"},{"refs":[{"id":"ref-for-accelerometer\u2467"}],"title":"7.2. The LinearAccelerationSensor Interface"},{"refs":[{"id":"ref-for-accelerometer\u2468"}],"title":"7.3. The GravitySensor Interface"},{"refs":[{"id":"ref-for-accelerometer\u2460\u24ea"}],"title":"8.1. Construct an accelerometer object"}],"url":"#accelerometer"},
+"accelerometer-reading-quantization-algorithm": {"dfnID":"accelerometer-reading-quantization-algorithm","dfnText":"8.2. Accelerometer reading quantization algorithm","external":false,"refSections":[{"refs":[{"id":"ref-for-accelerometer-reading-quantization-algorithm"}],"title":"4. Security and Privacy Considerations"},{"refs":[{"id":"ref-for-accelerometer-reading-quantization-algorithm"}],"title":"8.2. Accelerometer reading quantization algorithm"}],"url":"#accelerometer-reading-quantization-algorithm"},
+"accelerometer-sensor-type": {"dfnID":"accelerometer-sensor-type","dfnText":"Accelerometer","external":false,"refSections":[{"refs":[{"id":"ref-for-accelerometer-sensor-type"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-accelerometer-sensor-type\u2460"}],"title":"8.2. Accelerometer reading quantization algorithm"},{"refs":[{"id":"ref-for-accelerometer-sensor-type\u2461"}],"title":"9. Automation"}],"url":"#accelerometer-sensor-type"},
+"b4cfa5ce": {"dfnID":"b4cfa5ce","dfnText":"throw","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-throw"}],"title":"8.1. Construct an accelerometer object"}],"url":"https://webidl.spec.whatwg.org/#dfn-throw"},
+"b75bb3bd": {"dfnID":"b75bb3bd","dfnText":"SecureContext","external":true,"refSections":[{"refs":[{"id":"ref-for-SecureContext"}],"title":"7.1. The Accelerometer Interface"},{"refs":[{"id":"ref-for-SecureContext\u2460"}],"title":"7.2. The LinearAccelerationSensor Interface"},{"refs":[{"id":"ref-for-SecureContext\u2461"}],"title":"7.3. The GravitySensor Interface"}],"url":"https://webidl.spec.whatwg.org/#SecureContext"},
+"bb15fee5": {"dfnID":"bb15fee5","dfnText":"virtual sensor metadata","external":true,"refSections":[{"refs":[{"id":"ref-for-virtual-sensor-metadata"}],"title":"9.3. Gravity automation"}],"url":"https://w3c.github.io/sensors/#virtual-sensor-metadata"},
+"bb91d953": {"dfnID":"bb91d953","dfnText":"current orientation type","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-current-orientation-type"}],"title":"6.4. Reference Frame"}],"url":"https://www.w3.org/TR/screen-orientation/#dfn-current-orientation-type"},
+"beb7996f": {"dfnID":"beb7996f","dfnText":"extension sensor interface","external":true,"refSections":[{"refs":[{"id":"ref-for-extension-sensor-interface"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-extension-sensor-interface\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-extension-sensor-interface\u2461"}],"title":"6.3. Gravity Sensor"}],"url":"https://w3c.github.io/sensors/#extension-sensor-interface"},
+"c3e881ef": {"dfnID":"c3e881ef","dfnText":"SecurityError","external":true,"refSections":[{"refs":[{"id":"ref-for-securityerror"}],"title":"8.1. Construct an accelerometer object"}],"url":"https://webidl.spec.whatwg.org/#securityerror"},
+"cc890cc1": {"dfnID":"cc890cc1","dfnText":"policy-controlled feature","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-controlled-feature"}],"title":"5. Permissions Policy integration"}],"url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature"},
+"construct-an-accelerometer-object": {"dfnID":"construct-an-accelerometer-object","dfnText":"8.1. Construct an accelerometer object","external":false,"refSections":[{"refs":[{"id":"ref-for-construct-an-accelerometer-object"}],"title":"7.1. The Accelerometer Interface"},{"refs":[{"id":"ref-for-construct-an-accelerometer-object\u2460"}],"title":"7.2. The LinearAccelerationSensor Interface"},{"refs":[{"id":"ref-for-construct-an-accelerometer-object\u2461"}],"title":"7.3. The GravitySensor Interface"},{"refs":[{"id":"ref-for-construct-an-accelerometer-object"}],"title":"8.1. Construct an accelerometer object"}],"url":"#construct-an-accelerometer-object"},
+"d14a6f26": {"dfnID":"d14a6f26","dfnText":"key","external":true,"refSections":[{"refs":[{"id":"ref-for-map-key"}],"title":"9.3. Gravity automation"}],"url":"https://infra.spec.whatwg.org/#map-key"},
+"dca2de17": {"dfnID":"dca2de17","dfnText":"DOMException","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-DOMException"}],"title":"8.1. Construct an accelerometer object"}],"url":"https://webidl.spec.whatwg.org/#idl-DOMException"},
+"device-coordinate-system": {"dfnID":"device-coordinate-system","dfnText":"device coordinate system","external":false,"refSections":[{"refs":[{"id":"ref-for-device-coordinate-system"},{"id":"ref-for-device-coordinate-system\u2460"},{"id":"ref-for-device-coordinate-system\u2461"},{"id":"ref-for-device-coordinate-system\u2462"},{"id":"ref-for-device-coordinate-system\u2463"}],"title":"6.4. Reference Frame"},{"refs":[{"id":"ref-for-device-coordinate-system\u2464"}],"title":"8.1. Construct an accelerometer object"}],"url":"#device-coordinate-system"},
+"dictdef-accelerometersensoroptions": {"dfnID":"dictdef-accelerometersensoroptions","dfnText":"AccelerometerSensorOptions","external":false,"refSections":[{"refs":[{"id":"ref-for-dictdef-accelerometersensoroptions"}],"title":"7.1. The Accelerometer Interface"},{"refs":[{"id":"ref-for-dictdef-accelerometersensoroptions\u2460"}],"title":"7.2. The LinearAccelerationSensor Interface"},{"refs":[{"id":"ref-for-dictdef-accelerometersensoroptions\u2461"}],"title":"7.3. The GravitySensor Interface"},{"refs":[{"id":"ref-for-dictdef-accelerometersensoroptions\u2462"}],"title":"8.1. Construct an accelerometer object"}],"url":"#dictdef-accelerometersensoroptions"},
+"dom-accelerometer-accelerometer": {"dfnID":"dom-accelerometer-accelerometer","dfnText":"new Accelerometer(options)","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-accelerometer-accelerometer"}],"title":"7.1. The Accelerometer Interface"}],"url":"#dom-accelerometer-accelerometer"},
+"dom-accelerometer-accelerometer-options-options": {"dfnID":"dom-accelerometer-accelerometer-options-options","dfnText":"options","external":false,"refSections":[],"url":"#dom-accelerometer-accelerometer-options-options"},
+"dom-accelerometer-x": {"dfnID":"dom-accelerometer-x","dfnText":"x","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-accelerometer-x"}],"title":"7.1.1. Accelerometer.x"},{"refs":[{"id":"ref-for-dom-accelerometer-x\u2460"}],"title":"7.2.1. LinearAccelerationSensor.x"},{"refs":[{"id":"ref-for-dom-accelerometer-x\u2461"}],"title":"7.3.1. GravitySensor.x"}],"url":"#dom-accelerometer-x"},
+"dom-accelerometer-y": {"dfnID":"dom-accelerometer-y","dfnText":"y","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-accelerometer-y"}],"title":"7.1.2. Accelerometer.y"},{"refs":[{"id":"ref-for-dom-accelerometer-y\u2460"}],"title":"7.2.2. LinearAccelerationSensor.y"},{"refs":[{"id":"ref-for-dom-accelerometer-y\u2461"}],"title":"7.3.2. GravitySensor.y"}],"url":"#dom-accelerometer-y"},
+"dom-accelerometer-z": {"dfnID":"dom-accelerometer-z","dfnText":"z","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-accelerometer-z"}],"title":"7.1.3. Accelerometer.z"},{"refs":[{"id":"ref-for-dom-accelerometer-z\u2460"}],"title":"7.2.3. LinearAccelerationSensor.z"},{"refs":[{"id":"ref-for-dom-accelerometer-z\u2461"}],"title":"7.3.3. GravitySensor.z"}],"url":"#dom-accelerometer-z"},
+"dom-accelerometerlocalcoordinatesystem-device": {"dfnID":"dom-accelerometerlocalcoordinatesystem-device","dfnText":"\"device\"","external":false,"refSections":[],"url":"#dom-accelerometerlocalcoordinatesystem-device"},
+"dom-accelerometerlocalcoordinatesystem-screen": {"dfnID":"dom-accelerometerlocalcoordinatesystem-screen","dfnText":"\"screen\"","external":false,"refSections":[],"url":"#dom-accelerometerlocalcoordinatesystem-screen"},
+"dom-accelerometersensoroptions-referenceframe": {"dfnID":"dom-accelerometersensoroptions-referenceframe","dfnText":"referenceFrame","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-accelerometersensoroptions-referenceframe"}],"title":"8.1. Construct an accelerometer object"}],"url":"#dom-accelerometersensoroptions-referenceframe"},
+"dom-gravitysensor-gravitysensor": {"dfnID":"dom-gravitysensor-gravitysensor","dfnText":"new GravitySensor(options)","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-gravitysensor-gravitysensor"}],"title":"7.3. The GravitySensor Interface"}],"url":"#dom-gravitysensor-gravitysensor"},
+"dom-gravitysensor-gravitysensor-options-options": {"dfnID":"dom-gravitysensor-gravitysensor-options-options","dfnText":"options","external":false,"refSections":[],"url":"#dom-gravitysensor-gravitysensor-options-options"},
+"dom-linearaccelerationsensor-linearaccelerationsensor": {"dfnID":"dom-linearaccelerationsensor-linearaccelerationsensor","dfnText":"new LinearAccelerationSensor(options)","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-linearaccelerationsensor-linearaccelerationsensor"}],"title":"7.2. The LinearAccelerationSensor Interface"}],"url":"#dom-linearaccelerationsensor-linearaccelerationsensor"},
+"dom-linearaccelerationsensor-linearaccelerationsensor-options-options": {"dfnID":"dom-linearaccelerationsensor-linearaccelerationsensor-options-options","dfnText":"options","external":false,"refSections":[],"url":"#dom-linearaccelerationsensor-linearaccelerationsensor-options-options"},
+"eed9938b": {"dfnID":"eed9938b","dfnText":"user identifying","external":true,"refSections":[{"refs":[{"id":"ref-for-user-identifying"}],"title":"4. Security and Privacy Considerations"}],"url":"https://w3c.github.io/sensors/#user-identifying"},
+"enumdef-accelerometerlocalcoordinatesystem": {"dfnID":"enumdef-accelerometerlocalcoordinatesystem","dfnText":"AccelerometerLocalCoordinateSystem","external":false,"refSections":[{"refs":[{"id":"ref-for-enumdef-accelerometerlocalcoordinatesystem"}],"title":"7.1. The Accelerometer Interface"}],"url":"#enumdef-accelerometerlocalcoordinatesystem"},
+"f96b75e9": {"dfnID":"f96b75e9","dfnText":"sensor type","external":true,"refSections":[{"refs":[{"id":"ref-for-sensor-type"},{"id":"ref-for-sensor-type\u2460"}],"title":"6.1. Accelerometer"},{"refs":[{"id":"ref-for-sensor-type\u2461"},{"id":"ref-for-sensor-type\u2462"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-sensor-type\u2463"},{"id":"ref-for-sensor-type\u2464"}],"title":"6.3. Gravity Sensor"},{"refs":[{"id":"ref-for-sensor-type\u2465"}],"title":"8.1. Construct an accelerometer object"},{"refs":[{"id":"ref-for-sensor-type\u2466"}],"title":"8.2. Accelerometer reading quantization algorithm"}],"url":"https://w3c.github.io/sensors/#sensor-type"},
+"fd4ad34f": {"dfnID":"fd4ad34f","dfnText":"get value from latest reading","external":true,"refSections":[{"refs":[{"id":"ref-for-get-value-from-latest-reading"}],"title":"4. Security and Privacy Considerations"},{"refs":[{"id":"ref-for-get-value-from-latest-reading\u2460"}],"title":"7.1.1. Accelerometer.x"},{"refs":[{"id":"ref-for-get-value-from-latest-reading\u2461"}],"title":"7.1.2. Accelerometer.y"},{"refs":[{"id":"ref-for-get-value-from-latest-reading\u2462"}],"title":"7.1.3. Accelerometer.z"},{"refs":[{"id":"ref-for-get-value-from-latest-reading\u2463"}],"title":"7.2.1. LinearAccelerationSensor.x"},{"refs":[{"id":"ref-for-get-value-from-latest-reading\u2464"}],"title":"7.2.2. LinearAccelerationSensor.y"},{"refs":[{"id":"ref-for-get-value-from-latest-reading\u2465"}],"title":"7.2.3. LinearAccelerationSensor.z"},{"refs":[{"id":"ref-for-get-value-from-latest-reading\u2466"}],"title":"7.3.1. GravitySensor.x"},{"refs":[{"id":"ref-for-get-value-from-latest-reading\u2467"}],"title":"7.3.2. GravitySensor.y"},{"refs":[{"id":"ref-for-get-value-from-latest-reading\u2468"}],"title":"7.3.3. GravitySensor.z"}],"url":"https://w3c.github.io/sensors/#get-value-from-latest-reading"},
+"gravity": {"dfnID":"gravity","dfnText":"gravity","external":false,"refSections":[{"refs":[{"id":"ref-for-gravity"},{"id":"ref-for-gravity\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-gravity\u2461"},{"id":"ref-for-gravity\u2462"}],"title":"6.3. Gravity Sensor"},{"refs":[{"id":"ref-for-gravity\u2463"}],"title":"7.3.1. GravitySensor.x"},{"refs":[{"id":"ref-for-gravity\u2464"}],"title":"7.3.2. GravitySensor.y"},{"refs":[{"id":"ref-for-gravity\u2465"}],"title":"7.3.3. GravitySensor.z"}],"url":"#gravity"},
+"gravity-sensor-sensor-type": {"dfnID":"gravity-sensor-sensor-type","dfnText":"Gravity Sensor","external":false,"refSections":[{"refs":[{"id":"ref-for-gravity-sensor-sensor-type"}],"title":"6.3. Gravity Sensor"}],"url":"#gravity-sensor-sensor-type"},
+"gravity-virtual-sensor-type": {"dfnID":"gravity-virtual-sensor-type","dfnText":"gravity","external":false,"refSections":[{"refs":[{"id":"ref-for-gravity-virtual-sensor-type"}],"title":"9.3. Gravity automation"}],"url":"#gravity-virtual-sensor-type"},
+"gravitysensor": {"dfnID":"gravitysensor","dfnText":"GravitySensor","external":false,"refSections":[{"refs":[{"id":"ref-for-gravitysensor\u2460"}],"title":"1. Introduction"},{"refs":[{"id":"ref-for-gravitysensor\u2461"}],"title":"6.3. Gravity Sensor"},{"refs":[{"id":"ref-for-gravitysensor\u2462"}],"title":"6.4. Reference Frame"},{"refs":[{"id":"ref-for-gravitysensor\u2463"}],"title":"7.3. The GravitySensor Interface"},{"refs":[{"id":"ref-for-gravitysensor\u2464"}],"title":"7.3.1. GravitySensor.x"},{"refs":[{"id":"ref-for-gravitysensor\u2465"}],"title":"7.3.2. GravitySensor.y"},{"refs":[{"id":"ref-for-gravitysensor\u2466"}],"title":"7.3.3. GravitySensor.z"},{"refs":[{"id":"ref-for-gravitysensor\u2467"}],"title":"8.1. Construct an accelerometer object"}],"url":"#gravitysensor"},
+"linear-acceleration": {"dfnID":"linear-acceleration","dfnText":"linear acceleration","external":false,"refSections":[{"refs":[{"id":"ref-for-linear-acceleration"},{"id":"ref-for-linear-acceleration\u2460"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-linear-acceleration\u2461"}],"title":"6.3. Gravity Sensor"},{"refs":[{"id":"ref-for-linear-acceleration\u2462"}],"title":"7.2.1. LinearAccelerationSensor.x"},{"refs":[{"id":"ref-for-linear-acceleration\u2463"}],"title":"7.2.2. LinearAccelerationSensor.y"},{"refs":[{"id":"ref-for-linear-acceleration\u2464"}],"title":"7.2.3. LinearAccelerationSensor.z"}],"url":"#linear-acceleration"},
+"linear-acceleration-sensor-sensor-type": {"dfnID":"linear-acceleration-sensor-sensor-type","dfnText":"Linear Acceleration Sensor","external":false,"refSections":[{"refs":[{"id":"ref-for-linear-acceleration-sensor-sensor-type"}],"title":"6.2. Linear Acceleration Sensor"}],"url":"#linear-acceleration-sensor-sensor-type"},
+"linearaccelerationsensor": {"dfnID":"linearaccelerationsensor","dfnText":"LinearAccelerationSensor","external":false,"refSections":[{"refs":[{"id":"ref-for-linearaccelerationsensor\u2460"}],"title":"1. Introduction"},{"refs":[{"id":"ref-for-linearaccelerationsensor\u2461"}],"title":"6.2. Linear Acceleration Sensor"},{"refs":[{"id":"ref-for-linearaccelerationsensor\u2462"}],"title":"6.4. Reference Frame"},{"refs":[{"id":"ref-for-linearaccelerationsensor\u2463"}],"title":"7.2. The LinearAccelerationSensor Interface"},{"refs":[{"id":"ref-for-linearaccelerationsensor\u2464"}],"title":"7.2.1. LinearAccelerationSensor.x"},{"refs":[{"id":"ref-for-linearaccelerationsensor\u2465"}],"title":"7.2.2. LinearAccelerationSensor.y"},{"refs":[{"id":"ref-for-linearaccelerationsensor\u2466"}],"title":"7.2.3. LinearAccelerationSensor.z"},{"refs":[{"id":"ref-for-linearaccelerationsensor\u2467"}],"title":"8.1. Construct an accelerometer object"}],"url":"#linearaccelerationsensor"},
+"screen-coordinate-system": {"dfnID":"screen-coordinate-system","dfnText":"screen coordinate system","external":false,"refSections":[{"refs":[{"id":"ref-for-screen-coordinate-system"}],"title":"2. Examples"},{"refs":[{"id":"ref-for-screen-coordinate-system\u2460"},{"id":"ref-for-screen-coordinate-system\u2461"},{"id":"ref-for-screen-coordinate-system\u2462"},{"id":"ref-for-screen-coordinate-system\u2463"}],"title":"6.4. Reference Frame"},{"refs":[{"id":"ref-for-screen-coordinate-system\u2464"}],"title":"8.1. Construct an accelerometer object"}],"url":"#screen-coordinate-system"},
+};
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    genAllDfnPanels();
+
+    document.body.addEventListener("click", (e) => {
+        // If not handled already, just hide all dfn panels.
+        hideAllDfnPanels();
+    });
+});
+
+window.addEventListener("resize", () => {
+    // Pin any visible dfn panel
+    queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>positionDfnPanel(el));
+});
+
+function genAllDfnPanels() {
+    for(const panelData of Object.values(dfnPanelData)) {
+        const dfnID = panelData.dfnID;
+        const dfn = document.getElementById(dfnID);
+        if(!dfn) {
+            console.log(`Can't find dfn#${dfnID}.`, panelData);
+            continue;
+        }
+        dfn.panelData = panelData;
+        insertDfnPopupAction(dfn);
+    }
+}
+
+function genDfnPanel(dfn, { dfnID, url, dfnText, refSections, external }) {
+    const dfnPanel = mk.aside({
+        class: "dfn-panel on",
+        id: `infopanel-for-${dfnID}`,
+        "data-for": dfnID,
+        "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
+        },
+        mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
+            `Info about the '${dfnText}' ${external?"external":""} reference.`),
+        mk.a({href:url, class:"dfn-link"}, url),
+        refSections.length == 0 ? [] :
+            mk.b({}, "Referenced in:"),
+            mk.ul({},
+                ...refSections.map(section=>
+                    mk.li({},
+                        ...section.refs.map((ref, refI)=>
+                            [
+                                mk.a({ href: `#${ref.id}` },
+                                    (refI == 0) ? section.title : `(${refI + 1})`
+                                ),
+                                " ",
+                            ]
+                        ),
+                    ),
+                ),
+            ),
+        genLinkingSyntaxes(dfn),
+    );
+
+    dfnPanel.addEventListener('click', (event) => {
+        if (event.target.nodeName == 'A') {
+            scrollToTargetAndHighlight(event);
+            pinDfnPanel(dfnPanel);
+        }
+        event.stopPropagation();
+        refocusOnTarget(event);
+    });
+    dfnPanel.addEventListener('keydown', (event) => {
+        if(event.keyCode == 27) { // Escape key
+            hideDfnPanel({dfnPanel});
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    });
+
+    dfnPanel.dfn = dfn;
+    dfn.dfnPanel = dfnPanel;
+    return dfnPanel;
+}
+
+
+
+function hideAllDfnPanels() {
+    // Delete the currently-active dfn panel.
+    queryAll(".dfn-panel").forEach(dfnPanel=>hideDfnPanel({dfnPanel}));
+}
+
+function showDfnPanel(dfn) {
+    hideAllDfnPanels(); // Only display one at a time.
+
+    dfn.setAttribute("aria-expanded", "true");
+
+    const dfnPanel = genDfnPanel(dfn, dfn.panelData);
+
+    // Give the dfn a unique tabindex, and then
+    // give all the tabbable panel bits successive indexes.
+    let tabIndex = 100;
+    dfn.tabIndex = tabIndex++;
+    const tabbable = dfnPanel.querySelectorAll(":is(a, button)");
+    for (const el of tabbable) {
+        el.tabIndex = tabIndex++;
+    }
+
+    append(document.body, dfnPanel);
+    positionDfnPanel(dfnPanel);
+}
+
+function positionDfnPanel(dfnPanel) {
+    const dfn = dfnPanel.dfn;
+    const dfnPos = getBounds(dfn);
+    dfnPanel.style.top = dfnPos.bottom + "px";
+    dfnPanel.style.left = dfnPos.left + "px";
+
+    const panelPos = dfnPanel.getBoundingClientRect();
+    const panelMargin = 8;
+    const maxRight = document.body.parentNode.clientWidth - panelMargin;
+    if (panelPos.right > maxRight) {
+        const overflowAmount = panelPos.right - maxRight;
+        const newLeft = Math.max(panelMargin, dfnPos.left - overflowAmount);
+        dfnPanel.style.left = newLeft + "px";
+    }
+}
+
+function pinDfnPanel(dfnPanel) {
+    // Switch it to "activated" state, which pins it.
+    dfnPanel.classList.add("activated");
+    dfnPanel.style.position = "fixed";
+    dfnPanel.style.left = null;
+    dfnPanel.style.top = null;
+}
+
+function hideDfnPanel({dfn, dfnPanel}) {
+    if(!dfnPanel) dfnPanel = dfn.dfnPanel;
+    if(!dfn) dfn = dfnPanel.dfn;
+    dfn.dfnPanel = undefined;
+    dfnPanel.dfn = undefined;
+    dfn.setAttribute("aria-expanded", "false");
+    dfn.tabIndex = undefined;
+    dfnPanel.remove()
+}
+
+function toggleDfnPanel(dfn) {
+    if(dfn.dfnPanel) {
+        hideDfnPanel(dfn);
+    } else {
+        showDfnPanel(dfn);
+    }
+}
+
+function insertDfnPopupAction(dfn) {
+    dfn.setAttribute('role', 'button');
+    dfn.setAttribute('aria-expanded', 'false')
+    dfn.tabIndex = 0;
+    dfn.classList.add('has-dfn-panel');
+    dfn.addEventListener('click', (event) => {
+        toggleDfnPanel(dfn);
+        event.stopPropagation();
+    });
+    dfn.addEventListener('keypress', (event) => {
+        const kc = event.keyCode;
+        // 32->Space, 13->Enter
+        if(kc == 32 || kc == 13) {
+            toggleDfnPanel(dfn);
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    });
+}
+
+function refocusOnTarget(event) {
+    const target = event.target;
+    setTimeout(() => {
+        // Refocus on the event.target element.
+        // This is needed after browser scrolls to the destination.
+        target.focus();
+    });
+}
+
+// TODO: shared util
+// Returns the root-level absolute position {left and top} of element.
+function getBounds(el, relativeTo=document.body) {
+    const relativeRect = relativeTo.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    const top = elRect.top - relativeRect.top;
+    const left = elRect.left - relativeRect.left;
+    return {
+        top,
+        left,
+        bottom: top + elRect.height,
+        right: left + elRect.width,
+    }
+}
+
+function scrollToTargetAndHighlight(event) {
+    let hash = event.target.hash;
+    if (hash) {
+        hash = decodeURIComponent(hash.substring(1));
+        const dest = document.getElementById(hash);
+        if (dest) {
+            dest.classList.add('highlighted');
+            setTimeout(() => dest.classList.remove('highlighted'), 1000);
+        }
+    }
+}
+
+// Functions, divided by link type, that wrap an autolink's
+// contents with the appropriate outer syntax.
+// Alternately, a string naming another type they format
+// the same as.
+function needsFor(type) {
+    switch(type) {
+        case "descriptor":
+        case "value":
+        case "element-attr":
+        case "attr-value":
+        case "element-state":
+        case "method":
+        case "constructor":
+        case "argument":
+        case "attribute":
+        case "const":
+        case "dict-member":
+        case "event":
+        case "enum-value":
+        case "stringifier":
+        case "serializer":
+        case "iterator":
+        case "maplike":
+        case "setlike":
+        case "state":
+        case "mode":
+        case "context":
+        case "facet": return true;
+
+        default: return false;
+    }
+}
+function refusesFor(type) {
+    switch(type) {
+        case "property":
+        case "element":
+        case "interface":
+        case "namespace":
+        case "callback":
+        case "dictionary":
+        case "enum":
+        case "exception":
+        case "typedef":
+        case "http-header":
+        case "permission": return true;
+
+        default: return false;
+    }
+}
+function linkFormatterFromType(type) {
+    switch(type) {
+        case 'scheme':
+        case 'permission':
+        case 'dfn': return (text) => `[=${text}=]`;
+
+        case 'abstract-op': return (text) => `[\$${text}\$]`;
+
+        case 'function':
+        case 'at-rule':
+        case 'selector':
+        case 'value': return (text) => `''${text}''`;
+
+        case 'http-header': return (text) => `[:${text}:]`;
+
+        case 'interface':
+        case 'constructor':
+        case 'method':
+        case 'argument':
+        case 'attribute':
+        case 'callback':
+        case 'dictionary':
+        case 'dict-member':
+        case 'enum':
+        case 'enum-value':
+        case 'exception':
+        case 'const':
+        case 'typedef':
+        case 'stringifier':
+        case 'serializer':
+        case 'iterator':
+        case 'maplike':
+        case 'setlike':
+        case 'extended-attribute':
+        case 'event':
+        case 'idl': return (text) => `{{${text}}}`;
+
+        case 'element-state':
+        case 'element-attr':
+        case 'attr-value':
+        case 'element': return (element) => `<{${element}}>`;
+
+        case 'grammar': return (text) => `${text} (within a <pre class=prod>)`;
+
+        case 'type': return (text)=> `<<${text}>>`;
+
+        case 'descriptor':
+        case 'property': return (text) => `'${text}'`;
+
+        default: return;
+    };
+};
+
+function genLinkingSyntaxes(dfn) {
+    if(dfn.tagName != "DFN") return;
+
+    const type = dfn.getAttribute('data-dfn-type');
+    if(!type) {
+        console.log(`<dfn> doesn't have a data-dfn-type:`, dfn);
+        return [];
+    }
+
+    // Return a function that wraps link text based on the type
+    const linkFormatter = linkFormatterFromType(type);
+    if(!linkFormatter) {
+        console.log(`<dfn> has an unknown data-dfn-type:`, dfn);
+        return [];
+    }
+
+    let ltAlts;
+    if(dfn.hasAttribute('data-lt')) {
+        ltAlts = dfn.getAttribute('data-lt')
+            .split("|")
+            .map(x=>x.trim());
+    } else {
+        ltAlts = [dfn.textContent.trim()];
+    }
+    if(type == "type") {
+        // lt of "<foo>", but "foo" is the interior;
+        // <<foo/bar>> is how you write it with a for,
+        // not <foo/<bar>> or whatever.
+        for(var i = 0; i < ltAlts.length; i++) {
+            const lt = ltAlts[i];
+            const match = /<(.*)>/.exec(lt);
+            if(match) { ltAlts[i] = match[1]; }
+        }
+    }
+
+    let forAlts;
+    if(dfn.hasAttribute('data-dfn-for')) {
+        forAlts = dfn.getAttribute('data-dfn-for')
+            .split(",")
+            .map(x=>x.trim());
+    } else {
+        forAlts = [''];
+    }
+
+    let linkingSyntaxes = [];
+    if(!needsFor(type)) {
+        for(const lt of ltAlts) {
+            linkingSyntaxes.push(linkFormatter(lt));
+        }
+    }
+    if(!refusesFor(type)) {
+        for(const f of forAlts) {
+            linkingSyntaxes.push(linkFormatter(`${f}/${ltAlts[0]}`))
+        }
+    }
+    return [
+        mk.b({}, 'Possible linking syntaxes:'),
+        mk.ul({},
+            ...linkingSyntaxes.map(link => {
+                const copyLink = async () =>
+                    await navigator.clipboard.writeText(link);
+                return mk.li({},
+                    mk.div({ class: 'link-item' },
+                        mk.button({
+                            class: 'copy-icon', title: 'Copy',
+                            type: 'button',
+                            _onclick: copyLink,
+                            tabindex: 0,
+                        }, mk.span({ class: 'icon' }) ),
+                        mk.span({}, link)
+                    )
+                );
+            })
+        )
+    ];
+}
 }
 </script>
 <script>/* Boilerplate: script-position-annos */
 "use strict";
 {
-
 function repositionAnnoPanels(){
     const panels = [...document.querySelectorAll("[data-anno-for]")];
-    const main = document.querySelector("main");
-    let mainRect;
-    if(main) mainRect = main.getBoundingClientRect();
-    for(const panel of panels) {
-        const dfn = document.getElementById(panel.getAttribute("data-anno-for"));
-        if(!dfn) {
-            console.log("Can't find the annotation panel target:", panel);
-            continue;
-        }
-        const rect = dfn.getBoundingClientRect();
-        const top = window.scrollY + rect.top
-        panel.style.top = top + "px";
-        panel.top = top;
-        panel.height = rect.height;
-        panel.classList.remove("unpositioned");
-        const panelRect = panel.getBoundingClientRect()
-        if(main) {
-            panel.classList.toggle("overlapping-main", panelRect.left < mainRect.right)
-        }
-    }
+    hydratePanels(panels);
     let vSoFar = 0;
     for(const panel of panels.sort(cmpTops)) {
         if(panel.top < vSoFar) {
@@ -2316,6 +2451,39 @@ function repositionAnnoPanels(){
             panel.style.top = vSoFar + "px";
         }
         vSoFar = panel.top + panel.height + 15;
+    }
+}
+function hydratePanels(panels) {
+    const main = document.querySelector("main");
+    let mainRect;
+    if(main) mainRect = main.getBoundingClientRect();
+    // First display them all, if they're not already visible.
+    for(const panel of panels) {
+        panel.classList.remove("unpositioned");
+    }
+    // Measure them all
+    for(const panel of panels) {
+        const dfn = document.getElementById(panel.getAttribute("data-anno-for"));
+        if(!dfn) {
+            console.log("Can't find the annotation panel target:", panel);
+            continue;
+        }
+        panel.dfn = dfn;
+        panel.top = window.scrollY + dfn.getBoundingClientRect().top;
+        let panelRect = panel.getBoundingClientRect();
+        panel.height = panelRect.height;
+        if(main) {
+            panel.overlappingMain = panelRect.left < mainRect.right;
+        } else {
+            panel.overlappingMain = false;
+        }
+    }
+    // And finally position them
+    for(const panel of panels) {
+        const dfn = panel.dfn;
+        if(!dfn) continue;
+        panel.style.top = panel.top + "px";
+        panel.classList.toggle("overlapping-main", panel.overlappingMain);
     }
 }
 
@@ -2327,101 +2495,361 @@ window.addEventListener("load", repositionAnnoPanels);
 window.addEventListener("resize", repositionAnnoPanels);
 }
 </script>
+<script>/* Boilerplate: script-ref-hints */
+"use strict";
+{
+let refsData = {
+"#acceleration": {"displayText":"acceleration","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"acceleration","type":"dfn","url":"#acceleration"},
+"#accelerometer": {"displayText":"Accelerometer","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"Accelerometer","type":"interface","url":"#accelerometer"},
+"#accelerometer-reading-quantization-algorithm": {"displayText":"accelerometer reading quantization algorithm","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"accelerometer reading quantization algorithm","type":"dfn","url":"#accelerometer-reading-quantization-algorithm"},
+"#accelerometer-sensor-type": {"displayText":"accelerometer","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"accelerometer","type":"dfn","url":"#accelerometer-sensor-type"},
+"#construct-an-accelerometer-object": {"displayText":"construct an accelerometer object","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"construct an accelerometer object","type":"dfn","url":"#construct-an-accelerometer-object"},
+"#device-coordinate-system": {"displayText":"device coordinate system","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"device coordinate system","type":"dfn","url":"#device-coordinate-system"},
+"#dictdef-accelerometersensoroptions": {"displayText":"AccelerometerSensorOptions","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"AccelerometerSensorOptions","type":"dictionary","url":"#dictdef-accelerometersensoroptions"},
+"#dom-accelerometer-accelerometer": {"displayText":"Accelerometer(options)","export":true,"for_":["Accelerometer"],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"Accelerometer(options)","type":"constructor","url":"#dom-accelerometer-accelerometer"},
+"#dom-accelerometer-x": {"displayText":"x","export":true,"for_":["Accelerometer"],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"x","type":"attribute","url":"#dom-accelerometer-x"},
+"#dom-accelerometer-y": {"displayText":"y","export":true,"for_":["Accelerometer"],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"y","type":"attribute","url":"#dom-accelerometer-y"},
+"#dom-accelerometer-z": {"displayText":"z","export":true,"for_":["Accelerometer"],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"z","type":"attribute","url":"#dom-accelerometer-z"},
+"#dom-accelerometersensoroptions-referenceframe": {"displayText":"referenceFrame","export":true,"for_":["AccelerometerSensorOptions"],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"referenceFrame","type":"dict-member","url":"#dom-accelerometersensoroptions-referenceframe"},
+"#dom-gravitysensor-gravitysensor": {"displayText":"GravitySensor(options)","export":true,"for_":["GravitySensor"],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"GravitySensor(options)","type":"constructor","url":"#dom-gravitysensor-gravitysensor"},
+"#dom-linearaccelerationsensor-linearaccelerationsensor": {"displayText":"LinearAccelerationSensor(options)","export":true,"for_":["LinearAccelerationSensor"],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"LinearAccelerationSensor(options)","type":"constructor","url":"#dom-linearaccelerationsensor-linearaccelerationsensor"},
+"#enumdef-accelerometerlocalcoordinatesystem": {"displayText":"AccelerometerLocalCoordinateSystem","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"AccelerometerLocalCoordinateSystem","type":"enum","url":"#enumdef-accelerometerlocalcoordinatesystem"},
+"#gravity": {"displayText":"gravity","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"gravity","type":"dfn","url":"#gravity"},
+"#gravity-sensor-sensor-type": {"displayText":"gravity sensor","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"gravity sensor","type":"dfn","url":"#gravity-sensor-sensor-type"},
+"#gravity-virtual-sensor-type": {"displayText":"gravity virtual sensor type","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"gravity virtual sensor type","type":"dfn","url":"#gravity-virtual-sensor-type"},
+"#gravitysensor": {"displayText":"GravitySensor","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"GravitySensor","type":"interface","url":"#gravitysensor"},
+"#linear-acceleration": {"displayText":"linear acceleration","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"linear acceleration","type":"dfn","url":"#linear-acceleration"},
+"#linear-acceleration-sensor-sensor-type": {"displayText":"linear acceleration sensor","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"linear acceleration sensor","type":"dfn","url":"#linear-acceleration-sensor-sensor-type"},
+"#linearaccelerationsensor": {"displayText":"LinearAccelerationSensor","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"LinearAccelerationSensor","type":"interface","url":"#linearaccelerationsensor"},
+"#screen-coordinate-system": {"displayText":"screen coordinate system","export":true,"for_":[],"level":"","normative":true,"shortname":"accelerometer","spec":"accelerometer","status":"local","text":"screen coordinate system","type":"dfn","url":"#screen-coordinate-system"},
+"https://infra.spec.whatwg.org/#map-entry": {"displayText":"entry","export":true,"for_":["map"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"entry","type":"dfn","url":"https://infra.spec.whatwg.org/#map-entry"},
+"https://infra.spec.whatwg.org/#map-getting-the-keys": {"displayText":"keys","export":true,"for_":["map"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"keys","type":"dfn","url":"https://infra.spec.whatwg.org/#map-getting-the-keys"},
+"https://infra.spec.whatwg.org/#map-getting-the-values": {"displayText":"values","export":true,"for_":["map"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"values","type":"dfn","url":"https://infra.spec.whatwg.org/#map-getting-the-values"},
+"https://infra.spec.whatwg.org/#map-key": {"displayText":"key","export":true,"for_":["map"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"key","type":"dfn","url":"https://infra.spec.whatwg.org/#map-key"},
+"https://infra.spec.whatwg.org/#map-value": {"displayText":"value","export":true,"for_":["map"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"value","type":"dfn","url":"https://infra.spec.whatwg.org/#map-value"},
+"https://infra.spec.whatwg.org/#ordered-map": {"displayText":"map","export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"map","type":"dfn","url":"https://infra.spec.whatwg.org/#ordered-map"},
+"https://w3c.github.io/deviceorientation/#accelerometer-virtual-sensor-type": {"displayText":"accelerometer virtual sensor type","export":true,"for_":[],"level":"1","normative":true,"shortname":"orientation-event","spec":"orientation-event","status":"current","text":"accelerometer virtual sensor type","type":"dfn","url":"https://w3c.github.io/deviceorientation/#accelerometer-virtual-sensor-type"},
+"https://w3c.github.io/deviceorientation/#linear-acceleration-virtual-sensor-type": {"displayText":"linear-acceleration virtual sensor type","export":true,"for_":[],"level":"1","normative":true,"shortname":"orientation-event","spec":"orientation-event","status":"current","text":"linear-acceleration virtual sensor type","type":"dfn","url":"https://w3c.github.io/deviceorientation/#linear-acceleration-virtual-sensor-type"},
+"https://w3c.github.io/deviceorientation/#permissiondef-accelerometer": {"displayText":"\"accelerometer\"","export":true,"for_":[],"level":"1","normative":true,"shortname":"orientation-event","spec":"orientation-event","status":"current","text":"\"accelerometer\"","type":"permission","url":"https://w3c.github.io/deviceorientation/#permissiondef-accelerometer"},
+"https://w3c.github.io/permissions/#dfn-permission-revocation-algorithm": {"displayText":"permission revocation algorithm","export":true,"for_":["powerful feature"],"level":"1","normative":true,"shortname":"permissions","spec":"permissions","status":"current","text":"permission revocation algorithm","type":"dfn","url":"https://w3c.github.io/permissions/#dfn-permission-revocation-algorithm"},
+"https://w3c.github.io/sensors/#check-sensor-policy-controlled-features": {"displayText":"check sensor policy-controlled features","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"check sensor policy-controlled features","type":"dfn","url":"https://w3c.github.io/sensors/#check-sensor-policy-controlled-features"},
+"https://w3c.github.io/sensors/#default-sensor": {"displayText":"default sensor","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"default sensor","type":"dfn","url":"https://w3c.github.io/sensors/#default-sensor"},
+"https://w3c.github.io/sensors/#device-fingerprinting": {"displayText":"fingerprinting","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"fingerprinting","type":"dfn","url":"https://w3c.github.io/sensors/#device-fingerprinting"},
+"https://w3c.github.io/sensors/#dictdef-sensoroptions": {"displayText":"SensorOptions","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"SensorOptions","type":"dictionary","url":"https://w3c.github.io/sensors/#dictdef-sensoroptions"},
+"https://w3c.github.io/sensors/#extension-sensor-interface": {"displayText":"extension sensor interface","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"extension sensor interface","type":"dfn","url":"https://w3c.github.io/sensors/#extension-sensor-interface"},
+"https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm": {"displayText":"Generic Sensor permission revocation algorithm","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"generic sensor permission revocation algorithm","type":"dfn","url":"https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm"},
+"https://w3c.github.io/sensors/#get-value-from-latest-reading": {"displayText":"get value from latest reading","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"get value from latest reading","type":"dfn","url":"https://w3c.github.io/sensors/#get-value-from-latest-reading"},
+"https://w3c.github.io/sensors/#initialize-a-sensor-object": {"displayText":"initialize a sensor object","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"initialize a sensor object","type":"dfn","url":"https://w3c.github.io/sensors/#initialize-a-sensor-object"},
+"https://w3c.github.io/sensors/#keystroke-monitoring": {"displayText":"keylogging","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"keylogging","type":"dfn","url":"https://w3c.github.io/sensors/#keystroke-monitoring"},
+"https://w3c.github.io/sensors/#latest-reading": {"displayText":"latest reading","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"latest reading","type":"dfn","url":"https://w3c.github.io/sensors/#latest-reading"},
+"https://w3c.github.io/sensors/#local-coordinate-system": {"displayText":"local coordinate system","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"local coordinate system","type":"dfn","url":"https://w3c.github.io/sensors/#local-coordinate-system"},
+"https://w3c.github.io/sensors/#location-tracking": {"displayText":"location tracking","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"location tracking","type":"dfn","url":"https://w3c.github.io/sensors/#location-tracking"},
+"https://w3c.github.io/sensors/#mitigation-strategies": {"displayText":"generic mitigations","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"generic mitigations","type":"dfn","url":"https://w3c.github.io/sensors/#mitigation-strategies"},
+"https://w3c.github.io/sensors/#parse-xyz-reading": {"displayText":"Parse XYZ reading","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"parse xyz reading","type":"dfn","url":"https://w3c.github.io/sensors/#parse-xyz-reading"},
+"https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata": {"displayText":"per-type virtual sensor metadata","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"per-type virtual sensor metadata","type":"dfn","url":"https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata"},
+"https://w3c.github.io/sensors/#reading-quantization-algorithm": {"displayText":"reading quantization algorithm","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"reading quantization algorithm","type":"dfn","url":"https://w3c.github.io/sensors/#reading-quantization-algorithm"},
+"https://w3c.github.io/sensors/#sensor": {"displayText":"Sensor","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"Sensor","type":"interface","url":"https://w3c.github.io/sensors/#sensor"},
+"https://w3c.github.io/sensors/#sensor-feature-names": {"displayText":"sensor feature names","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"sensor feature names","type":"dfn","url":"https://w3c.github.io/sensors/#sensor-feature-names"},
+"https://w3c.github.io/sensors/#sensor-permission-names": {"displayText":"sensor permission names","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"sensor permission names","type":"dfn","url":"https://w3c.github.io/sensors/#sensor-permission-names"},
+"https://w3c.github.io/sensors/#sensor-reading": {"displayText":"sensor reading","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"sensor reading","type":"dfn","url":"https://w3c.github.io/sensors/#sensor-reading"},
+"https://w3c.github.io/sensors/#sensor-type": {"displayText":"sensor type","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"sensor type","type":"dfn","url":"https://w3c.github.io/sensors/#sensor-type"},
+"https://w3c.github.io/sensors/#supported-sensor-options": {"displayText":"supported sensor options","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"supported sensor options","type":"dfn","url":"https://w3c.github.io/sensors/#supported-sensor-options"},
+"https://w3c.github.io/sensors/#user-identifying": {"displayText":"user identifying","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"user identifying","type":"dfn","url":"https://w3c.github.io/sensors/#user-identifying"},
+"https://w3c.github.io/sensors/#virtual-sensor-metadata": {"displayText":"virtual sensor metadata","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"virtual sensor metadata","type":"dfn","url":"https://w3c.github.io/sensors/#virtual-sensor-metadata"},
+"https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm": {"displayText":"reading parsing algorithm","export":true,"for_":["virtual sensor metadata"],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"reading parsing algorithm","type":"dfn","url":"https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm"},
+"https://w3c.github.io/sensors/#virtual-sensor-type": {"displayText":"virtual sensor type","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"virtual sensor type","type":"dfn","url":"https://w3c.github.io/sensors/#virtual-sensor-type"},
+"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature": {"displayText":"policy-controlled feature","export":true,"for_":[],"level":"1","normative":true,"shortname":"permissions-policy","spec":"permissions-policy-1","status":"current","text":"policy-controlled feature","type":"dfn","url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature"},
+"https://webidl.spec.whatwg.org/#Exposed": {"displayText":"Exposed","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"Exposed","type":"extended-attribute","url":"https://webidl.spec.whatwg.org/#Exposed"},
+"https://webidl.spec.whatwg.org/#SecureContext": {"displayText":"SecureContext","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"SecureContext","type":"extended-attribute","url":"https://webidl.spec.whatwg.org/#SecureContext"},
+"https://webidl.spec.whatwg.org/#dfn-throw": {"displayText":"throw","export":true,"for_":["exception"],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"throw","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-throw"},
+"https://webidl.spec.whatwg.org/#idl-DOMException": {"displayText":"DOMException","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"DOMException","type":"interface","url":"https://webidl.spec.whatwg.org/#idl-DOMException"},
+"https://webidl.spec.whatwg.org/#idl-double": {"displayText":"double","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"double","type":"interface","url":"https://webidl.spec.whatwg.org/#idl-double"},
+"https://webidl.spec.whatwg.org/#securityerror": {"displayText":"SecurityError","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"SecurityError","type":"exception","url":"https://webidl.spec.whatwg.org/#securityerror"},
+"https://webidl.spec.whatwg.org/#this": {"displayText":"this","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"this","type":"dfn","url":"https://webidl.spec.whatwg.org/#this"},
+"https://www.w3.org/TR/screen-orientation/#dfn-current-orientation-type": {"displayText":"current orientation type","export":true,"for_":[],"level":"","normative":true,"shortname":"screen-orientation","spec":"screen-orientation","status":"anchor-block","text":"current orientation type","type":"dfn","url":"https://www.w3.org/TR/screen-orientation/#dfn-current-orientation-type"},
+"https://www.w3.org/TR/screen-orientation/#dom-screen": {"displayText":"dom screen","export":true,"for_":[],"level":"","normative":true,"shortname":"screen-orientation","spec":"screen-orientation","status":"anchor-block","text":"dom screen","type":"dfn","url":"https://www.w3.org/TR/screen-orientation/#dom-screen"},
+};
+
+function mkRefHint(link, ref) {
+    const linkText = link.textContent;
+    let dfnTextElements = '';
+    if (ref.displayText.toLowerCase() != linkText.toLowerCase()) {
+        // Give the original term if it's being displayed in a different way.
+        // But allow casing differences, they're insignificant.
+        dfnTextElements =
+            mk.li({},
+                mk.b({}, "Term: "),
+                mk.span({}, ref.displayText)
+            );
+    }
+    const forList = ref.for_;
+    let forListElements;
+    if(forList.length == 0) {
+        forListElements = [];
+    } else if(forList.length == 1) {
+        forListElements = mk.li({},
+            mk.b({}, "For: "),
+            mk.span({}, forList[0]),
+        );
+    } else {
+        forListElements = mk.li({},
+            mk.b({}, "For: "),
+            mk.ul({},
+                ...forList.map(forItem =>
+                    mk.li({},
+                        mk.span({}, forItem)
+                    ),
+                ),
+            ),
+        );
+    }
+    const url = ref.url;
+    const safeUrl = encodeURIComponent(url);
+    const hintPanel = mk.aside({
+        class: "ref-hint",
+        id: `ref-hint-for-${safeUrl}`,
+        "data-for": url,
+        "aria-labelled-by": `ref-hint-for-${safeUrl}`,
+    },
+        mk.ul({},
+            dfnTextElements,
+            mk.li({},
+                mk.b({}, "URL: "),
+                mk.a({ href: url, class: "ref" }, url),
+            ),
+            mk.li({},
+                mk.b({}, "Type: "),
+                mk.span({}, `${ref.type}`),
+            ),
+            mk.li({},
+                mk.b({}, "Spec: "),
+                mk.span({}, `${ref.spec ? ref.spec : ''}`),
+            ),
+            forListElements
+        ),
+    );
+    hintPanel.forLink = link;
+    setupRefHintEventListeners(link, hintPanel);
+    return hintPanel;
+}
+
+function hideAllRefHints() {
+    queryAll(".ref-hint").forEach(el=>hideRefHint(el));
+}
+
+function hideRefHint(refHint) {
+    const link = refHint.forLink;
+    link.setAttribute("aria-expanded", "false");
+    if(refHint.teardownEventListeners) {
+        refHint.teardownEventListeners();
+    }
+    refHint.remove();
+}
+
+function showRefHint(link) {
+    if(link.classList.contains("dfn-link")) return;
+    const url = link.getAttribute("href");
+    const ref = refsData[url];
+    if(!ref) return;
+
+    hideAllRefHints(); // Only display one at this time.
+
+    const refHint = mkRefHint(link, ref);
+    append(document.body, refHint);
+    link.setAttribute("aria-expanded", "true");
+    positionRefHint(refHint);
+}
+
+function setupRefHintEventListeners(link, refHint) {
+    if (refHint.teardownEventListeners) return;
+    // Add event handlers to hide the refHint after the user moves away
+    // from both the link and refHint, if not hovering either within one second.
+    let timeout = null;
+    const startHidingRefHint = (event) => {
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        timeout = setTimeout(() => {
+            hideRefHint(refHint);
+        }, 1000);
+    }
+    const resetHidingRefHint = (event) => {
+        if (timeout) clearTimeout(timeout);
+        timeout = null;
+    };
+    link.addEventListener("mouseleave", startHidingRefHint);
+    link.addEventListener("mouseenter", resetHidingRefHint);
+    link.addEventListener("blur", startHidingRefHint);
+    link.addEventListener("focus", resetHidingRefHint);
+    refHint.addEventListener("mouseleave", startHidingRefHint);
+    refHint.addEventListener("mouseenter", resetHidingRefHint);
+    refHint.addEventListener("blur", startHidingRefHint);
+    refHint.addEventListener("focus", resetHidingRefHint);
+
+    refHint.teardownEventListeners = () => {
+        // remove event listeners
+        resetHidingRefHint();
+        link.removeEventListener("mouseleave", startHidingRefHint);
+        link.removeEventListener("mouseenter", resetHidingRefHint);
+        link.removeEventListener("blur", startHidingRefHint);
+        link.removeEventListener("focus", resetHidingRefHint);
+        refHint.removeEventListener("mouseleave", startHidingRefHint);
+        refHint.removeEventListener("mouseenter", resetHidingRefHint);
+        refHint.removeEventListener("blur", startHidingRefHint);
+        refHint.removeEventListener("focus", resetHidingRefHint);
+    };
+}
+
+function positionRefHint(refHint) {
+    const link = refHint.forLink;
+    const linkPos = getBounds(link);
+    refHint.style.top = linkPos.bottom + "px";
+    refHint.style.left = linkPos.left + "px";
+
+    const panelPos = refHint.getBoundingClientRect();
+    const panelMargin = 8;
+    const maxRight = document.body.parentNode.clientWidth - panelMargin;
+    if (panelPos.right > maxRight) {
+        const overflowAmount = panelPos.right - maxRight;
+        const newLeft = Math.max(panelMargin, linkPos.left - overflowAmount);
+        refHint.style.left = newLeft + "px";
+    }
+}
+
+// TODO: shared util
+// Returns the root-level absolute position {left and top} of element.
+function getBounds(el, relativeTo=document.body) {
+    const relativeRect = relativeTo.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    const top = elRect.top - relativeRect.top;
+    const left = elRect.left - relativeRect.left;
+    return {
+        top,
+        left,
+        bottom: top + elRect.height,
+        right: left + elRect.width,
+    }
+}
+
+function showRefHintListener(e) {
+    // If the target isn't in a link (or is a link),
+    // just ignore it.
+    let link = e.target.closest("a");
+    if(!link) return;
+
+    // If the target is in a ref-hint panel
+    // (aka a link in the already-open one),
+    // also just ignore it.
+    if(link.closest(".ref-hint")) return;
+
+    // Otherwise, show the panel for the link.
+    showRefHint(link);
+}
+
+function hideAllHintsListener(e) {
+    // If the click is inside a ref-hint panel, ignore it.
+    if(e.target.closest(".ref-hint")) return;
+    // Otherwise, close all the current panels.
+    hideAllRefHints();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.addEventListener("mousedown", showRefHintListener);
+    document.body.addEventListener("focus", showRefHintListener);
+
+    document.body.addEventListener("click", hideAllHintsListener);
+});
+
+window.addEventListener("resize", () => {
+    // Hide any open ref hint.
+    hideAllRefHints();
+});
+}
+</script>
 <script>/* Boilerplate: script-var-click-highlighting */
+"use strict";
+{
 /*
 Color-choosing design:
 
-Colors are ordered by goodness.
-Each color has a usage count (initially zero).
-Each variable has a last-used color.
-
-* If the var has a last-used color, and that color's usage is 0,
-    return that color.
-* Otherwise, return the lowest-indexed color with the lowest usage.
-    Increment the color's usage and set it as the last-used color
-    for that var.
-* On unclicking, decrement usage of the color.
+* Colors are ordered by goodness.
+* On clicking a var, give it the earliest color
+    with the lowest usage in the algorithm.
+* On re-clicking, re-use the var's most recent color
+    if that's not currently being used elsewhere.
 */
-"use strict";
-{
-    document.addEventListener("click", e=>{
-        if(e.target.nodeName == "VAR") {
-            highlightSameAlgoVars(e.target);
-        }
-    });
-    const indexCounts = new Map();
-    const indexNames = new Map();
-    function highlightSameAlgoVars(v) {
-        // Find the algorithm container.
-        let algoContainer = null;
-        let searchEl = v;
-        while(algoContainer == null && searchEl != document.body) {
-            searchEl = searchEl.parentNode;
-            if(searchEl.hasAttribute("data-algorithm")) {
-                algoContainer = searchEl;
-            }
-        }
 
-        // Not highlighting document-global vars,
-        // too likely to be unrelated.
-        if(algoContainer == null) return;
+const COLOR_COUNT = 7;
 
-        const algoName = algoContainer.getAttribute("data-algorithm");
-        const varName = getVarName(v);
-        const addClass = !v.classList.contains("selected");
-        let highlightClass = null;
-        if(addClass) {
-            const index = chooseHighlightIndex(algoName, varName);
-            indexCounts.get(algoName)[index] += 1;
-            indexNames.set(algoName+"///"+varName, index);
-            highlightClass = nameFromIndex(index);
-        } else {
-            const index = previousHighlightIndex(algoName, varName);
-            indexCounts.get(algoName)[index] -= 1;
-            highlightClass = nameFromIndex(index);
-        }
+document.addEventListener("click", e=>{
+    if(e.target.nodeName == "VAR") {
+        highlightSameAlgoVars(e.target);
+    }
+});
 
-        // Find all same-name vars, and toggle their class appropriately.
+function highlightSameAlgoVars(v) {
+    // Find the algorithm container.
+    let algoContainer = findAlgoContainer(v);
+
+    // Not highlighting document-global vars,
+    // too likely to be unrelated.
+    if(algoContainer == null) return;
+
+    const varName = nameFromVar(v);
+    if(!v.hasAttribute("data-var-color")) {
+        const newColor = chooseHighlightColor(algoContainer, v);
         for(const el of algoContainer.querySelectorAll("var")) {
-            if(getVarName(el) == varName) {
-                el.classList.toggle("selected", addClass);
-                el.classList.toggle(highlightClass, addClass);
+            if(nameFromVar(el) == varName) {
+                el.setAttribute("data-var-color", newColor);
+                el.setAttribute("data-var-last-color", newColor);
+            }
+        }
+    } else {
+        for(const el of algoContainer.querySelectorAll("var")) {
+            if(nameFromVar(el) == varName) {
+                el.removeAttribute("data-var-color");
             }
         }
     }
-    function getVarName(el) {
-        return el.textContent.replace(/(\s|\xa0)+/, " ").trim();
+}
+function findAlgoContainer(el) {
+    while(el != document.body) {
+        if(el.hasAttribute("data-algorithm")) return el;
+        el = el.parentNode;
     }
-    function chooseHighlightIndex(algoName, varName) {
-        let indexes = null;
-        if(indexCounts.has(algoName)) {
-            indexes = indexCounts.get(algoName);
-        } else {
-            // 7 classes right now
-            indexes = [0,0,0,0,0,0,0];
-            indexCounts.set(algoName, indexes);
-        }
+    return null;
+}
+function nameFromVar(el) {
+    return el.textContent.replace(/(\s|\xa0)+/g, " ").trim();
+}
+function colorCountsFromContainer(container) {
+    const namesFromColor = Array.from({length:COLOR_COUNT}, x=>new Set());
+    for(let v of container.querySelectorAll("var[data-var-color]")) {
+        let color = +v.getAttribute("data-var-color");
+        namesFromColor[color].add(nameFromVar(v));
+    }
 
-        // If the element was recently unclicked,
-        // *and* that color is still unclaimed,
-        // give it back the same color.
-        const lastIndex = previousHighlightIndex(algoName, varName);
-        if(indexes[lastIndex] === 0) return lastIndex;
-
-        // Find the earliest index with the lowest count.
-        const minCount = Math.min.apply(null, indexes);
-        let index = null;
-        for(var i = 0; i < indexes.length; i++) {
-            if(indexes[i] == minCount) {
-                return i;
-            }
+    return namesFromColor.map(x=>x.size);
+}
+function leastUsedColor(colors) {
+    // Find the earliest color with the lowest count.
+    let minCount = Infinity;
+    let minColor = null;
+    for(var i = 0; i < colors.length; i++) {
+        if(colors[i] < minCount) {
+            minColor = i;
+            minCount = colors[i];
         }
     }
-    function previousHighlightIndex(algoName, varName) {
-        return indexNames.get(algoName+"///"+varName);
+    return minColor;
+}
+function chooseHighlightColor(container, v) {
+    const colorCounts = colorCountsFromContainer(container);
+    if(v.hasAttribute("data-var-last-color")) {
+        let color = +v.getAttribute("data-var-last-color");
+        if(colorCounts[color] == 0) return color;
     }
-    function nameFromIndex(index) {
-        return "selected" + index;
-    }
+    return leastUsedColor(colorCounts);
+}
 }
 </script>
