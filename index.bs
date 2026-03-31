@@ -23,9 +23,8 @@ Implementation Report: https://www.w3.org/wiki/DAS/Implementations
 Default Biblio Status: current
 Status Text: <div class="advisement">
   This specification is currently implemented in a single browser engine (Blink).
-  The <a href="https://www.w3.org/TR/device-orientation/">Device Orientation and Motion</a>
-  specification provides equivalent functionality and is implemented across major browser engines.
-  This specification is being maintained to support existing deployed content.
+  The [[DEVICE-ORIENTATION]] specification provides equivalent functionality and is implemented across major browser engines.
+  This specification is being maintained while websites migrate to [[DEVICE-ORIENTATION]].
   Implementer standards positions:
   <a href="https://github.com/WebKit/standards-positions/issues/347">WebKit</a>,
   <a href="https://github.com/mozilla/standards-positions/issues/35">Mozilla</a>.
