@@ -21,7 +21,15 @@ Test Suite: https://github.com/web-platform-tests/wpt/tree/main/accelerometer
 Include MDN Panels: if possible
 Implementation Report: https://www.w3.org/wiki/DAS/Implementations
 Default Biblio Status: current
-Status Text: This document is maintained and updated at any time. Some parts of this document are work in progress.
+Status Text: <div class="advisement">
+  This specification is currently implemented in a single browser engine (Blink).
+  The <a href="https://www.w3.org/TR/device-orientation/">Device Orientation and Motion</a>
+  specification provides equivalent functionality and is implemented across major browser engines.
+  This specification is being maintained to support existing deployed content.
+  Implementer standards positions:
+  <a href="https://github.com/WebKit/standards-positions/issues/347">WebKit</a>,
+  <a href="https://github.com/mozilla/standards-positions/issues/35">Mozilla</a>.
+  </div>
 </pre>
 <pre class="anchors">
 urlPrefix: https://w3c.github.io/sensors/; spec: GENERIC-SENSOR
