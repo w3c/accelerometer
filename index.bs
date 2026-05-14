@@ -21,7 +21,10 @@ Test Suite: https://github.com/web-platform-tests/wpt/tree/main/accelerometer
 Include MDN Panels: if possible
 Implementation Report: https://www.w3.org/wiki/DAS/Implementations
 Default Biblio Status: current
-Status Text: This document is maintained and updated at any time. Some parts of this document are work in progress.
+Status Text:
+  <p class="advisement">This specification is maintained for existing deployments. Multiple browser engines have expressed concerns about this specification. For new projects, developers should use <a href="https://www.w3.org/TR/orientation-event/">Device Orientation and Motion</a>, which has cross-engine support. The Working Group intends to develop new motion-sensing functionality in <a href="https://www.w3.org/TR/orientation-event/">Device Orientation and Motion</a>.</p>
+
+  This document is maintained and updated at any time. Some parts of this document are work in progress.
 </pre>
 <pre class="anchors">
 urlPrefix: https://w3c.github.io/sensors/; spec: GENERIC-SENSOR
